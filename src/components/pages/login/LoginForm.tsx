@@ -1,7 +1,9 @@
 import {FormEvent} from "react";
+import { useNavigate } from "react-router-dom";
 
 export const LoginForm = () => {
     // const [firstName, setFirstName] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -9,7 +11,7 @@ export const LoginForm = () => {
         const formData = new FormData(currentForm)
         const firstNameValue = formData.get("firstName") as string;
         currentForm.reset()
-        alert(firstNameValue);
+        navigate(`/order/${firstNameValue}`, { replace: true })
     }
     return (
         <form onSubmit={handleSubmit}>

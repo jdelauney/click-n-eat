@@ -1,13 +1,17 @@
+import {useNavigate, useParams} from 'react-router-dom';
 
 
 export const OrderPage = () => {
+
+    const {userName} = useParams()
+    const navigate = useNavigate()
     const handleClick = () => {
-        alert("déconnexion")
+        navigate(`/`, {replace: true})
     }
 
     return (
         <div>
-            Bonjour firstName
+            <h1>Bonjour {userName}</h1>
             <br/>
             <button onClick={handleClick}>Déconnexion</button>
         </div>
