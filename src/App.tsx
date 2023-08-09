@@ -4,13 +4,11 @@ import {LoginPage} from "./components/pages/login/LoginPage.tsx";
 
 const App = () => {
 
-
-
   return (
-        <>
-            <LoginPage/>
-        </>
-    )
+    <>
+      <LoginPage/>
+    </>
+  )
 }
 
 export default App
