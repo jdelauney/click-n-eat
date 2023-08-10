@@ -39,6 +39,7 @@ const fonts = {
   P4: "36px",
   P5: "48px",
   P6: "60px",
+  P7: "11rem",
 }
 const gridUnit = 8
 const borderRadius = {
