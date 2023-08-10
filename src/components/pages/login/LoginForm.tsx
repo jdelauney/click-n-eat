@@ -1,6 +1,44 @@
 import {FormEvent} from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import {theme} from "../../../theme";
+import {InputText} from "../../shared/InputText.tsx";
+import {ButtonPrimary} from "../../shared/ButtonPrimary.tsx";
+import {BsChevronRight, BsPersonCircle} from "react-icons/bs";
 
+
+const LoginFormStyled = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-inline: 3.2rem;
+  padding-block: 5rem 4rem;
+  color: white;
+  
+  h2 {
+    font-family: 'Amatic SC', serif;
+    font-size: ${theme.fonts.P5};
+    font-weight: 700;
+  }
+  
+  hr {
+    margin-top:3.2rem;
+    margin-bottom: 4rem;
+    width: 100%;
+    background-color: ${theme.colors.primary_burger};
+    height: 3px;
+    border: none;
+  }
+
+  h3 {
+    font-family: 'Amatic SC', serif;
+    font-size: ${theme.fonts.P4};
+    font-weight: 700;
+    margin-bottom: 1.8rem;
+  }
+  
+  
+`
 export const LoginForm = () => {
     const navigate = useNavigate();
 
@@ -16,11 +54,22 @@ export const LoginForm = () => {
         navigate(`/order/${firstNameValue}`, { replace: true })
     }
     return (
-        <form onSubmit={handleSubmit}>
-            <h1>Bienvenue chez nous !</h1>
-            <h2>Connectez-vous</h2>
-            <input type="text" placeholder="Entrez votre prénom..." id="firstName" name="firstName" aria-label="Identifiant" required/>
-            <button type={"submit"}>Accédez à votre espace</button>
-        </form>
+        <LoginFormStyled onSubmit={handleSubmit}>
+          <h2>Bienvenue chez nous !</h2>
+          <hr/>
+          <h3>Connectez-vous</h3>
+          <InputText
+            name="firstName"
+            ariaLabel="Identifiant"
+            placeholder="Entrez votre prénom"
+            Icon={<BsPersonCircle className={"icon"}/>}
+            required/>
+          <ButtonPrimary
+            type={"submit"}
+            label={"Accédez à mon espace"}
+            fullWidth={true}
+            IconAfter={<BsChevronRight className={"icon"}/>}
+          />
+        </LoginFormStyled>
     )
 }
