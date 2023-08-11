@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {theme} from "../../../theme";
 import {ButtonPrimary} from "../../shared/ButtonPrimary.tsx";
 import {MenuItem} from "../../../data/fakeMenu.ts";
+import {formatPrice} from "../../../utils/currency.ts";
 
 const CardStyled = styled.article`
     display: flex;
@@ -65,7 +66,7 @@ export const Card = ({item}: CardProps) => {
       <img className={"card__image"} src={item.imageSource} alt={item.title}/>
       <span className={"card__title"}>{item.title}</span>
       <div className={"card__footer"}>
-        <span className={"card__price"}>{item.price}</span>
+        <span className={"card__price"}>{formatPrice(item.price)}</span>
         <ButtonPrimary label={"Ajouter"} className={"card__button"}/>
       </div>
     </CardStyled>
