@@ -24,7 +24,7 @@ const OrderLayoutStyled = styled.div`
 const OrderPageContentStyled = styled.main`
   width: 100%;
   flex: 1 1 100%;
-  background-color: white;
+  background-color: ${theme.colors.background_white};
   border-radius: 0 0 1.5rem 1.5rem;
   box-shadow: ${theme.shadows.strong};  
 `

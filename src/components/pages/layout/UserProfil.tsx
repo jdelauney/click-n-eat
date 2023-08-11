@@ -16,10 +16,11 @@ const UserProfilStyled = styled.div`
 
     > span {
       font-family: 'Open Sans', sans-serif;
-      font-weight: ${theme.weights.bold};
+      font-weight: ${theme.weights.regular};
       color: ${theme.colors.greyBlue};
 
       > span {
+        font-weight: ${theme.weights.bold};
         color: ${theme.colors.primary_burger};
       }
     }

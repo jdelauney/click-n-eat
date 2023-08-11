@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "../../theme"
+import {FC, MouseEventHandler} from "react";
 
 
 //font-family: 'Open Sans', sans-serif;
@@ -32,11 +33,13 @@ const LogoStyled = styled.h1<{ $big?: boolean; }>`
 `
 type LogoProps = {
   big?: boolean
+  onClick? : MouseEventHandler
+  className?: string
 }
 
-export const Logo = ({big}: LogoProps) => {
+export const Logo: FC<LogoProps> = ({className, onClick, big}: LogoProps) => {
   return (
-    <LogoStyled $big={big}>
+    <LogoStyled className={className} onClick={onClick} $big={big}>
       <span>Click</span>
       <div>
         <img src="/assets/images/logo-orange.png" alt="Click and Eat"/>
