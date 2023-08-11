@@ -1,4 +1,4 @@
-import { useNavigate, useParams} from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import styled from "styled-components";
 import {theme} from "../../../theme";
 import {Navbar} from "../layout/Navbar.tsx";
@@ -35,21 +35,17 @@ export const OrderPage = () => {
   if (!userName) {
     userName=""
   }
-  const navigate = useNavigate()
-  const handleClick = () => {
-    navigate(`/`, {replace: true})
-  }
+  //const navigate = useNavigate()
+  // const handleClick = () => {
+  //   navigate(`/`, {replace: true})
+  // }
 
   return (
     <OrderLayoutStyled>
       <div className={"container"}>
         <Navbar userName={userName}/>
         <OrderPageContentStyled>
-          <div>
-            <h1>Bonjour {userName}</h1>
-            <br/>
-            <button onClick={handleClick}>Déconnexion</button>
-          </div>
+
         </OrderPageContentStyled>
       </div>
     </OrderLayoutStyled>

@@ -2,6 +2,7 @@ import {Logo} from "../../shared/Logo.tsx";
 import styled from "styled-components";
 import {UserProfil} from "./UserProfil.tsx";
 import {theme} from "../../../theme";
+import {reloadPage} from "../../../utils/window.ts";
 
 
 const NavbarStyled = styled.nav`
@@ -36,7 +37,7 @@ export const Navbar = ({userName}: NavbarPros) => {
   return (
     <NavbarStyled>
       <div>
-        <Logo className={"as-link"} onClick={() => window.location.reload()}/>
+        <Logo className={"as-link"} onClick={reloadPage}/>
       </div>
       <div>
         <UserProfil userName={userName}/>
