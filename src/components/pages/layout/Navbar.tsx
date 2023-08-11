@@ -15,6 +15,9 @@ const NavbarStyled = styled.nav`
   padding-inline:2rem 7rem;
   background-color: ${theme.colors.background_white};
   border-radius: 1.5rem 1.5rem 0 0;
+  position: sticky;
+  top:0;
+  
   
   //.left-side {
   //  
