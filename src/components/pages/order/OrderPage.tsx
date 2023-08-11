@@ -2,6 +2,9 @@ import { useParams} from 'react-router-dom';
 import styled from "styled-components";
 import {theme} from "../../../theme";
 import {Navbar} from "../layout/Navbar.tsx";
+import {Menu} from "./Menu.tsx";
+import { fakeMenu2 as fakeMenu} from "../../../data/fakeMenu.ts";
+import {Card} from "./Card.tsx";
 
 
 const OrderLayoutStyled = styled.div`
@@ -26,7 +29,7 @@ const OrderPageContentStyled = styled.main`
   flex: 1 1 100%;
   background-color: ${theme.colors.background_white};
   border-radius: 0 0 1.5rem 1.5rem;
-  box-shadow: ${theme.shadows.strong};  
+  box-shadow: ${theme.shadows.strong};
 `
 
 export const OrderPage = () => {
@@ -35,17 +38,20 @@ export const OrderPage = () => {
   if (!userName) {
     userName=""
   }
-  //const navigate = useNavigate()
-  // const handleClick = () => {
-  //   navigate(`/`, {replace: true})
-  // }
+
 
   return (
     <OrderLayoutStyled>
       <div className={"container"}>
         <Navbar userName={userName}/>
         <OrderPageContentStyled>
-
+          <Menu>
+            {
+              fakeMenu.map((item) => {
+                return <Card key={item.id} item={item}/>
+              })
+            }
+          </Menu>
         </OrderPageContentStyled>
       </div>
     </OrderLayoutStyled>

@@ -10,7 +10,6 @@ const ButtonStyled = styled.button<{ $fullWidth?: boolean; }>`
   align-items: center;
   justify-content: center;
   width: ${props => props?.$fullWidth ? '100%' : 'auto'};
-  margin-top: 1.8rem;
   padding: 1.8rem;
   background-color: ${theme.colors.primary_burger};
   border: 1px solid ${theme.colors.primary_burger};
@@ -28,12 +27,13 @@ const ButtonStyled = styled.button<{ $fullWidth?: boolean; }>`
 type ButtonProps = {
   label:string,
   IconAfter?: ReactNode,
-  fullWidth?: boolean
+  fullWidth?: boolean,
+  className?: string
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
-export const ButtonPrimary = ({label, IconAfter, fullWidth, ...rest}: ButtonProps) => {
+export const ButtonPrimary = ({className, label, IconAfter, fullWidth, ...rest}: ButtonProps) => {
   return (
-    <ButtonStyled $fullWidth={fullWidth} {...rest} >
+    <ButtonStyled $fullWidth={fullWidth} className={className} {...rest} >
       <span>{label}</span>
       {IconAfter && IconAfter}
     </ButtonStyled>
