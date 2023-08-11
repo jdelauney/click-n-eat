@@ -14,7 +14,7 @@ const LogoStyled = styled.h1<{ $big?: boolean; }>`
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  line-height: 4.6;
+  line-height: ${props => props.$big ? 1 : 4.6 };
   color: ${theme.colors.primary_burger};
   
   div {
