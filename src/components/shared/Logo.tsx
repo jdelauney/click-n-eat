@@ -13,19 +13,20 @@ const LogoStyled = styled.h1<{ $big?: boolean; }>`
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.5px;
+  line-height: 4.6;
   color: ${theme.colors.primary_burger};
   
   div {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1 1 20rem;
+    //flex: 1 1 30rem;
     overflow: auto;
   }
   img {
     height: 100%; 
     width: 100%;
-    max-height: 15rem;
+    max-height: ${props => props.$big ? '15rem' : '6rem' };
   }
 
 `
