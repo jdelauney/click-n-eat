@@ -20,6 +20,7 @@ const OrderLayoutStyled = styled.div`
     flex-direction: column;
     max-width: 1400px;
     width: 100%;
+    max-height: 95vh;
     
   }
 `
@@ -30,6 +31,7 @@ const OrderPageContentStyled = styled.main`
   background-color: ${theme.colors.background_white};
   border-radius: 0 0 1.5rem 1.5rem;
   box-shadow: ${theme.shadows.strong};
+  overflow: auto;
 `
 
 export const OrderPage = () => {
