@@ -3,6 +3,8 @@ import styled from "styled-components";
 import {UserProfil} from "./UserProfil.tsx";
 import {theme} from "../../../theme";
 import {reloadPage} from "../../../utils/window.ts";
+import {ToggleButton} from "../../shared/ToggleButton.tsx";
+import {ChangeEventHandler} from "react";
 
 
 const NavbarStyled = styled.nav`
@@ -23,9 +25,12 @@ const NavbarStyled = styled.nav`
   //  
   //}
   //
-  //.right-side {
-  //  
-  //}
+  .right-side {
+    display:flex;
+    flex-flow: row nowrap;
+    gap:5rem;
+    align-items: center;
+  }
   
   .as-link {
     cursor: pointer;
@@ -35,14 +40,17 @@ const NavbarStyled = styled.nav`
 
 type NavbarPros = {
   userName: string;
+  onAdminButtonToggle: ChangeEventHandler<HTMLInputElement>,
+  adminMode: boolean
 }
-export const Navbar = ({userName}: NavbarPros) => {
+export const Navbar = ({userName, onAdminButtonToggle, adminMode=false}: NavbarPros) => {
   return (
     <NavbarStyled>
       <div>
         <Logo className={"as-link"} onClick={reloadPage}/>
       </div>
-      <div>
+      <div className={"right-side"}>
+        <ToggleButton isChecked={adminMode} onToggle={onAdminButtonToggle} labelIfChecked={"DÉSACTIVER LE MODE ADMIN"} labelIfUnchecked={"ACTIVER LE MODE ADMIN"} />
         <UserProfil userName={userName}/>
       </div>
     </NavbarStyled>
