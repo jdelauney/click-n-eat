@@ -36,6 +36,11 @@ const OrderPageContentStyled = styled.main`
 export const OrderPage = () => {
 
   const [products, setProducts] = useState<MenuItem[]>(fakeMenu);
+  const [adminMode, setAdminMode] = useState<boolean>(false);
+
+  const adminButtonToggleHandler = () => {
+    setAdminMode(() => !adminMode)
+  }
 
   let {userName} = useParams()
   if (!userName) {
@@ -45,7 +50,7 @@ export const OrderPage = () => {
   return (
     <OrderLayoutStyled>
       <div className={"container"}>
-        <Navbar userName={userName}/>
+        <Navbar userName={userName} adminMode={adminMode} onAdminButtonToggle={adminButtonToggleHandler}/>
         <OrderPageContentStyled>
           <Menu products={...products} />
         </OrderPageContentStyled>
