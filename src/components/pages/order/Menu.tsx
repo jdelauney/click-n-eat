@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import {PropsWithChildren} from "react";
+import {MenuItem} from "../../../data/fakeMenu.ts";
+import {CardMenuItem} from "./CardMenuItem.tsx";
 
 const MenuStyled = styled.section`
   display:grid;
@@ -9,10 +10,18 @@ const MenuStyled = styled.section`
   padding-inline: 9.5rem;
   padding-block: 5rem;
 `
-export const Menu = ({children}: PropsWithChildren) => {
+
+type MenuProps = {
+  products: MenuItem[]
+}
+export const Menu = ({products}: MenuProps) => {
   return (
     <MenuStyled>
-      {children}
+      {
+        products.map((item) => {
+          return <CardMenuItem key={item.id} item={item}/>
+        })
+      }
     </MenuStyled>
   )
 }

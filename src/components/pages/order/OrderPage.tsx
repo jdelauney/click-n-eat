@@ -3,9 +3,8 @@ import styled from "styled-components";
 import {theme} from "../../../theme";
 import {Navbar} from "../layout/Navbar.tsx";
 import {Menu} from "./Menu.tsx";
-import { fakeMenu2 as fakeMenu} from "../../../data/fakeMenu.ts";
-import {Card} from "./Card.tsx";
-
+import {fakeMenu2 as fakeMenu, MenuItem} from "../../../data/fakeMenu.ts";
+import {useState} from "react";
 
 const OrderLayoutStyled = styled.div`
   display: flex;
@@ -36,24 +35,19 @@ const OrderPageContentStyled = styled.main`
 
 export const OrderPage = () => {
 
+  const [products, setProducts] = useState<MenuItem[]>(fakeMenu);
+
   let {userName} = useParams()
   if (!userName) {
     userName=""
   }
-
 
   return (
     <OrderLayoutStyled>
       <div className={"container"}>
         <Navbar userName={userName}/>
         <OrderPageContentStyled>
-          <Menu>
-            {
-              fakeMenu.map((item) => {
-                return <Card key={item.id} item={item}/>
-              })
-            }
-          </Menu>
+          <Menu products={...products} />
         </OrderPageContentStyled>
       </div>
     </OrderLayoutStyled>

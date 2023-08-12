@@ -60,7 +60,7 @@ const CardStyled = styled.article`
 type CardProps = {
   item: MenuItem
 }
-export const Card = ({item}: CardProps) => {
+export const CardMenuItem = ({item}: CardProps) => {
   return (
     <CardStyled>
       <img className={"card__image"} src={item.imageSource} alt={item.title}/>
