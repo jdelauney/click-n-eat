@@ -5,6 +5,7 @@ import {Navbar} from "../layout/Navbar.tsx";
 import {Menu} from "./Menu.tsx";
 import {fakeMenu2 as fakeMenu, MenuItem} from "../../../data/fakeMenu.ts";
 import {useState} from "react";
+import toast from "react-hot-toast";
 
 const OrderLayoutStyled = styled.div`
   display: flex;
@@ -38,8 +39,27 @@ export const OrderPage = () => {
   const [products, setProducts] = useState<MenuItem[]>(fakeMenu);
   const [adminMode, setAdminMode] = useState<boolean>(false);
 
+  const notifyAdminMode = () => {
+    toast('Mode admin activé',
+      {
+        icon: '🛠️',
+        style: {
+          borderRadius: '.5rem',
+          border: "2px solid " + theme.colors.blue,
+          background: theme.colors.background_dark,
+          color: theme.colors.blue,
+          fontFamily: "'Open Sans', sans-serif",
+          fontWeight: theme.weights.regular
+        },
+      }
+    );
+  }
   const adminButtonToggleHandler = () => {
-    setAdminMode(() => !adminMode)
+    setAdminMode(!adminMode)
+
+    if (!adminMode) {
+      notifyAdminMode()
+    }
   }
 
   let {userName} = useParams()
@@ -55,6 +75,8 @@ export const OrderPage = () => {
           <Menu products={...products} />
         </OrderPageContentStyled>
       </div>
+
     </OrderLayoutStyled>
+
   )
 }
