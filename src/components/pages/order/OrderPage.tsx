@@ -26,24 +26,29 @@ const OrderLayoutStyled = styled.div`
     max-width: 1400px;
     width: 100%;
     max-height: 95vh;
+    overflow: hidden;
 
     > .admin {
       position: absolute;
       display: flex;
       flex-direction: column;
       width: 100%;
-      height: 25rem;
       left: 0;
       bottom:0;
       border-radius: 0 0 1.5rem 1.5rem;
-
-      background-color: rgb(255 0 0 /25%);
+      transform: translateY(calc(100% - 4.3rem)); 
       
-      > .tabs {
+      
+      &.open {
+        transform: translateY(0);
+      }
+      
+      .tabs {
         display: flex;
         flex-flow: row nowrap;
         padding-inline-start: 7rem;
         overflow: hidden;
+        height: inherit; //fix display bug with use of transform and flex
       }
       
       .tab {
@@ -51,9 +56,10 @@ const OrderLayoutStyled = styled.div`
         flex-flow: row nowrap;
         align-items: center;
         justify-content: center;
-        gap: 1.3rem;
-        height: 4.6rem;
-        padding-inline: 2.2rem;
+        gap: 1.3rem; 
+        height: 4.3rem;
+        padding-inline: 2.2rem 2.3rem;
+        padding-block: 1rem 1.1rem;
         background-color: ${theme.colors.background_white};
         color: ${theme.colors.greyBlue};
         border: 1px solid ${theme.colors.greyLight};
@@ -74,12 +80,31 @@ const OrderLayoutStyled = styled.div`
           height: 1.6rem;
         }
         
+        .label {
+          border-bottom: 2px solid transparent;
+        }
+        
+        &:not(.selected) .label:hover {
+          border-bottom: 2px solid ${theme.colors.greySemiDark};
+        }
+        
+      }
+      
+      .tabPanel {
+        height: 100%;
+        padding-inline: 2rem;
+        padding-block: 1.7rem;
+        min-height: 25rem;
+        background-color: ${theme.colors.white};
+        font-family: 'Open Sans', sans-serif;
+        border: 1px solid ${theme.colors.greyLight};
+        border-radius: 0 0 1.5rem 1.5rem;
+        box-shadow: ${theme.shadows.soft};
+        
       }
     }
     
   }
-  
-  
 `
 
 const OrderPageContentStyled = styled.main`
@@ -138,12 +163,15 @@ export const OrderPage = () => {
             </div>
             <div className={"tab selected"}>
               <AiOutlinePlus className={"icon"}/>
-              <span>Ajouter un produit</span>
+              <span className={"label"}>Ajouter un produit</span>
             </div>
             <div className={"tab"}>
               <MdModeEditOutline className={"icon"}/>
-              <span>Modifier un produit</span>
+              <span className={"label"}>Modifier un produit</span>
             </div>
+          </div>
+          <div className={"tabPanel"}>
+            TabPanel
           </div>
         </div>
       </div>
