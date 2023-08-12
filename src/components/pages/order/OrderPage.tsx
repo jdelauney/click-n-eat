@@ -2,7 +2,9 @@ import { useParams} from 'react-router-dom';
 import styled from "styled-components";
 import {theme} from "../../../theme";
 import {Navbar} from "../layout/Navbar.tsx";
-
+import {Menu} from "./Menu.tsx";
+import {fakeMenu2 as fakeMenu, MenuItem} from "../../../data/fakeMenu.ts";
+import {useState} from "react";
 
 const OrderLayoutStyled = styled.div`
   display: flex;
@@ -17,6 +19,7 @@ const OrderLayoutStyled = styled.div`
     flex-direction: column;
     max-width: 1400px;
     width: 100%;
+    max-height: 95vh;
     
   }
 `
@@ -26,26 +29,25 @@ const OrderPageContentStyled = styled.main`
   flex: 1 1 100%;
   background-color: ${theme.colors.background_white};
   border-radius: 0 0 1.5rem 1.5rem;
-  box-shadow: ${theme.shadows.strong};  
+  box-shadow: ${theme.shadows.strong};
+  overflow: auto;
 `
 
 export const OrderPage = () => {
+
+  const [products, setProducts] = useState<MenuItem[]>(fakeMenu);
 
   let {userName} = useParams()
   if (!userName) {
     userName=""
   }
-  //const navigate = useNavigate()
-  // const handleClick = () => {
-  //   navigate(`/`, {replace: true})
-  // }
 
   return (
     <OrderLayoutStyled>
       <div className={"container"}>
         <Navbar userName={userName}/>
         <OrderPageContentStyled>
-
+          <Menu products={...products} />
         </OrderPageContentStyled>
       </div>
     </OrderLayoutStyled>

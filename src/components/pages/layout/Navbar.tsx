@@ -11,10 +11,13 @@ const NavbarStyled = styled.nav`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  min-height: 64px;
+  max-height: 8rem;
   padding-inline:2rem 7rem;
   background-color: ${theme.colors.background_white};
   border-radius: 1.5rem 1.5rem 0 0;
+  position: sticky;
+  top:0;
+  
   
   //.left-side {
   //  

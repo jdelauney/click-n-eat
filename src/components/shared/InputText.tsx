@@ -12,6 +12,7 @@ const InputContainerStyled = styled.div`
   padding-block: 1.8rem;
   border-radius: .5rem;
   background-color: #fff;
+  margin-bottom: 1.8rem;
 
   .icon {
     //width:1.5rem;
