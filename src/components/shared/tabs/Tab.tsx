@@ -56,11 +56,11 @@ type TTabClickHandler = MouseEventHandler<HTMLDivElement>
 type TabProps = {
   id: string,
   Icon?: ReactNode,
-  label?: string
+  label?: string,
   className?: string,
   onClick?: TTabClickHandler,
-  tabIndex?: number
-  tabPanelID?: string
+  tabIndex?: number,
+  tabPanelID?: string,
   isSelected?: boolean
   // labelClass?: string,
   // iconClass?:string

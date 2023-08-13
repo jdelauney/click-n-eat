@@ -5,7 +5,7 @@ import {Navbar} from "../layout/Navbar.tsx";
 import {Menu} from "./Menu.tsx";
 import {fakeMenu2 as fakeMenu, MenuItem} from "../../../data/fakeMenu.ts";
 import {useState} from "react";
-import {AdminBoard} from "./AdminBoard.tsx";
+import {AdminBoard} from "./AdminBoard/AdminBoard.tsx";
 import {AdminContext, TAdminContext} from "./context/AdminContext.tsx";
 import {ModeAdminContext, TModeAdminContext} from "./context/ModeAdminContext.tsx";
 
