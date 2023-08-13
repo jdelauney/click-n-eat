@@ -60,7 +60,7 @@ type TabProps = {
   className?: string,
   onClick?: TTabClickHandler,
   tabIndex?: number
-  tabPanelID?: number
+  tabPanelID?: string
   isSelected?: boolean
   // labelClass?: string,
   // iconClass?:string

@@ -5,9 +5,9 @@ import {Navbar} from "../layout/Navbar.tsx";
 import {Menu} from "./Menu.tsx";
 import {fakeMenu2 as fakeMenu, MenuItem} from "../../../data/fakeMenu.ts";
 import {useState} from "react";
-import toast from "react-hot-toast";
 import {AdminBoard} from "./AdminBoard.tsx";
 import {AdminContext, TAdminContext} from "./context/AdminContext.tsx";
+import {ModeAdminContext, TModeAdminContext} from "./context/ModeAdminContext.tsx";
 
 const OrderLayoutStyled = styled.div`
   
@@ -52,27 +52,10 @@ export const OrderPage = () => {
     isAdminBoardOpen: isAdminBoardOpen,
     setIsAdminBoardOpen: setIsAdminBoardOpen,
   }
-  const notifyAdminMode = () => {
-    toast('Mode admin activé',
-      {
-        icon: '🛠️',
-        style: {
-          borderRadius: '.5rem',
-          border: "2px solid " + theme.colors.blue,
-          background: theme.colors.background_dark,
-          color: theme.colors.blue,
-          fontFamily: "'Open Sans', sans-serif",
-          fontWeight: theme.weights.regular
-        },
-      }
-    );
-  }
-  const adminButtonToggleHandler = () => {
-    setIsAdminMode(!isAdminMode)
 
-    if (!isAdminMode) {
-      notifyAdminMode()
-    }
+  const modeAdminContextValue: TModeAdminContext = {
+    isModeAdmin: isAdminMode,
+    setIsModeAdmin: setIsAdminMode
   }
 
   let {userName} = useParams()
@@ -81,35 +64,18 @@ export const OrderPage = () => {
   }
 
   return (
-    <OrderLayoutStyled>
-      <div className={"container"}>
-        <Navbar userName={userName} adminMode={isAdminMode} onAdminButtonToggle={adminButtonToggleHandler}/>
-        <OrderPageContentStyled>
-          <Menu products={...products} />
-        </OrderPageContentStyled>
-        <AdminContext.Provider value={adminContextValue}>
-          { isAdminMode && <AdminBoard/>}
-        </AdminContext.Provider>
-        {/*<div className={"admin"}>
-          <div className={"tabs"}>
-            <div className={"tab"}>
-              <FiChevronDown className={"icon"}/>
-            </div>
-            <div className={"tab selected"}>
-              <AiOutlinePlus className={"icon"}/>
-              <span className={"label"}>Ajouter un produit</span>
-            </div>
-            <div className={"tab"}>
-              <MdModeEditOutline className={"icon"}/>
-              <span className={"label"}>Modifier un produit</span>
-            </div>
-          </div>
-          <div className={"tabPanel"}>
-            TabPanel
-          </div>
-        </div>*/}
-      </div>
-    </OrderLayoutStyled>
-
+    <ModeAdminContext.Provider value={modeAdminContextValue}>
+      <OrderLayoutStyled>
+        <div className={"container"}>
+          <Navbar userName={userName}/>
+          <OrderPageContentStyled>
+            <Menu products={...products} />
+          </OrderPageContentStyled>
+          <AdminContext.Provider value={adminContextValue}>
+            { isAdminMode && <AdminBoard/>}
+          </AdminContext.Provider>
+        </div>
+      </OrderLayoutStyled>
+    </ModeAdminContext.Provider>
   )
 }

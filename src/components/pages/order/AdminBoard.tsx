@@ -41,8 +41,6 @@ export const AdminBoard = () => {
     setIsAdminBoardOpen(!isAdminBoardOpen);
   }
 
-
-
   return (
     <AdminBoardStyled className={isAdminBoardOpen ? "is-open" : ""}>
       <Tabs ariaLabel={"Groupe d'actions du panel d'administration"}>
