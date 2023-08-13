@@ -25,7 +25,7 @@ const ButtonStyled = styled.button<{ $fullWidth?: boolean; }>`
 `
 
 type ButtonProps = {
-  label:string,
+  label?:string,
   IconAfter?: ReactNode,
   fullWidth?: boolean,
   className?: string
@@ -34,7 +34,7 @@ type ButtonProps = {
 export const ButtonPrimary = ({className, label, IconAfter, fullWidth, ...rest}: ButtonProps) => {
   return (
     <ButtonStyled $fullWidth={fullWidth} className={className} {...rest} >
-      <span>{label}</span>
+      {label && <span>{label}</span> }
       {IconAfter && IconAfter}
     </ButtonStyled>
   )
