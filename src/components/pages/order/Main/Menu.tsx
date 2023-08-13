@@ -3,7 +3,7 @@ import {MenuItem} from "../../../../data/fakeMenu.ts";
 import {CardMenuItem} from "./CardMenuItem.tsx";
 
 const MenuStyled = styled.section`
-  display:grid;
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(23rem, 100%), 1fr));
   row-gap: 6rem;
   column-gap: 8.5rem;

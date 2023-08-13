@@ -7,7 +7,9 @@ export type MenuItem = {
   id: number
   title: string
 }
-export const fakeMenu1: MenuItem[] = [
+
+export type MenuList = MenuItem[]
+export const fakeMenu1: MenuList = [
   {
     id: 1,
     imageSource: "/assets/images/burger1.png",
@@ -28,7 +30,7 @@ export const fakeMenu1: MenuItem[] = [
   },
 ]
 
-export const fakeMenu2: MenuItem[] = [
+export const fakeMenu2: MenuList = [
   {
     id: 1,
     imageSource: "/assets/images/burger-bacon-egg.png",

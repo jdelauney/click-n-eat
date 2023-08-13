@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import {theme} from "../../../theme";
 import {InputText} from "../../shared/InputText.tsx";
-import {ButtonPrimary} from "../../shared/ButtonPrimary.tsx";
+import {Button} from "../../shared/Button.tsx";
 import {BsChevronRight, BsPersonCircle} from "react-icons/bs";
 
 
@@ -64,7 +64,7 @@ export const LoginForm = () => {
             placeholder="Entrez votre prénom"
             Icon={<BsPersonCircle className={"icon"}/>}
             required/>
-          <ButtonPrimary
+          <Button
             type={"submit"}
             label={"Accédez à mon espace"}
             fullWidth={true}

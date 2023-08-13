@@ -7,5 +7,8 @@ export const formatPrice = (priceToFormat: number): string => {
   return new Intl.NumberFormat("fr-FR", {
     style: "currency",
     currency: "EUR",
+    useGrouping: true
   }).format(priceToFormat)
 }
+
+//x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")

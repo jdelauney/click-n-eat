@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import {theme} from "../../../../theme";
-import {ButtonPrimary} from "../../../shared/ButtonPrimary.tsx";
+import {Button} from "../../../shared/Button.tsx";
 import {MenuItem} from "../../../../data/fakeMenu.ts";
 import {formatPrice} from "../../../../utils/currency.ts";
+import {useContext} from "react";
+import {OrderContext} from "../Context/OrderContext.tsx";
+import {DeleteButton} from "../../../shared/DeleteButton.tsx";
 
 const CardStyled = styled.article`
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 24rem;
@@ -17,6 +21,12 @@ const CardStyled = styled.article`
     border-radius: 1.5rem;
     box-shadow: -8px 8px 20px 0 rgb(0 0 0 / 20%);
     
+    .card__remove-button {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+    }
+  
     .card__image {
       width: auto;
       max-width: 20rem;
@@ -61,13 +71,23 @@ type CardProps = {
   item: MenuItem
 }
 export const CardMenuItem = ({item}: CardProps) => {
+  const {isModeAdmin, products, setProducts} = useContext(OrderContext)
+
+  const handleDeleteButtonClick = (productId: number) => {
+    const newProducts = products.filter((product) => {
+      return product.id !== productId
+    })
+    setProducts(newProducts)
+  }
+
   return (
     <CardStyled>
+      { isModeAdmin && <DeleteButton className={"card__remove-button"} onClick={() => handleDeleteButtonClick(item.id)}/> }
       <img className={"card__image"} src={item.imageSource} alt={item.title}/>
       <span className={"card__title"}>{item.title}</span>
       <div className={"card__footer"}>
         <span className={"card__price"}>{formatPrice(item.price)}</span>
-        <ButtonPrimary label={"Ajouter"} className={"card__button"}/>
+        <Button label={"Ajouter"} className={"card__button"}/>
       </div>
     </CardStyled>
   )

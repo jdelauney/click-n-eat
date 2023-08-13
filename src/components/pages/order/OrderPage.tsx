@@ -5,8 +5,9 @@ import {Navbar} from "../layout/Navbar.tsx";
 import {useState} from "react";
 import {AdminBoard} from "./AdminBoard/AdminBoard.tsx";
 import {AdminContext, TAdminContext} from "./Context/AdminContext.tsx";
-import {ModeAdminContext, TModeAdminContext} from "./Context/ModeAdminContext.tsx";
+import {OrderContext, TOrderContext} from "./Context/OrderContext.tsx";
 import {Main} from "./Main/Main.tsx";
+import {fakeMenu2 as fakeMenu, MenuItem} from "../../../data/fakeMenu.ts";
 
 const OrderPageStyled = styled.div`
   
@@ -33,6 +34,7 @@ export const OrderPage = () => {
   const [isAdminMode, setIsAdminMode] = useState<boolean>(false);
   const [currentAdminTabIndex, setCurrentAdminTabIndex] = useState<string>("tab-1");
   const [isAdminBoardOpen, setIsAdminBoardOpen] = useState<boolean>(true);
+  const [products, setProducts] = useState<MenuItem[]>(fakeMenu);
 
   const adminContextValue: TAdminContext = {
     currentAdminTabIndex : currentAdminTabIndex,
@@ -41,9 +43,11 @@ export const OrderPage = () => {
     setIsAdminBoardOpen: setIsAdminBoardOpen,
   }
 
-  const modeAdminContextValue: TModeAdminContext = {
+  const orderContextValue: TOrderContext = {
     isModeAdmin: isAdminMode,
-    setIsModeAdmin: setIsAdminMode
+    setIsModeAdmin: setIsAdminMode,
+    products: products,
+    setProducts: setProducts,
   }
 
   let {userName} = useParams()
@@ -52,7 +56,7 @@ export const OrderPage = () => {
   }
 
   return (
-    <ModeAdminContext.Provider value={modeAdminContextValue}>
+    <OrderContext.Provider value={orderContextValue}>
       <OrderPageStyled>
         <div className={"container"}>
           <Navbar userName={userName}/>
@@ -64,6 +68,6 @@ export const OrderPage = () => {
             }
         </div>
       </OrderPageStyled>
-    </ModeAdminContext.Provider>
+    </OrderContext.Provider>
   )
 }

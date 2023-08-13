@@ -1,8 +1,9 @@
 import {Menu} from "./Menu.tsx";
 import styled from "styled-components";
 import {theme} from "../../../../theme";
-import {useState} from "react";
-import {fakeMenu2 as fakeMenu, MenuItem} from "../../../../data/fakeMenu.ts";
+import {useContext} from "react";
+import {OrderContext} from "../Context/OrderContext.tsx";
+import {EmptyProductsInformation} from "./EmptyProductsInformation.tsx";
 
 const MainStyled = styled.main`
   width: 100%;
@@ -14,11 +15,19 @@ const MainStyled = styled.main`
 `
 export const Main = () => {
 
-  const [products, setProducts] = useState<MenuItem[]>(fakeMenu);
+  const { products } = useContext(OrderContext)
+
 
   return (
     <MainStyled>
-      <Menu products={...products} />
+      { products.length > 0
+        ? (
+          <Menu products={...products} />
+        )
+        : (
+          <EmptyProductsInformation/>
+        )
+      }
     </MainStyled>
   )
 }

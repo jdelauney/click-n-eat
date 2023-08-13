@@ -5,7 +5,7 @@ import {theme} from "../../../theme";
 import {reloadPage} from "../../../utils/window.ts";
 import {ToggleButton} from "../../shared/ToggleButton.tsx";
 import {useContext} from "react";
-import {ModeAdminContext} from "../order/Context/ModeAdminContext.tsx";
+import {OrderContext} from "../order/Context/OrderContext.tsx";
 import toast from "react-hot-toast";
 
 
@@ -45,7 +45,7 @@ type NavbarPros = {
 }
 export const Navbar = ({userName}: NavbarPros) => {
 
-  const { isModeAdmin, setIsModeAdmin } = useContext(ModeAdminContext)
+  const { isModeAdmin, setIsModeAdmin } = useContext(OrderContext)
 
   const notifyAdminMode = () => {
     toast('Mode admin activé',
