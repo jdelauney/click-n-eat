@@ -1,23 +1,27 @@
 import {TabPanel} from "../../../shared/tabs/TabPanel.tsx";
 import {TabPanels} from "../../../shared/tabs/TabPanels.tsx";
 import {TAdminBoardTabConfig} from "./adminBoardTabConfig.tsx";
+import {useContext} from "react";
+import {AdminContext} from "../Context/AdminContext.tsx";
 
 type AdminBoardTabPanelsProps = {
   tabPanelConfig: TAdminBoardTabConfig
 }
 export const AdminBoardTabPanels = ({tabPanelConfig}: AdminBoardTabPanelsProps) => {
 
+  const  {currentAdminTabIndex} = useContext(AdminContext)
+
   return (
     <TabPanels>
       {
         tabPanelConfig.map((item) => {
           const {id, tabPanelId } = item.tab
-          if (tabPanelId !== undefined && item.tabpanel.isExpanded) {
+          if (tabPanelId !== undefined) {
             return (
               <TabPanel key={tabPanelId}
                         id={tabPanelId}
                         labelledBy={id}
-                        isExpanded={item.tabpanel.isExpanded}
+                        isExpanded={currentAdminTabIndex === id}
                         className={item.tabpanel.className}
               >
                 {item.tabpanel.content}

@@ -23,7 +23,6 @@ const AdminBoardStyled = styled.div`
 export const AdminBoard = () => {
   const { isAdminBoardOpen,
           setIsAdminBoardOpen,
-          currentAdminTabIndex,
           setCurrentAdminTabIndex} = useContext(AdminContext)
 
   const defaultHandleTabClick = (value:string) => {
@@ -37,7 +36,7 @@ export const AdminBoard = () => {
     setIsAdminBoardOpen(!isAdminBoardOpen);
   }
 
-  const adminTabsConfig = getAdminBoardTabConfig(isAdminBoardOpen, currentAdminTabIndex, handleToggleClick, )
+  const adminTabsConfig = getAdminBoardTabConfig(isAdminBoardOpen, handleToggleClick, )
   const adminBoardTabs = adminTabsConfig.map((item) => item.tab)
 
   return (
