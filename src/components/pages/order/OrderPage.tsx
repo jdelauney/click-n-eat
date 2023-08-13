@@ -2,14 +2,13 @@ import { useParams} from 'react-router-dom';
 import styled from "styled-components";
 import {theme} from "../../../theme";
 import {Navbar} from "../layout/Navbar.tsx";
-import {Menu} from "./Menu.tsx";
-import {fakeMenu2 as fakeMenu, MenuItem} from "../../../data/fakeMenu.ts";
 import {useState} from "react";
 import {AdminBoard} from "./AdminBoard/AdminBoard.tsx";
 import {AdminContext, TAdminContext} from "./context/AdminContext.tsx";
 import {ModeAdminContext, TModeAdminContext} from "./context/ModeAdminContext.tsx";
+import {Main} from "./Main/Main.tsx";
 
-const OrderLayoutStyled = styled.div`
+const OrderPageStyled = styled.div`
   
   display: flex;
   width: 100%;
@@ -29,18 +28,8 @@ const OrderLayoutStyled = styled.div`
   }
 `
 
-const OrderPageContentStyled = styled.main`
-  width: 100%;
-  flex: 1 1 100%;
-  background-color: ${theme.colors.background_white};
-  border-radius: 0 0 1.5rem 1.5rem;
-  box-shadow: ${theme.shadows.strong};
-  overflow: auto;
-`
-
 export const OrderPage = () => {
 
-  const [products, setProducts] = useState<MenuItem[]>(fakeMenu);
   const [isAdminMode, setIsAdminMode] = useState<boolean>(false);
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(1);
   const [isAdminBoardOpen, setIsAdminBoardOpen] = useState<boolean>(true);
@@ -65,17 +54,17 @@ export const OrderPage = () => {
 
   return (
     <ModeAdminContext.Provider value={modeAdminContextValue}>
-      <OrderLayoutStyled>
+      <OrderPageStyled>
         <div className={"container"}>
           <Navbar userName={userName}/>
-          <OrderPageContentStyled>
-            <Menu products={...products} />
-          </OrderPageContentStyled>
-          <AdminContext.Provider value={adminContextValue}>
-            { isAdminMode && <AdminBoard/>}
-          </AdminContext.Provider>
+          <Main/>
+            { isAdminMode &&
+                <AdminContext.Provider value={adminContextValue}>
+                    <AdminBoard/>
+                </AdminContext.Provider>
+            }
         </div>
-      </OrderLayoutStyled>
+      </OrderPageStyled>
     </ModeAdminContext.Provider>
   )
 }

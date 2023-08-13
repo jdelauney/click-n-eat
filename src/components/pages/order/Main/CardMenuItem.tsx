@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import {theme} from "../../../theme";
-import {ButtonPrimary} from "../../shared/ButtonPrimary.tsx";
-import {MenuItem} from "../../../data/fakeMenu.ts";
-import {formatPrice} from "../../../utils/currency.ts";
+import {theme} from "../../../../theme";
+import {ButtonPrimary} from "../../../shared/ButtonPrimary.tsx";
+import {MenuItem} from "../../../../data/fakeMenu.ts";
+import {formatPrice} from "../../../../utils/currency.ts";
 
 const CardStyled = styled.article`
     display: flex;
