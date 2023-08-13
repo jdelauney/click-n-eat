@@ -5,7 +5,7 @@ import {theme} from "../../../theme";
 import {reloadPage} from "../../../utils/window.ts";
 import {ToggleButton} from "../../shared/ToggleButton.tsx";
 import {useContext} from "react";
-import {ModeAdminContext} from "../order/context/ModeAdminContext.tsx";
+import {ModeAdminContext} from "../order/Context/ModeAdminContext.tsx";
 import toast from "react-hot-toast";
 
 

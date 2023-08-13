@@ -4,8 +4,8 @@ import {theme} from "../../../theme";
 import {Navbar} from "../layout/Navbar.tsx";
 import {useState} from "react";
 import {AdminBoard} from "./AdminBoard/AdminBoard.tsx";
-import {AdminContext, TAdminContext} from "./context/AdminContext.tsx";
-import {ModeAdminContext, TModeAdminContext} from "./context/ModeAdminContext.tsx";
+import {AdminContext, TAdminContext} from "./Context/AdminContext.tsx";
+import {ModeAdminContext, TModeAdminContext} from "./Context/ModeAdminContext.tsx";
 import {Main} from "./Main/Main.tsx";
 
 const OrderPageStyled = styled.div`
@@ -31,12 +31,12 @@ const OrderPageStyled = styled.div`
 export const OrderPage = () => {
 
   const [isAdminMode, setIsAdminMode] = useState<boolean>(false);
-  const [selectedTabIndex, setSelectedTabIndex] = useState<number>(1);
+  const [currentAdminTabIndex, setCurrentAdminTabIndex] = useState<string>("tab-1");
   const [isAdminBoardOpen, setIsAdminBoardOpen] = useState<boolean>(true);
 
   const adminContextValue: TAdminContext = {
-    selectedTabIndex : selectedTabIndex,
-    setSelectedTabIndex: setSelectedTabIndex,
+    currentAdminTabIndex : currentAdminTabIndex,
+    setCurrentAdminTabIndex: setCurrentAdminTabIndex,
     isAdminBoardOpen: isAdminBoardOpen,
     setIsAdminBoardOpen: setIsAdminBoardOpen,
   }
