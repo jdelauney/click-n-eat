@@ -1,10 +1,10 @@
 import {createContext, Dispatch, SetStateAction} from "react";
 
-export type TModeAdminContext = {
+export type TOrderContext = {
   isModeAdmin: boolean,
   setIsModeAdmin: Dispatch<SetStateAction<boolean>>
 }
-export const ModeAdminContext = createContext<TModeAdminContext>({
+export const OrderContext = createContext<TOrderContext>({
   isModeAdmin: false,
   setIsModeAdmin: () => {},
 
