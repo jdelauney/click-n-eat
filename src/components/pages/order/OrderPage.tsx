@@ -7,6 +7,7 @@ import {AdminBoard} from "./AdminBoard/AdminBoard.tsx";
 import {AdminContext, TAdminContext} from "./Context/AdminContext.tsx";
 import {OrderContext, TOrderContext} from "./Context/OrderContext.tsx";
 import {Main} from "./Main/Main.tsx";
+import {fakeMenu2 as fakeMenu, MenuItem} from "../../../data/fakeMenu.ts";
 
 const OrderPageStyled = styled.div`
   
@@ -33,6 +34,7 @@ export const OrderPage = () => {
   const [isAdminMode, setIsAdminMode] = useState<boolean>(false);
   const [currentAdminTabIndex, setCurrentAdminTabIndex] = useState<string>("tab-1");
   const [isAdminBoardOpen, setIsAdminBoardOpen] = useState<boolean>(true);
+  const [products, setProducts] = useState<MenuItem[]>(fakeMenu);
 
   const adminContextValue: TAdminContext = {
     currentAdminTabIndex : currentAdminTabIndex,
@@ -43,7 +45,9 @@ export const OrderPage = () => {
 
   const orderContextValue: TOrderContext = {
     isModeAdmin: isAdminMode,
-    setIsModeAdmin: setIsAdminMode
+    setIsModeAdmin: setIsAdminMode,
+    products: products,
+    setProducts: setProducts,
   }
 
   let {userName} = useParams()
