@@ -5,13 +5,16 @@ import {FaHamburger} from "react-icons/fa";
 import {BsFillCameraFill} from "react-icons/bs";
 import {MdOutlineEuro} from "react-icons/md";
 import {BtnSuccess, Button} from "../../../shared/Button.tsx";
+import {FormEvent, useContext} from "react";
+import {OrderContext} from "../Context/OrderContext.tsx";
+import {MenuItem} from "../../../../data/fakeMenu.ts";
 
 const AdminProductFormStyled = styled.form`
-  display:flex;
+  display: flex;
   gap: 2rem;
-  width:90rem;
-  height:16rem;
-  
+  width: 90rem;
+  height: 16rem;
+
   .productForm__image-preview {
     display: grid;
     place-items: center;
@@ -19,45 +22,99 @@ const AdminProductFormStyled = styled.form`
     height: 12rem;
     border-radius: 0.5rem;
     border: 1px solid ${theme.colors.greyLight};
-    
+
     > span {
       font-family: "Open Sans", sans-serif;
       line-height: 2.4;
       color: ${theme.colors.greyBlue};
     }
   }
-  
+
   .productForm__fields {
-    display:flex;
+    display: flex;
     flex-direction: column;
     flex: 1 1 100%;
   }
-  
+
   .productForm__field {
     background-color: ${theme.colors.background_white};
     padding-inline: 1.6rem;
     padding-block: .8rem;
-    
+
     > input {
       background-color: ${theme.colors.background_white};
     }
   }
-  
+
 `
 export const AdminProductForm = () => {
+  const { products, setProducts } = useContext(OrderContext)
+
+  /*const generatRFC4122uuid = (): string => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+  }*/
+  const addNewProduct = (name: string, imgUrl: string, price: string) => {
+    const maxId = Math.max(...products.map(o => o.id))
+    const newProduct: MenuItem = {
+      id: maxId + 1,
+      imageSource: imgUrl,
+      title: name,
+      price: parseFloat(price),
+      quantity: 0,
+      isAvailable: true,
+      isAdvertised: false,
+    }
+
+    setProducts([...products, newProduct])
+  }
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const currentForm = event.currentTarget as HTMLFormElement
+    const formData = new FormData(currentForm)
+    const nameValue = formData.get("productName") as string;
+    let imageValue = formData.get("productImage") as string;
+    let priceValue = formData.get("productPrice") as string;
+
+    if (priceValue === "") {
+      priceValue = "0.00"
+    }
+
+    if (imageValue === "") {
+      imageValue = "../../assets/images/coming-soon.png"
+    }
+    addNewProduct(nameValue, imageValue, priceValue);
+
+    currentForm.reset()
+
+  }
   return (
-    <AdminProductFormStyled>
+    <AdminProductFormStyled onSubmit={handleSubmit}>
       <div className={"productForm__image-preview"}>
-          <span>Aucune image</span>
+        <span>Aucune image</span>
       </div>
       <div className={"productForm__fields"}>
-        <InputText name={"productName"} Icon={<FaHamburger className={"icon"}/>} inputContainerClass={"productForm__field"} placeholder={"Nom du produit (ex: Super Burger)"} ariaLabel={"Nom du produit "}/>
-        <InputText type={"url"} Icon={<BsFillCameraFill className={"icon"}/>} name={"productImage"} inputContainerClass={"productForm__field"} placeholder={"Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)"} ariaLabel={"Image du produit "}/>
-        <InputText name={"productPrice"} Icon={<MdOutlineEuro className={"icon"}/>} inputContainerClass={"productForm__field"} placeholder={"Prix"} ariaLabel={"Prix du produit "} pattern={"\\d+(\\[.,]\\d{2})?"}/>
+        <InputText name={"productName"}
+                   Icon={<FaHamburger className={"icon"}/>}
+                   inputContainerClass={"productForm__field"}
+                   placeholder={"Nom du produit (ex: Super Burger)"}
+                   ariaLabel={"Nom du produit "}/>
+        <InputText type={"url"}
+                   Icon={<BsFillCameraFill className={"icon"}/>}
+                   name={"productImage"}
+                   inputContainerClass={"productForm__field"}
+                   placeholder={"Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)"}
+                   ariaLabel={"Image du produit "}/>
+        <InputText name={"productPrice"}
+                   Icon={<MdOutlineEuro className={"icon"}/>}
+                   inputContainerClass={"productForm__field"}
+                   placeholder={"Prix"}
+                   ariaLabel={"Prix du produit "}
+                   pattern={"\\d+(\\{.,}\\d{2})?"}/>
         <div>
-
-            <Button theme={BtnSuccess} label={"Ajouter un nouveau produit au menu"}/>
-
+          <Button type={"submit"} theme={BtnSuccess} label={"Ajouter un nouveau produit au menu"}/>
         </div>
       </div>
     </AdminProductFormStyled>
