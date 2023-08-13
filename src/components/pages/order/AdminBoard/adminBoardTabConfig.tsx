@@ -2,6 +2,7 @@ import {ReactNode} from "react";
 import {FiChevronDown, FiChevronUp} from "react-icons/fi";
 import {AiOutlinePlus} from "react-icons/ai";
 import {MdModeEditOutline} from "react-icons/md";
+import {AdminProductForm} from "./AdminProductForm.tsx";
 
 export type TAdminBoardTabConfigTabItem = {
   id: string,
@@ -49,7 +50,7 @@ export const getAdminBoardTabConfig = (isAdminBoardOpen: boolean,
           label: "Ajouter un produit",
         },
         tabpanel: {
-          content: "Ajouter un produit",
+          content: <AdminProductForm/>,
         }
       },
       {

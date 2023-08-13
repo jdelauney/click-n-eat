@@ -11,7 +11,7 @@ const InputContainerStyled = styled.div`
   padding-inline: 2.4rem;
   padding-block: 1.8rem;
   border-radius: .5rem;
-  background-color: #fff;
+  background-color: ${theme.colors.white};
   margin-bottom: 1.8rem;
 
   .icon {
@@ -24,6 +24,8 @@ const InputContainerStyled = styled.div`
     appearance: none;
     border: none;
     width: 100%;
+    outline: none;
+    padding: .4rem;
     //padding-block: 1rem;
     //padding-inline: 1rem;
     border-radius: .35rem;
@@ -31,15 +33,17 @@ const InputContainerStyled = styled.div`
 `
 
 type InputTextProps = {
+  type?: string
   name: string,
   ariaLabel: string;
-  Icon?: ReactNode
+  Icon?: ReactNode,
+  inputContainerClass?: string,
 } & InputHTMLAttributes<HTMLInputElement>
-export const InputText = ({name, ariaLabel, Icon,  ...rest}: InputTextProps) => {
+export const InputText = ({type="text", name, inputContainerClass, ariaLabel, Icon,  ...rest}: InputTextProps) => {
   return (
-    <InputContainerStyled>
+    <InputContainerStyled className={inputContainerClass}>
       {Icon && Icon}
-      <input type="text" id={name} name={name} aria-label={ariaLabel} {...rest}/>
+      <input type={type} id={name} name={name} aria-label={ariaLabel} {...rest}/>
     </InputContainerStyled>
   )
 }
