@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {theme} from "../../../../theme";
-import {ButtonPrimary} from "../../../shared/ButtonPrimary.tsx";
+import {Button} from "../../../shared/Button.tsx";
 import {MenuItem} from "../../../../data/fakeMenu.ts";
 import {formatPrice} from "../../../../utils/currency.ts";
 import {useContext} from "react";
@@ -87,7 +87,7 @@ export const CardMenuItem = ({item}: CardProps) => {
       <span className={"card__title"}>{item.title}</span>
       <div className={"card__footer"}>
         <span className={"card__price"}>{formatPrice(item.price)}</span>
-        <ButtonPrimary label={"Ajouter"} className={"card__button"}/>
+        <Button label={"Ajouter"} className={"card__button"}/>
       </div>
     </CardStyled>
   )

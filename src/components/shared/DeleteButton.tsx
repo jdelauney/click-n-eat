@@ -1,10 +1,10 @@
-import {ButtonPrimary} from "./ButtonPrimary.tsx";
+import {Button} from "./Button.tsx";
 import {TiDelete} from "react-icons/ti";
 import styled from "styled-components";
 import {theme} from "../../theme";
 import {ButtonHTMLAttributes} from "react";
 
-const DeleteButtonStyled = styled(ButtonPrimary)`
+const DeleteButtonStyled = styled(Button)`
   border-radius: 50%;
   padding:0;
   width: 3rem;
