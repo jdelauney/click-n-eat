@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {MenuItem} from "../../../data/fakeMenu.ts";
+import {MenuItem} from "../../../../data/fakeMenu.ts";
 import {CardMenuItem} from "./CardMenuItem.tsx";
 
 const MenuStyled = styled.section`

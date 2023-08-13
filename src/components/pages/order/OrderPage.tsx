@@ -2,12 +2,14 @@ import { useParams} from 'react-router-dom';
 import styled from "styled-components";
 import {theme} from "../../../theme";
 import {Navbar} from "../layout/Navbar.tsx";
-import {Menu} from "./Menu.tsx";
-import {fakeMenu2 as fakeMenu, MenuItem} from "../../../data/fakeMenu.ts";
 import {useState} from "react";
-import toast from "react-hot-toast";
+import {AdminBoard} from "./AdminBoard/AdminBoard.tsx";
+import {AdminContext, TAdminContext} from "./Context/AdminContext.tsx";
+import {ModeAdminContext, TModeAdminContext} from "./Context/ModeAdminContext.tsx";
+import {Main} from "./Main/Main.tsx";
 
-const OrderLayoutStyled = styled.div`
+const OrderPageStyled = styled.div`
+  
   display: flex;
   width: 100%;
   height: 100dvh;
@@ -16,50 +18,32 @@ const OrderLayoutStyled = styled.div`
   background-color: ${theme.colors.primary_burger};
   
   > .container {
+    position: relative;
     display: flex;
     flex-direction: column;
     max-width: 1400px;
     width: 100%;
     max-height: 95vh;
-    
+    overflow: hidden;
   }
-`
-
-const OrderPageContentStyled = styled.main`
-  width: 100%;
-  flex: 1 1 100%;
-  background-color: ${theme.colors.background_white};
-  border-radius: 0 0 1.5rem 1.5rem;
-  box-shadow: ${theme.shadows.strong};
-  overflow: auto;
 `
 
 export const OrderPage = () => {
 
-  const [products, setProducts] = useState<MenuItem[]>(fakeMenu);
-  const [adminMode, setAdminMode] = useState<boolean>(false);
+  const [isAdminMode, setIsAdminMode] = useState<boolean>(false);
+  const [currentAdminTabIndex, setCurrentAdminTabIndex] = useState<string>("tab-1");
+  const [isAdminBoardOpen, setIsAdminBoardOpen] = useState<boolean>(true);
 
-  const notifyAdminMode = () => {
-    toast('Mode admin activé',
-      {
-        icon: '🛠️',
-        style: {
-          borderRadius: '.5rem',
-          border: "2px solid " + theme.colors.blue,
-          background: theme.colors.background_dark,
-          color: theme.colors.blue,
-          fontFamily: "'Open Sans', sans-serif",
-          fontWeight: theme.weights.regular
-        },
-      }
-    );
+  const adminContextValue: TAdminContext = {
+    currentAdminTabIndex : currentAdminTabIndex,
+    setCurrentAdminTabIndex: setCurrentAdminTabIndex,
+    isAdminBoardOpen: isAdminBoardOpen,
+    setIsAdminBoardOpen: setIsAdminBoardOpen,
   }
-  const adminButtonToggleHandler = () => {
-    setAdminMode(!adminMode)
 
-    if (!adminMode) {
-      notifyAdminMode()
-    }
+  const modeAdminContextValue: TModeAdminContext = {
+    isModeAdmin: isAdminMode,
+    setIsModeAdmin: setIsAdminMode
   }
 
   let {userName} = useParams()
@@ -68,15 +52,18 @@ export const OrderPage = () => {
   }
 
   return (
-    <OrderLayoutStyled>
-      <div className={"container"}>
-        <Navbar userName={userName} adminMode={adminMode} onAdminButtonToggle={adminButtonToggleHandler}/>
-        <OrderPageContentStyled>
-          <Menu products={...products} />
-        </OrderPageContentStyled>
-      </div>
-
-    </OrderLayoutStyled>
-
+    <ModeAdminContext.Provider value={modeAdminContextValue}>
+      <OrderPageStyled>
+        <div className={"container"}>
+          <Navbar userName={userName}/>
+          <Main/>
+            { isAdminMode &&
+                <AdminContext.Provider value={adminContextValue}>
+                    <AdminBoard/>
+                </AdminContext.Provider>
+            }
+        </div>
+      </OrderPageStyled>
+    </ModeAdminContext.Provider>
   )
 }

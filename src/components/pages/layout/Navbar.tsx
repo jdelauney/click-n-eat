@@ -4,7 +4,9 @@ import {UserProfil} from "./UserProfil.tsx";
 import {theme} from "../../../theme";
 import {reloadPage} from "../../../utils/window.ts";
 import {ToggleButton} from "../../shared/ToggleButton.tsx";
-import {ChangeEventHandler} from "react";
+import {useContext} from "react";
+import {ModeAdminContext} from "../order/Context/ModeAdminContext.tsx";
+import toast from "react-hot-toast";
 
 
 const NavbarStyled = styled.nav`
@@ -40,17 +42,40 @@ const NavbarStyled = styled.nav`
 
 type NavbarPros = {
   userName: string;
-  onAdminButtonToggle: ChangeEventHandler<HTMLInputElement>,
-  adminMode: boolean
 }
-export const Navbar = ({userName, onAdminButtonToggle, adminMode=false}: NavbarPros) => {
+export const Navbar = ({userName}: NavbarPros) => {
+
+  const { isModeAdmin, setIsModeAdmin } = useContext(ModeAdminContext)
+
+  const notifyAdminMode = () => {
+    toast('Mode admin activé',
+      {
+        icon: '🛠️',
+        style: {
+          borderRadius: '.5rem',
+          border: "2px solid " + theme.colors.blue,
+          background: theme.colors.background_dark,
+          color: theme.colors.blue,
+          fontFamily: "'Open Sans', sans-serif",
+          fontWeight: theme.weights.regular
+        },
+      }
+    );
+  }
+  const adminButtonToggleHandler = () => {
+    setIsModeAdmin(!isModeAdmin)
+
+    if (!isModeAdmin) {
+      notifyAdminMode()
+    }
+  }
   return (
     <NavbarStyled>
       <div>
         <Logo className={"as-link"} onClick={reloadPage}/>
       </div>
       <div className={"right-side"}>
-        <ToggleButton isChecked={adminMode} onToggle={onAdminButtonToggle} labelIfChecked={"DÉSACTIVER LE MODE ADMIN"} labelIfUnchecked={"ACTIVER LE MODE ADMIN"} />
+        <ToggleButton isChecked={isModeAdmin} onToggle={adminButtonToggleHandler} labelIfChecked={"DÉSACTIVER LE MODE ADMIN"} labelIfUnchecked={"ACTIVER LE MODE ADMIN"} />
         <UserProfil userName={userName}/>
       </div>
     </NavbarStyled>
