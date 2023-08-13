@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import {useContext} from "react";
-import {AdminContext} from "../context/AdminContext.tsx";
+import {AdminContext} from "../Context/AdminContext.tsx";
 import {AdminBoardTabs} from "./AdminBoardTabs.tsx";
 import {AdminBoardTabPanels} from "./AdminBoardTabPanels.tsx";
+import {getAdminBoardTabConfig} from "./adminBoardTabConfig.tsx";
 
 
 const AdminBoardStyled = styled.div`
@@ -22,30 +23,29 @@ const AdminBoardStyled = styled.div`
 export const AdminBoard = () => {
   const { isAdminBoardOpen,
           setIsAdminBoardOpen,
-          selectedTabIndex,
-          setSelectedTabIndex} = useContext(AdminContext)
+          currentAdminTabIndex,
+          setCurrentAdminTabIndex} = useContext(AdminContext)
 
-  const handleTabClick = (value: number) => {
-    setSelectedTabIndex(value);
+  const defaultHandleTabClick = (value:string) => {
+    setCurrentAdminTabIndex(value);
     if (!isAdminBoardOpen) {
       setIsAdminBoardOpen(!isAdminBoardOpen);
     }
   }
 
-  const isSelectedTab = (index: number): boolean => {
-    return selectedTabIndex === index;
+  const isSelectedTab = (index: string): boolean => {
+    return currentAdminTabIndex === index;
   }
 
   const handleToggleClick = () => {
     setIsAdminBoardOpen(!isAdminBoardOpen);
   }
 
+  const adminTabsConfig = getAdminBoardTabConfig(isAdminBoardOpen, currentAdminTabIndex, handleToggleClick, )
+
   return (
     <AdminBoardStyled className={isAdminBoardOpen ? "is-open" : ""}>
-      <AdminBoardTabs  isAdminBoardOpen={isAdminBoardOpen}
-                       toggleAdminBoardOpenHandler={handleToggleClick}
-                       isSelectedTabHandler={isSelectedTab}
-                       tabClickHandler={handleTabClick}/>
+      <AdminBoardTabs tabConfig={adminTabsConfig} defaultTabClickHandler={defaultHandleTabClick}/>
       <AdminBoardTabPanels isSelectedTabHandler={isSelectedTab} />
     </AdminBoardStyled>
   )

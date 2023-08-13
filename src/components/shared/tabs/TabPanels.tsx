@@ -3,6 +3,7 @@ import {PropsWithChildren} from "react";
 
 const TabPanelsStyled =  styled.section`
   width: 100%;
+  //min-height: 25rem;
 `
 
 type TabPanelsProps = {

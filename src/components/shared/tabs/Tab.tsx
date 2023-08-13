@@ -60,19 +60,19 @@ type TabProps = {
   className?: string,
   onClick?: TTabClickHandler,
   tabIndex?: number,
-  tabPanelID?: string,
+  tabPanelId?: string,
   isSelected?: boolean
   // labelClass?: string,
   // iconClass?:string
 }
-export const Tab = ({id, Icon, label, className, onClick, tabIndex, tabPanelID, isSelected}: TabProps) => {
+export const Tab = ({id, Icon, label, className, onClick, tabIndex, tabPanelId, isSelected}: TabProps) => {
 
   return (
-    <TabStyled id={id}
+    <TabStyled role={"tab"} id={id}
                className={className}
-               onClick={onClick} role={"tab"}
+               onClick={onClick}
                tabIndex={tabIndex}
-               aria-controls={tabPanelID}
+               aria-controls={tabPanelId}
                aria-selected={isSelected}>
       {Icon && <div className="icon">{Icon}</div>}
       {label && <span className={"label"}>{label}</span>}
