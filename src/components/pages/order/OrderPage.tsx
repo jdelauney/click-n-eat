@@ -7,6 +7,7 @@ import {fakeMenu2 as fakeMenu, MenuItem} from "../../../data/fakeMenu.ts";
 import {useState} from "react";
 import toast from "react-hot-toast";
 import {AdminBoard} from "./AdminBoard.tsx";
+import {AdminContext, TAdminContext} from "./context/AdminContext.tsx";
 
 const OrderLayoutStyled = styled.div`
   
@@ -41,7 +42,16 @@ export const OrderPage = () => {
 
   const [products, setProducts] = useState<MenuItem[]>(fakeMenu);
   const [isAdminMode, setIsAdminMode] = useState<boolean>(false);
+  const [selectedTabIndex, setSelectedTabIndex] = useState<number>(1);
+  const [isAdminBoardOpen, setIsAdminBoardOpen] = useState<boolean>(true);
 
+
+  const adminContextValue: TAdminContext = {
+    selectedTabIndex : selectedTabIndex,
+    setSelectedTabIndex: setSelectedTabIndex,
+    isAdminBoardOpen: isAdminBoardOpen,
+    setIsAdminBoardOpen: setIsAdminBoardOpen,
+  }
   const notifyAdminMode = () => {
     toast('Mode admin activé',
       {
@@ -77,7 +87,9 @@ export const OrderPage = () => {
         <OrderPageContentStyled>
           <Menu products={...products} />
         </OrderPageContentStyled>
-        <AdminBoard/>
+        <AdminContext.Provider value={adminContextValue}>
+          { isAdminMode && <AdminBoard/>}
+        </AdminContext.Provider>
         {/*<div className={"admin"}>
           <div className={"tabs"}>
             <div className={"tab"}>

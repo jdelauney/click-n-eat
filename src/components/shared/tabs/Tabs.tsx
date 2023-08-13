@@ -1,22 +1,26 @@
 import styled from "styled-components";
-import {FiChevronDown} from "react-icons/fi";
-import {Tab} from "./Tab.tsx";
-import {AiOutlinePlus} from "react-icons/ai";
-import {MdModeEditOutline} from "react-icons/md";
+import {PropsWithChildren} from "react";
 
 const TabsStyled = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  padding-inline-start: 7rem;
+  margin-inline-start: 7rem;
   overflow: hidden;
 `
 
-export const Tabs = () => {
+type TabListProps = {
+   ariaLabel?: string,
+   selectedTabIndex?: number,
+  className?: string
+ } & PropsWithChildren
+//{selectedTabIndex}: TabsProps
+export const Tabs = ({ariaLabel, className,  children}: TabListProps) => {
+
   return (
-    <TabsStyled>
-      <Tab Icon={<FiChevronDown className={"icon"}/>}/>
-      <Tab Icon={<AiOutlinePlus className={"icon"}/>} label={"Ajouter un produit"}/>
-      <Tab Icon={<MdModeEditOutline className={"icon"}/>} label={"Modifier un produit"}/>
+    <TabsStyled role={"tablist"} aria-label={ariaLabel} className={className}>
+     { children }
     </TabsStyled>
   )
 }
+
+//className={selectedTabIndex === 1 ? "selected" : ""}
