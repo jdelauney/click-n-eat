@@ -8,7 +8,7 @@ export type TAdminBoardTabConfigTabItem = {
   tabPanelId?: string,
   Icon: ReactNode
   label?: string,
-  className: string
+  className?: string
   onClick?: () => void
   isSelected?: boolean
 }
@@ -27,7 +27,6 @@ export type TAdminBoardTabConfigItem = {
 export type TAdminBoardTabConfig = TAdminBoardTabConfigItem[]
 
 export const getAdminBoardTabConfig = (isAdminBoardOpen: boolean,
-                                       currentSelectedTabIndex: string,
                                        toggleAdminBoardOpenHandler: () => void ): TAdminBoardTabConfig => {
 
   return [
@@ -48,12 +47,9 @@ export const getAdminBoardTabConfig = (isAdminBoardOpen: boolean,
           tabPanelId: "panel-1",
           Icon: <AiOutlinePlus/>,
           label: "Ajouter un produit",
-          className: currentSelectedTabIndex === "tab-1" ? "is-selected" : "",
-          isSelected: currentSelectedTabIndex === "tab-1"
         },
         tabpanel: {
           content: "Ajouter un produit",
-          isExpanded: currentSelectedTabIndex === "tab-1"
         }
       },
       {
@@ -62,12 +58,9 @@ export const getAdminBoardTabConfig = (isAdminBoardOpen: boolean,
           tabPanelId: "panel-2",
           Icon: <MdModeEditOutline/>,
           label: "Modifier un produit",
-          className: currentSelectedTabIndex === "tab-2" ? "is-selected" : "",
-          isSelected: currentSelectedTabIndex === "tab-2"
         },
         tabpanel: {
           content: "Modifier un produit",
-          isExpanded: currentSelectedTabIndex === "tab-2"
         }
       }
     ]
