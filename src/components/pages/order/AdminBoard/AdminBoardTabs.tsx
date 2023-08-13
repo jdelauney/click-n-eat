@@ -1,12 +1,12 @@
 import {Tabs} from "../../../shared/tabs/Tabs.tsx";
 import {Tab} from "../../../shared/tabs/Tab.tsx";
-import { TAdminBoardTabConfig} from "./adminBoardTabConfig.tsx";
+import {TAdminBoardTabConfigTabItem} from "./adminBoardTabConfig.tsx";
 
 // type TisSelectedTabHandler = (value: string) => boolean
 type TTabClickHandler = (value: string) => void
 
 type AdminBoardTabsProps = {
-  tabConfig : TAdminBoardTabConfig,
+  tabConfig : TAdminBoardTabConfigTabItem[],
   defaultTabClickHandler: TTabClickHandler,
 }
 
@@ -15,8 +15,7 @@ export const AdminBoardTabs = ({tabConfig, defaultTabClickHandler}: AdminBoardTa
   return (
     <Tabs ariaLabel={"Groupe d'actions du panel d'administration"}>
       {
-        tabConfig.map((item) => {
-          const currentTab = item.tab
+        tabConfig.map((currentTab) => {
           return ( <Tab key={currentTab.id}
                         id={currentTab.id}
                         tabPanelId={currentTab.tabPanelId}

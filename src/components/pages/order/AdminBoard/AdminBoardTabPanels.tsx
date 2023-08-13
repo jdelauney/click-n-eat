@@ -1,25 +1,31 @@
 import {TabPanel} from "../../../shared/tabs/TabPanel.tsx";
 import {TabPanels} from "../../../shared/tabs/TabPanels.tsx";
-
-type TisSelectedTabHandler = (value: string) => boolean
+import {TAdminBoardTabConfig} from "./adminBoardTabConfig.tsx";
 
 type AdminBoardTabPanelsProps = {
-  isSelectedTabHandler: TisSelectedTabHandler,
+  tabPanelConfig: TAdminBoardTabConfig
 }
-export const AdminBoardTabPanels = ({isSelectedTabHandler}: AdminBoardTabPanelsProps) => {
-
-  const handleIsSelectedTab = (value: string):boolean => {
-    return isSelectedTabHandler(value)
-  }
+export const AdminBoardTabPanels = ({tabPanelConfig}: AdminBoardTabPanelsProps) => {
 
   return (
     <TabPanels>
-      <TabPanel id={"panel-1"} labelledBy={"tab-1"} isExpanded={handleIsSelectedTab("tab-1")}>
-        Ajout d&apos;un produit
-      </TabPanel>
-      <TabPanel id={"panel-2"} labelledBy={"tab-2"} isExpanded={handleIsSelectedTab("tab-2")}>
-        Modification d&apos;un produit
-      </TabPanel>
+      {
+        tabPanelConfig.map((item) => {
+          const {id, tabPanelId } = item.tab
+          if (tabPanelId !== undefined && item.tabpanel.isExpanded) {
+            return (
+              <TabPanel key={tabPanelId}
+                        id={tabPanelId}
+                        labelledBy={id}
+                        isExpanded={item.tabpanel.isExpanded}
+                        className={item.tabpanel.className}
+              >
+                {item.tabpanel.content}
+              </TabPanel>
+            )
+          }
+        })
+      }
     </TabPanels>
   )
 }

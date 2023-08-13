@@ -33,20 +33,17 @@ export const AdminBoard = () => {
     }
   }
 
-  const isSelectedTab = (index: string): boolean => {
-    return currentAdminTabIndex === index;
-  }
-
   const handleToggleClick = () => {
     setIsAdminBoardOpen(!isAdminBoardOpen);
   }
 
   const adminTabsConfig = getAdminBoardTabConfig(isAdminBoardOpen, currentAdminTabIndex, handleToggleClick, )
+  const adminBoardTabs = adminTabsConfig.map((item) => item.tab)
 
   return (
     <AdminBoardStyled className={isAdminBoardOpen ? "is-open" : ""}>
-      <AdminBoardTabs tabConfig={adminTabsConfig} defaultTabClickHandler={defaultHandleTabClick}/>
-      <AdminBoardTabPanels isSelectedTabHandler={isSelectedTab} />
+      <AdminBoardTabs tabConfig={adminBoardTabs} defaultTabClickHandler={defaultHandleTabClick}/>
+      <AdminBoardTabPanels tabPanelConfig={adminTabsConfig}/>
     </AdminBoardStyled>
   )
 }

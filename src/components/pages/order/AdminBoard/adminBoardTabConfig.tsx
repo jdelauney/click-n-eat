@@ -14,7 +14,9 @@ export type TAdminBoardTabConfigTabItem = {
 }
 
 export type TAdminBoardTabConfigTabPanelItem = {
-  content: ReactNode
+  content: ReactNode | string
+  isExpanded?: boolean
+  className?: string
 }
 
 export type TAdminBoardTabConfigItem = {
@@ -50,7 +52,8 @@ export const getAdminBoardTabConfig = (isAdminBoardOpen: boolean,
           isSelected: currentSelectedTabIndex === "tab-1"
         },
         tabpanel: {
-          content: null
+          content: "Ajouter un produit",
+          isExpanded: currentSelectedTabIndex === "tab-1"
         }
       },
       {
@@ -63,7 +66,8 @@ export const getAdminBoardTabConfig = (isAdminBoardOpen: boolean,
           isSelected: currentSelectedTabIndex === "tab-2"
         },
         tabpanel: {
-          content: null
+          content: "Modifier un produit",
+          isExpanded: currentSelectedTabIndex === "tab-2"
         }
       }
     ]
