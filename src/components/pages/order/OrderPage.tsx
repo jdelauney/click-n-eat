@@ -34,7 +34,6 @@ export const OrderPage = () => {
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(1);
   const [isAdminBoardOpen, setIsAdminBoardOpen] = useState<boolean>(true);
 
-
   const adminContextValue: TAdminContext = {
     selectedTabIndex : selectedTabIndex,
     setSelectedTabIndex: setSelectedTabIndex,
