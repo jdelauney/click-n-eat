@@ -9,6 +9,7 @@ import {FaHamburger} from "react-icons/fa";
 import {BsFillCameraFill} from "react-icons/bs";
 import {MdOutlineEuro} from "react-icons/md";
 import {FiCheckCircle} from "react-icons/fi";
+import {ImagePreview} from "./ImagePreview.tsx";
 
 
 //https://c-pi.niceshops.com/upload/image/product/large/default/haribo-tropi-frutti-100-g-922290-fr.jpg
@@ -86,6 +87,9 @@ const AdminProductFormStyled = styled.form`
 `
 
 const IMAGE_DEFAULT: string = "../../assets/images/coming-soon.png"
+
+
+
 export const AdminProductForm = () => {
   const { products, setProducts } = useContext(OrderContext)
   const [imageUrl, setImageUrl] = useState("");
@@ -144,18 +148,7 @@ export const AdminProductForm = () => {
 
   return (
     <AdminProductFormStyled onSubmit={handleSubmit}>
-      <div className={"productForm__image-preview"}>
-        {
-          imageUrl !== ""
-            ?  (
-              <div>
-                <img  src={imageUrl} alt={"image preview"}/>
-              </div>
-            )
-            : <span>Aucune image</span>
-        }
-
-      </div>
+      <ImagePreview imageUrl={imageUrl}/>
       <div className={"productForm__fields"}>
         <InputText name={"productName"}
                    Icon={<FaHamburger className={"icon"}/>}
@@ -180,7 +173,8 @@ export const AdminProductForm = () => {
         />
         <div className={"productForm__footer"}>
           <Button type={"submit"} theme={BtnSuccess} label={"Ajouter un nouveau produit au menu"}/>
-          { isSubmitted && <span className={"productForm__notification-message"}><FiCheckCircle className={"icon"}/> Ajouté avec succès !</span>}
+          {isSubmitted &&
+              <span className={"productForm__notification-message"}><FiCheckCircle className={"icon"}/> Ajouté avec succès !</span>}
         </div>
       </div>
     </AdminProductFormStyled>
