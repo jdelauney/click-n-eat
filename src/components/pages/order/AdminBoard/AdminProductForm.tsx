@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import {InputText} from "../../../shared/InputText.tsx";
 import {theme} from "../../../../theme";
-import {FaHamburger} from "react-icons/fa";
-import {BsFillCameraFill} from "react-icons/bs";
-import {MdOutlineEuro} from "react-icons/md";
 import {BtnSuccess, Button} from "../../../shared/Button.tsx";
 import {ChangeEvent, FormEvent, useContext, useState} from "react";
 import {OrderContext} from "../Context/OrderContext.tsx";
 import {MenuItem} from "../../../../data/fakeMenu.ts";
+import {FaHamburger} from "react-icons/fa";
+import {BsFillCameraFill} from "react-icons/bs";
+import {MdOutlineEuro} from "react-icons/md";
+import {FiCheckCircle} from "react-icons/fi";
 
 
 //https://c-pi.niceshops.com/upload/image/product/large/default/haribo-tropi-frutti-100-g-922290-fr.jpg
@@ -37,7 +38,7 @@ const AdminProductFormStyled = styled.form`
       object-fit: contain;
     }
 
-    > div > span {
+    > span {
       font-family: "Open Sans", sans-serif;
       line-height: 2.4;
       color: ${theme.colors.greyBlue};
@@ -59,6 +60,28 @@ const AdminProductFormStyled = styled.form`
       background-color: ${theme.colors.background_white};
     }
   }
+  
+  .productForm__footer {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap:1.5rem;
+
+    .productForm__notification-message {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap:.5rem;
+      font-family: "Open Sans", sans-serif;
+      font-size: 1.5rem;
+      color: ${theme.colors.success};
+      
+      > .icon {
+        width: 1.8rem;
+        height: 1.8rem;
+      }
+    }
+  }
 
 `
 
@@ -66,7 +89,7 @@ const IMAGE_DEFAULT: string = "../../assets/images/coming-soon.png"
 export const AdminProductForm = () => {
   const { products, setProducts } = useContext(OrderContext)
   const [imageUrl, setImageUrl] = useState("");
-
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
 
   /*const generatRFC4122uuid = (): string => {
@@ -104,6 +127,12 @@ export const AdminProductForm = () => {
       priceValue === "" ? "0.00" : priceValue
     );
 
+    setIsSubmitted(true)
+    setTimeout(() => {
+      setIsSubmitted(false)
+    }, 2000)
+
+    setImageUrl("")
     currentForm.reset()
   }
 
@@ -116,13 +145,16 @@ export const AdminProductForm = () => {
   return (
     <AdminProductFormStyled onSubmit={handleSubmit}>
       <div className={"productForm__image-preview"}>
-        <div>
-          {
-            imageUrl !== ""
-              ? <img  src={imageUrl} alt={"image preview"}/>
-              : <span>Aucune image</span>
-          }
-        </div>
+        {
+          imageUrl !== ""
+            ?  (
+              <div>
+                <img  src={imageUrl} alt={"image preview"}/>
+              </div>
+            )
+            : <span>Aucune image</span>
+        }
+
       </div>
       <div className={"productForm__fields"}>
         <InputText name={"productName"}
@@ -137,18 +169,18 @@ export const AdminProductForm = () => {
                    inputContainerClass={"productForm__field"}
                    placeholder={"Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)"}
                    ariaLabel={"Image du produit "}
-                   onChange={handleInputImageProductChange}
+                   onInput={handleInputImageProductChange}
         />
         <InputText name={"productPrice"}
                    Icon={<MdOutlineEuro className={"icon"}/>}
                    inputContainerClass={"productForm__field"}
                    placeholder={"Prix"}
                    ariaLabel={"Prix du produit "}
-                   pattern={"\\d+(\\{.,}\\d{2})?"}
+                   pattern={"[0-9]+([\\.,][0-9]+)?"}
         />
-        <div>
+        <div className={"productForm__footer"}>
           <Button type={"submit"} theme={BtnSuccess} label={"Ajouter un nouveau produit au menu"}/>
-
+          { isSubmitted && <span className={"productForm__notification-message"}><FiCheckCircle className={"icon"}/> Ajouté avec succès !</span>}
         </div>
       </div>
     </AdminProductFormStyled>
