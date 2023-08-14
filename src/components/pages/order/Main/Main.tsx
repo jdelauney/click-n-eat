@@ -1,9 +1,9 @@
-import {Menu} from "./Menu.tsx";
+import {Menu} from "../Menu/Menu.tsx";
 import styled from "styled-components";
 import {theme} from "../../../../theme";
 import {useContext} from "react";
 import {OrderContext} from "../Context/OrderContext.tsx";
-import {EmptyProductsInformation} from "./EmptyProductsInformation.tsx";
+import {EmptyProductsInformation} from "../Menu/EmptyProductsInformation.tsx";
 
 const MainStyled = styled.main`
   width: 100%;

@@ -1,6 +1,6 @@
 import {useContext} from "react";
 import {OrderContext} from "../Context/OrderContext.tsx";
-import {AdminEmptyProductsInformation} from "./AdminEmptyProductsInformation.tsx";
+import {AdminEmptyProductsInformation} from "../AdminBoard/AdminEmptyProductsInformation.tsx";
 import {UserEmptyProductsInformation} from "./UserEmptyProductsInformation.tsx";
 import styled from "styled-components";
 import {theme} from "../../../../theme";
