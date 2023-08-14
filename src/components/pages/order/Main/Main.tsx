@@ -22,7 +22,7 @@ export const Main = () => {
     <MainStyled>
       { products.length > 0
         ? (
-          <Menu products={...products} />
+          <Menu products={products} />
         )
         : (
           <EmptyProductsInformation/>
