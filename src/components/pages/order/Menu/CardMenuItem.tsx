@@ -106,6 +106,9 @@ export const CardMenuItem = ({item}: CardProps) => {
       return product.id !== productId
     })
     setProducts(newProducts)
+    if (productId === currentSelectProduct?.id) {
+      setCurrentSelectedProduct(null)
+    }
   }
 
 const handleDeleteClick = (event: MouseEvent, id: number) => {
