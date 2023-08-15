@@ -28,15 +28,7 @@ const OrderPageStyled = styled.div`
     overflow: hidden;
   }
 `
-/*const NEW_DEFAULT_MENUITEM : MenuItem = {
-  id: -1,
-  imageSource: "",
-  title: "",
-  price: 0,
-  quantity: 0,
-  isAvailable: true,
-  isAdvertised: false,
-}*/
+
 export const OrderPage = () => {
 
   const [isAdminMode, setIsAdminMode] = useState<boolean>(false);

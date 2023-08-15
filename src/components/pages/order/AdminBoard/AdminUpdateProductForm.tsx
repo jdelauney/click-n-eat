@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {InputText} from "../../../shared/InputText.tsx";
 import {theme} from "../../../../theme";
 import {ChangeEvent, InputHTMLAttributes, ReactElement, useContext } from "react";
-//import {OrderContext} from "../Context/OrderContext.tsx";
+import {OrderContext} from "../Context/OrderContext.tsx";
 
 import {FaHamburger} from "react-icons/fa";
 import {BsFillCameraFill} from "react-icons/bs";
@@ -11,6 +11,7 @@ import {MdOutlineEuro} from "react-icons/md";
 import {ImagePreview} from "./ImagePreview.tsx";
 import {AdminContext} from "../Context/AdminContext.tsx";
 import {AdminUpdateProductMessage} from "./AdminUpdateProductMessage.tsx";
+import {MenuItem} from "../../../../data/fakeMenu.ts";
 
 
 //https://c-pi.niceshops.com/upload/image/product/large/default/haribo-tropi-frutti-100-g-922290-fr.jpg
@@ -55,8 +56,7 @@ const AdminUpdateProductFormStyled = styled.form`
 `
 
 export const AdminUpdateProductForm = () => {
-  //const {products, setProducts} = useContext(OrderContext)
-  //const [imageUrl, setImageUrl] = useState("");
+  const {setProducts} = useContext(OrderContext)
   const {currentSelectProduct, setCurrentSelectedProduct} = useContext(AdminContext)
 
 /*  const updateProduct = (name: string, imgUrl: string, price: string) => {
@@ -102,9 +102,32 @@ export const AdminUpdateProductForm = () => {
     return ""
   }
 
+  const DEFAULT_MENUITEM : MenuItem = {
+  id: -1,
+  imageSource: "",
+  title: "",
+  price: 0,
+  quantity: 0,
+  isAvailable: true,
+  isAdvertised: false,
+}
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
-    setCurrentSelectedProduct({id: 0, imageSource: "", isAdvertised: false, isAvailable: false, price: 0, quantity: 0, title: "", ...currentSelectProduct, [getProductPropertyKeyName(name)]: value })
+    const updatedProduct: MenuItem = {
+      //id: 0, imageSource: "", isAdvertised: false, isAvailable: false, price: 0, quantity: 0, title: ""
+      ...DEFAULT_MENUITEM
+      , ...currentSelectProduct,
+      [getProductPropertyKeyName(name)]: value
+    }
+    setCurrentSelectedProduct(updatedProduct)
+    setProducts((prevState) => {
+      return  prevState.map((item) => {
+        if (item.id === updatedProduct.id) {
+          item = {...updatedProduct}
+        }
+        return item
+      })
+    })
   }
 
   type FormFieldDesc = {
