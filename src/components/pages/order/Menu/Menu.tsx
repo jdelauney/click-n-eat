@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import {MenuItem} from "../../../../data/fakeMenu.ts";
 import {CardMenuItem} from "./CardMenuItem.tsx";
+import {useContext} from "react";
+import {OrderContext} from "../Context/OrderContext.tsx";
 
 const MenuStyled = styled.section`
   display: grid;
@@ -11,10 +12,10 @@ const MenuStyled = styled.section`
   padding-block: 5rem;
 `
 
-type MenuProps = {
-  products: MenuItem[]
-}
-export const Menu = ({products}: MenuProps) => {
+export const Menu = () => {
+
+  const { products } = useContext(OrderContext)
+
   return (
     <MenuStyled>
       {

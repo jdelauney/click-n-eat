@@ -176,7 +176,6 @@ export const AdminProductForm = () => {
         pattern: "[0-9]+([\\.,][0-9]+)?",
         inputContainerClass:"productForm__field",
       },
-
     ]
   }
 

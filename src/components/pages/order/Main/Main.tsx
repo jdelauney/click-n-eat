@@ -1,7 +1,7 @@
 import {Menu} from "../Menu/Menu.tsx";
 import styled from "styled-components";
 import {theme} from "../../../../theme";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import {OrderContext} from "../Context/OrderContext.tsx";
 import {EmptyProductsInformation} from "../Menu/EmptyProductsInformation.tsx";
 
@@ -15,17 +15,27 @@ const MainStyled = styled.main`
 `
 export const Main = () => {
 
-  const { products } = useContext(OrderContext)
+  const [isProductsEmpty, setIsProductsEmpty] = useState(false);
+  const {products} = useContext(OrderContext)
+
+  useEffect(() => {
+    if (products.length === 0) {
+      setIsProductsEmpty(true)
+    } else if ((products.length !== 0) && isProductsEmpty) {
+      setIsProductsEmpty(false)
+    }
+    return () => {}
+  }, [products, isProductsEmpty]);
 
 
   return (
     <MainStyled>
-      { products.length > 0
+      { isProductsEmpty
         ? (
-          <Menu products={products} />
+          <EmptyProductsInformation/>
         )
         : (
-          <EmptyProductsInformation/>
+          <Menu/>
         )
       }
     </MainStyled>
