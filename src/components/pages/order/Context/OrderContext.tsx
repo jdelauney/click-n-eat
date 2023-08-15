@@ -6,14 +6,14 @@ export type TOrderContext = {
   setIsModeAdmin: Dispatch<SetStateAction<boolean>>
   products: MenuList
   setProducts:  Dispatch<SetStateAction<MenuList>>
-  isAdminUpdateMode: boolean,
-  setIsAdminUpdateMode: Dispatch<SetStateAction<boolean>>
+  /*isAdminUpdateMode: boolean,
+  setIsAdminUpdateMode: Dispatch<SetStateAction<boolean>>*/
 }
 export const OrderContext = createContext<TOrderContext>({
   isModeAdmin: false,
   setIsModeAdmin: () => {},
   products: [],
   setProducts:  () => {},
-  isAdminUpdateMode: false,
-  setIsAdminUpdateMode: () => {}
+  /*isAdminUpdateMode: false,
+  setIsAdminUpdateMode: () => {}*/
 })

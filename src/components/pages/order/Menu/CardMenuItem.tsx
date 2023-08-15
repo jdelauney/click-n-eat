@@ -99,8 +99,8 @@ type CardProps = {
   item: MenuItem
 }
 export const CardMenuItem = ({item}: CardProps) => {
-  const {isModeAdmin, products, setProducts, isAdminUpdateMode} = useContext(OrderContext)
-  const {inputNameRef, isAdminBoardOpen, setIsAdminBoardOpen, currentSelectProduct, setCurrentSelectedProduct} = useContext(AdminContext)
+  const {isModeAdmin, products, setProducts} = useContext(OrderContext)
+  const {setCurrentAdminTabIndex, inputNameRef, isAdminBoardOpen, setIsAdminBoardOpen, currentSelectProduct, setCurrentSelectedProduct} = useContext(AdminContext)
   const deleteProduct = (productId: number) => {
     const newProducts = products.filter((product) => {
       return product.id !== productId
@@ -114,12 +114,16 @@ const handleDeleteClick = (event: MouseEvent, id: number) => {
   }
   //const cardRef = useRef<HTMLDivElement>(null);
 
-  const handleCardClick = (event: MouseEvent<HTMLDivElement>, product: MenuItem) => {
+  const handleCardClick = async (event: MouseEvent<HTMLDivElement>, product: MenuItem) => {
     if (!isAdminBoardOpen) {
       setIsAdminBoardOpen(true)
     }
 
-    setCurrentSelectedProduct(product)
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await setCurrentSelectedProduct(product)
+    setCurrentAdminTabIndex("tab-2");
+
+
     if (inputNameRef) {
       inputNameRef.current?.focus()
     }
@@ -132,8 +136,8 @@ const handleDeleteClick = (event: MouseEvent, id: number) => {
   return (
     <CardStyled>
       <div
-        className={ isAdminUpdateMode ? `card__inner is-selectable ${currentSelectProduct?.id === item.id ? "is-selected" : ""}` : "card__inner"}
-        onClick={isAdminUpdateMode ?  (event) => handleCardClick(event, item) : undefined}
+        className={ isModeAdmin ? `card__inner is-selectable ${currentSelectProduct?.id === item.id ? "is-selected" : ""}` : "card__inner"}
+        onClick={isModeAdmin ?  (event) => handleCardClick(event, item) : undefined}
       >
         {
           isModeAdmin &&
