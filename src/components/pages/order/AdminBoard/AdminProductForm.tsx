@@ -87,6 +87,12 @@ export const AdminProductForm = () => {
     setProducts([newProduct, ...products ])
   }
 
+  const displaySuccessMessage = () => {
+    setIsSubmitted(true)
+    setTimeout(() => {
+      setIsSubmitted(false)
+    }, 2000)
+  }
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const currentForm = event.currentTarget as HTMLFormElement
@@ -101,10 +107,7 @@ export const AdminProductForm = () => {
       priceValue === "" ? "0.00" : priceValue
     );
 
-    setIsSubmitted(true)
-    setTimeout(() => {
-      setIsSubmitted(false)
-    }, 2000)
+    displaySuccessMessage()
 
     setImageUrl("")
     currentForm.reset()
