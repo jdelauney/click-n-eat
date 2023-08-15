@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {InputText} from "../../../shared/InputText.tsx";
 import {theme} from "../../../../theme";
 import {BtnSuccess, Button} from "../../../shared/Button.tsx";
-import {ChangeEvent, FormEvent, useContext, useState} from "react";
+import {ChangeEvent, FormEvent, InputHTMLAttributes, ReactElement, useContext, useState} from "react";
 import {OrderContext} from "../Context/OrderContext.tsx";
 import {MenuItem} from "../../../../data/fakeMenu.ts";
 import {FaHamburger} from "react-icons/fa";
@@ -88,8 +88,6 @@ const AdminProductFormStyled = styled.form`
 
 const IMAGE_DEFAULT: string = "../../assets/images/coming-soon.png"
 
-
-
 export const AdminProductForm = () => {
   const { products, setProducts } = useContext(OrderContext)
   const [imageUrl, setImageUrl] = useState("");
@@ -113,9 +111,8 @@ export const AdminProductForm = () => {
       isAvailable: true,
       isAdvertised: false,
     }
-    setProducts([...products, newProduct])
+    setProducts([newProduct, ...products ])
   }
-
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -142,35 +139,64 @@ export const AdminProductForm = () => {
 
   const handleInputImageProductChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
-    console.log("Image : ", event.target.value)
     setImageUrl(event.target.value)
+  }
+
+  type FormFieldDesc = {
+    type?: string
+    name: string
+    placeholder: string
+    ariaLabel: string
+    Icon: ReactElement | null
+    inputContainerClass: string
+  } & InputHTMLAttributes<HTMLInputElement>
+
+  const getInputFields = (): FormFieldDesc[] => {
+    return [
+      {
+        name: "productName",
+        placeholder: "Nom du produit (ex: Super Burger)",
+        ariaLabel: "Nom du produit ",
+        Icon: <FaHamburger className={"icon"}/>,
+        inputContainerClass:"productForm__field",
+      },
+      {
+        name: "productImage",
+        placeholder: "Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)",
+        ariaLabel: "Image du produit",
+        Icon: <BsFillCameraFill className={"icon"}/>,
+        onInput: handleInputImageProductChange,
+        inputContainerClass:"productForm__field",
+      },
+      {
+        name: "productPrice",
+        placeholder: "Prix",
+        ariaLabel: "Prix du produit",
+        Icon: <MdOutlineEuro className={"icon"}/>,
+        pattern: "[0-9]+([\\.,][0-9]+)?",
+        inputContainerClass:"productForm__field",
+      },
+
+    ]
   }
 
   return (
     <AdminProductFormStyled onSubmit={handleSubmit}>
       <ImagePreview imageUrl={imageUrl}/>
       <div className={"productForm__fields"}>
-        <InputText name={"productName"}
-                   Icon={<FaHamburger className={"icon"}/>}
-                   inputContainerClass={"productForm__field"}
-                   placeholder={"Nom du produit (ex: Super Burger)"}
-                   ariaLabel={"Nom du produit "}
-        />
-        <InputText type={"url"}
-                   Icon={<BsFillCameraFill className={"icon"}/>}
-                   name={"productImage"}
-                   inputContainerClass={"productForm__field"}
-                   placeholder={"Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)"}
-                   ariaLabel={"Image du produit "}
-                   onInput={handleInputImageProductChange}
-        />
-        <InputText name={"productPrice"}
-                   Icon={<MdOutlineEuro className={"icon"}/>}
-                   inputContainerClass={"productForm__field"}
-                   placeholder={"Prix"}
-                   ariaLabel={"Prix du produit "}
-                   pattern={"[0-9]+([\\.,][0-9]+)?"}
-        />
+        {
+          getInputFields().map((input) => {
+            return <InputText key={input.name} name={input.name}
+                              Icon={input.Icon}
+                              inputContainerClass={input.inputContainerClass}
+                              placeholder={input.placeholder}
+                              ariaLabel={input.ariaLabel}
+                              pattern={input.pattern}
+                              onInput={input.onInput}
+                    />
+          })
+        }
+
         <div className={"productForm__footer"}>
           <Button type={"submit"} theme={BtnSuccess} label={"Ajouter un nouveau produit au menu"}/>
           {isSubmitted &&
