@@ -19,33 +19,6 @@ const AdminProductFormStyled = styled.form`
   width: 90rem;
   height: 16rem;
 
-  .productForm__image-preview {
-    display: grid;
-    place-items: center;
-    width: 22rem;
-    height: 15rem;
-    border-radius: 0.5rem;
-    border: 1px solid ${theme.colors.greyLight};
-    
-    > div {
-      height: 100%;
-      max-height: 14rem;
-    }
-    
-    > div > img {
-      display: block;
-      width: auto;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    > span {
-      font-family: "Open Sans", sans-serif;
-      line-height: 2.4;
-      color: ${theme.colors.greyBlue};
-    }
-  }
-
   .productForm__fields {
     display: flex;
     flex-direction: column;
