@@ -106,14 +106,19 @@ export const CardMenuItem = ({item}: CardProps) => {
       return product.id !== productId
     })
     setProducts(newProducts)
-    if (productId === currentSelectProduct?.id) {
-      setCurrentSelectedProduct(null)
-    }
+
+
   }
 
 const handleDeleteClick = (event: MouseEvent, id: number) => {
     event.stopPropagation()
     deleteProduct(id)
+    if (id === currentSelectProduct?.id) {
+      setCurrentSelectedProduct(null)
+    }
+    if (inputNameRef) {
+      inputNameRef.current?.focus()
+    }
   }
   //const cardRef = useRef<HTMLDivElement>(null);
 
