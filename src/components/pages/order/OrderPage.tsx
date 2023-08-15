@@ -2,7 +2,7 @@ import { useParams} from 'react-router-dom';
 import styled from "styled-components";
 import {theme} from "../../../theme";
 import {Navbar} from "../layout/Navbar.tsx";
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {AdminBoard} from "./AdminBoard/AdminBoard.tsx";
 import {AdminContext, TAdminContext} from "./Context/AdminContext.tsx";
 import {OrderContext, TOrderContext} from "./Context/OrderContext.tsx";
@@ -39,6 +39,7 @@ export const OrderPage = () => {
   const [products, setProducts] = useState<MenuItem[]>(fakeMenu);
   const [currentSelectedProduct, setCurrentSelectedProduct] = useState<MenuItem|null>(null);
 
+  const inputNameRef = useRef<HTMLInputElement>(null);
 
   const adminContextValue: TAdminContext = {
     currentAdminTabIndex : currentAdminTabIndex,
@@ -47,6 +48,7 @@ export const OrderPage = () => {
     setIsAdminBoardOpen: setIsAdminBoardOpen,
     currentSelectProduct: currentSelectedProduct,
     setCurrentSelectedProduct: setCurrentSelectedProduct,
+    inputNameRef : inputNameRef
   }
 
   const orderContextValue: TOrderContext = {

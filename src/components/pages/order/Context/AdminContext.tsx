@@ -1,4 +1,4 @@
-import {createContext, Dispatch, SetStateAction} from "react";
+import {createContext, Dispatch, RefObject, SetStateAction} from "react";
 import {MenuItem} from "../../../../data/fakeMenu.ts";
 
 export type TAdminContext = {
@@ -8,6 +8,7 @@ export type TAdminContext = {
   setIsAdminBoardOpen: Dispatch<SetStateAction<boolean>>
   currentSelectProduct: MenuItem | null,
   setCurrentSelectedProduct: Dispatch<SetStateAction<MenuItem|null>>
+  inputNameRef: RefObject<HTMLInputElement>|null
 }
 export const AdminContext = createContext<TAdminContext>({
   currentAdminTabIndex: "",
@@ -16,4 +17,5 @@ export const AdminContext = createContext<TAdminContext>({
   setIsAdminBoardOpen: () => {},
   currentSelectProduct: null,
   setCurrentSelectedProduct: () => {},
+  inputNameRef: null
 })

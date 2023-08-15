@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {theme} from "../../theme";
-import {InputHTMLAttributes, ReactNode} from "react";
+import {forwardRef, InputHTMLAttributes, ReactNode} from "react";
 
 const InputContainerStyled = styled.div`
   display: flex;
@@ -39,11 +39,16 @@ type InputTextProps = {
   Icon?: ReactNode,
   inputContainerClass?: string,
 } & InputHTMLAttributes<HTMLInputElement>
-export const InputText = ({type="text", name, inputContainerClass, ariaLabel, Icon,  ...rest}: InputTextProps) => {
-  return (
-    <InputContainerStyled className={inputContainerClass}>
-      {Icon && Icon}
-      <input type={type} id={name} name={name} aria-label={ariaLabel} {...rest}/>
-    </InputContainerStyled>
-  )
-}
+
+
+// eslint-disable-next-line react/display-name
+export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
+  ({type="text", name, inputContainerClass, ariaLabel, Icon,  ...rest}: InputTextProps, ref) => {
+    return (
+      <InputContainerStyled className={inputContainerClass}>
+        {Icon && Icon}
+        <input ref={ref} type={type} id={name} name={name} aria-label={ariaLabel} {...rest}/>
+      </InputContainerStyled>
+    )
+  }
+)

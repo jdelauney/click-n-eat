@@ -25,6 +25,10 @@ const CardStyled = styled.article`
     box-shadow: -8px 8px 20px 0 rgb(0 0 0 / 20%),
     0 0 8px 0 #FF9A23 !important;
   }
+
+  .is-selectable:hover {
+    transform: scale(1.05);
+  }
   
   .card__inner {
     position: relative;
@@ -41,6 +45,7 @@ const CardStyled = styled.article`
     border-radius: 1.5rem;
     box-shadow: -8px 8px 20px 0 rgb(0 0 0 / 20%);
     border: 2px solid transparent;
+    transition: all .25s ease-in-out;
   }
 
   .card__remove-button {
@@ -95,12 +100,17 @@ type CardProps = {
 }
 export const CardMenuItem = ({item}: CardProps) => {
   const {isModeAdmin, products, setProducts, isAdminUpdateMode} = useContext(OrderContext)
-  const {isAdminBoardOpen, setIsAdminBoardOpen, currentSelectProduct, setCurrentSelectedProduct} = useContext(AdminContext)
-  const handleDeleteButtonClick = (productId: number) => {
+  const {inputNameRef, isAdminBoardOpen, setIsAdminBoardOpen, currentSelectProduct, setCurrentSelectedProduct} = useContext(AdminContext)
+  const deleteProduct = (productId: number) => {
     const newProducts = products.filter((product) => {
       return product.id !== productId
     })
     setProducts(newProducts)
+  }
+
+const handleDeleteClick = (event: MouseEvent, id: number) => {
+    event.stopPropagation()
+    deleteProduct(id)
   }
   //const cardRef = useRef<HTMLDivElement>(null);
 
@@ -110,6 +120,9 @@ export const CardMenuItem = ({item}: CardProps) => {
     }
 
     setCurrentSelectedProduct(product)
+    if (inputNameRef) {
+      inputNameRef.current?.focus()
+    }
 
     //const currentCard : HTMLDivElement = event.currentTarget as HTMLDivElement
     //currentCard.classList.toggle("is-selected")
@@ -124,7 +137,7 @@ export const CardMenuItem = ({item}: CardProps) => {
       >
         {
           isModeAdmin &&
-            <DeleteButton className={"card__remove-button"} onClick={() => handleDeleteButtonClick(item.id)}/>
+            <DeleteButton className={"card__remove-button"} onClick={(event) => handleDeleteClick(event, item.id)}/>
         }
         <img className={"card__image"} src={item.imageSource} alt={item.title}/>
         <span className={"card__title"}>{item.title}</span>

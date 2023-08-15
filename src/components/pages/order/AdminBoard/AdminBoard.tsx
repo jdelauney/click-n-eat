@@ -29,7 +29,6 @@ export const AdminBoard = () => {
   const {setIsAdminUpdateMode} = useContext(OrderContext)
   const defaultHandleTabClick = (value:string) => {
     setCurrentAdminTabIndex(value);
-    console.log("defaultHandleTabClick  : ", isAdminBoardOpen)
     if (!isAdminBoardOpen) {
       setIsAdminBoardOpen(true);
     }
@@ -42,7 +41,6 @@ export const AdminBoard = () => {
   }
 
   const handleToggleClick = () => {
-    console.log("handleToggleClick  : ", isAdminBoardOpen)
     setIsAdminBoardOpen(!isAdminBoardOpen);
   }
 
