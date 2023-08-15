@@ -56,8 +56,6 @@ export const OrderPage = () => {
     setIsModeAdmin: setIsAdminMode,
     products: products,
     setProducts: setProducts,
-    /*isAdminUpdateMode: isAdminUpdateMode,
-    setIsAdminUpdateMode: setIsAdminUpdateMode,*/
   }
 
   let {userName} = useParams()
@@ -71,7 +69,7 @@ export const OrderPage = () => {
         <div className={"container"}>
           <Navbar userName={userName}/>
           <AdminContext.Provider value={adminContextValue}>
-          <Main/>
+            <Main/>
             { isAdminMode && <AdminBoard/>}
           </AdminContext.Provider>
         </div>

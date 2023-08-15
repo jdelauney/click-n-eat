@@ -13,7 +13,7 @@ const AdminUpdateProductMessageStyled = styled.div`
   }
 `
 
-export const AdminUpdateProductMessage = () => {
+export const AdminUpdateNotSelectedProductMessage = () => {
   return (
     <AdminUpdateProductMessageStyled>
         <span>Cliquer sur un produit du menu pour le modifier</span>
