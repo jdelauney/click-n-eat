@@ -61,11 +61,11 @@ export const OrderPage = () => {
         <div className={"container"}>
           <Navbar userName={userName}/>
           <Main/>
-            { isAdminMode &&
-                <AdminContext.Provider value={adminContextValue}>
-                    <AdminBoard/>
-                </AdminContext.Provider>
-            }
+          { isAdminMode &&
+              <AdminContext.Provider value={adminContextValue}>
+                  <AdminBoard/>
+              </AdminContext.Provider>
+          }
         </div>
       </OrderPageStyled>
     </OrderContext.Provider>
