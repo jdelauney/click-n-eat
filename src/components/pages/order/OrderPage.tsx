@@ -64,12 +64,10 @@ export const OrderPage = () => {
       <OrderPageStyled>
         <div className={"container"}>
           <Navbar userName={userName}/>
+          <AdminContext.Provider value={adminContextValue}>
           <Main/>
-          { isAdminMode &&
-              <AdminContext.Provider value={adminContextValue}>
-                  <AdminBoard/>
-              </AdminContext.Provider>
-          }
+            { isAdminMode && <AdminBoard/>}
+          </AdminContext.Provider>
         </div>
       </OrderPageStyled>
     </OrderContext.Provider>

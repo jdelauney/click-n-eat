@@ -6,6 +6,8 @@ import {formatPrice} from "../../../../utils/currency.ts";
 import {useContext} from "react";
 import {OrderContext} from "../Context/OrderContext.tsx";
 import {DeleteButton} from "../../../shared/DeleteButton.tsx";
+import {AdminContext} from "../Context/AdminContext.tsx";
+import {MouseEvent} from "react";
 
 const CardStyled = styled.article`
   width: 24rem;
@@ -16,11 +18,12 @@ const CardStyled = styled.article`
     background-color: transparent;
     box-shadow: none;
     cursor: pointer;
-    
-    &:hover {
-      box-shadow: -8px 8px 20px 0 rgb(0 0 0 / 20%), 
-              0 0 8px 0 #FF9A23;
-    }
+  }
+
+  .is-selected,
+  .is-selectable:hover {
+    box-shadow: -8px 8px 20px 0 rgb(0 0 0 / 20%),
+    0 0 8px 0 #FF9A23 !important;
   }
   
   .card__inner {
@@ -92,18 +95,37 @@ type CardProps = {
 }
 export const CardMenuItem = ({item}: CardProps) => {
   const {isModeAdmin, products, setProducts, isAdminUpdateMode} = useContext(OrderContext)
-
+  const {isAdminBoardOpen, setIsAdminBoardOpen} = useContext(AdminContext)
   const handleDeleteButtonClick = (productId: number) => {
     const newProducts = products.filter((product) => {
       return product.id !== productId
     })
     setProducts(newProducts)
   }
+  //const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleCardClick = (event: MouseEvent<HTMLDivElement>) => {
+    console.log("Click  : ", isAdminBoardOpen)
+    if (!isAdminBoardOpen) {
+      setIsAdminBoardOpen(true)
+    }
+
+    const currentCard : HTMLDivElement = event.currentTarget as HTMLDivElement
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    currentCard.classList.toggle("is-selected")
+    event.stopPropagation();
+  }
 
   return (
-    <CardStyled className={ isAdminUpdateMode ? "is-selectable" : ""}>
-      <div className={ isAdminUpdateMode ? "card__inner is-selectable" : "card__inner"}>{isModeAdmin &&
-          <DeleteButton className={"card__remove-button"} onClick={() => handleDeleteButtonClick(item.id)}/>}
+    <CardStyled>
+      <div
+        className={ isAdminUpdateMode ? "card__inner is-selectable" : "card__inner"}
+        onClick={isAdminUpdateMode ?  handleCardClick : undefined}
+      >
+        {
+          isModeAdmin &&
+            <DeleteButton className={"card__remove-button"} onClick={() => handleDeleteButtonClick(item.id)}/>
+        }
         <img className={"card__image"} src={item.imageSource} alt={item.title}/>
         <span className={"card__title"}>{item.title}</span>
         <div className={"card__footer"}>
