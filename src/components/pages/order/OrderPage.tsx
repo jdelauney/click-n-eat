@@ -28,7 +28,15 @@ const OrderPageStyled = styled.div`
     overflow: hidden;
   }
 `
-
+/*const NEW_DEFAULT_MENUITEM : MenuItem = {
+  id: -1,
+  imageSource: "",
+  title: "",
+  price: 0,
+  quantity: 0,
+  isAvailable: true,
+  isAdvertised: false,
+}*/
 export const OrderPage = () => {
 
   const [isAdminMode, setIsAdminMode] = useState<boolean>(false);
@@ -37,12 +45,16 @@ export const OrderPage = () => {
   const [isAdminUpdateMode, setIsAdminUpdateMode] = useState(false);
 
   const [products, setProducts] = useState<MenuItem[]>(fakeMenu);
+  const [currentSelectedProduct, setCurrentSelectedProduct] = useState<MenuItem|null>(null);
+
 
   const adminContextValue: TAdminContext = {
     currentAdminTabIndex : currentAdminTabIndex,
     setCurrentAdminTabIndex: setCurrentAdminTabIndex,
     isAdminBoardOpen: isAdminBoardOpen,
     setIsAdminBoardOpen: setIsAdminBoardOpen,
+    currentSelectProduct: currentSelectedProduct,
+    setCurrentSelectedProduct: setCurrentSelectedProduct,
   }
 
   const orderContextValue: TOrderContext = {

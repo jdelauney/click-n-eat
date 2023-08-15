@@ -95,7 +95,7 @@ type CardProps = {
 }
 export const CardMenuItem = ({item}: CardProps) => {
   const {isModeAdmin, products, setProducts, isAdminUpdateMode} = useContext(OrderContext)
-  const {isAdminBoardOpen, setIsAdminBoardOpen} = useContext(AdminContext)
+  const {isAdminBoardOpen, setIsAdminBoardOpen, currentSelectProduct, setCurrentSelectedProduct} = useContext(AdminContext)
   const handleDeleteButtonClick = (productId: number) => {
     const newProducts = products.filter((product) => {
       return product.id !== productId
@@ -104,23 +104,23 @@ export const CardMenuItem = ({item}: CardProps) => {
   }
   //const cardRef = useRef<HTMLDivElement>(null);
 
-  const handleCardClick = (event: MouseEvent<HTMLDivElement>) => {
-    console.log("Click  : ", isAdminBoardOpen)
+  const handleCardClick = (event: MouseEvent<HTMLDivElement>, product: MenuItem) => {
     if (!isAdminBoardOpen) {
       setIsAdminBoardOpen(true)
     }
 
-    const currentCard : HTMLDivElement = event.currentTarget as HTMLDivElement
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    currentCard.classList.toggle("is-selected")
+    setCurrentSelectedProduct(product)
+
+    //const currentCard : HTMLDivElement = event.currentTarget as HTMLDivElement
+    //currentCard.classList.toggle("is-selected")
     event.stopPropagation();
   }
 
   return (
     <CardStyled>
       <div
-        className={ isAdminUpdateMode ? "card__inner is-selectable" : "card__inner"}
-        onClick={isAdminUpdateMode ?  handleCardClick : undefined}
+        className={ isAdminUpdateMode ? `card__inner is-selectable ${currentSelectProduct?.id === item.id ? "is-selected" : ""}` : "card__inner"}
+        onClick={isAdminUpdateMode ?  (event) => handleCardClick(event, item) : undefined}
       >
         {
           isModeAdmin &&
