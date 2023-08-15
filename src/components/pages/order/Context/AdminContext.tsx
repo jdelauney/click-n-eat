@@ -5,6 +5,7 @@ export type TAdminContext = {
   setCurrentAdminTabIndex: Dispatch<SetStateAction<string>>
   isAdminBoardOpen: boolean,
   setIsAdminBoardOpen: Dispatch<SetStateAction<boolean>>
+
 }
 export const AdminContext = createContext<TAdminContext>({
   currentAdminTabIndex: "",

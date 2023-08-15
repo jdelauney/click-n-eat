@@ -3,6 +3,7 @@ import {FiChevronDown, FiChevronUp} from "react-icons/fi";
 import {AiOutlinePlus} from "react-icons/ai";
 import {MdModeEditOutline} from "react-icons/md";
 import {AdminProductForm} from "./AdminProductForm.tsx";
+import {AdminUpdateProductForm} from "./AdminUpdateProductForm.tsx";
 
 export type TAdminBoardTabConfigTabItem = {
   id: string,
@@ -61,7 +62,7 @@ export const getAdminBoardTabConfig = (isAdminBoardOpen: boolean,
           label: "Modifier un produit",
         },
         tabpanel: {
-          content: "Modifier un produit",
+          content: <AdminUpdateProductForm/>,
         }
       }
     ]

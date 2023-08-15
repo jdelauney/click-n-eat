@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {PropsWithChildren} from "react";
+import {HTMLAttributes, PropsWithChildren} from "react";
 
 const TabPanelsStyled =  styled.section`
   width: 100%;
@@ -8,10 +8,10 @@ const TabPanelsStyled =  styled.section`
 
 type TabPanelsProps = {
   className?: string
-} & PropsWithChildren
-export const TabPanels = ({ className, children }: TabPanelsProps) => {
+} & PropsWithChildren & HTMLAttributes<HTMLDivElement>
+export const TabPanels = ({ className, children, ...rest }: TabPanelsProps) => {
   return (
-    <TabPanelsStyled role={"region"} aria-live={"polite"} className={className}>
+    <TabPanelsStyled role={"region"} aria-live={"polite"} className={className} {...rest} >
       { children }
     </TabPanelsStyled>
   )

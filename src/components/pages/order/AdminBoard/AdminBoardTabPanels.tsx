@@ -12,7 +12,7 @@ export const AdminBoardTabPanels = ({tabPanelConfig}: AdminBoardTabPanelsProps) 
   const  {currentAdminTabIndex} = useContext(AdminContext)
 
   return (
-    <TabPanels>
+    <TabPanels >
       {
         tabPanelConfig.map((item) => {
           const {id, tabPanelId } = item.tab
@@ -23,6 +23,7 @@ export const AdminBoardTabPanels = ({tabPanelConfig}: AdminBoardTabPanelsProps) 
                         labelledBy={id}
                         isExpanded={currentAdminTabIndex === id}
                         className={item.tabpanel.className}
+                        style={{height: "24rem"}}
               >
                 {item.tabpanel.content}
               </TabPanel>

@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import {theme} from "../../../theme";
-import {PropsWithChildren} from "react";
+import {HTMLAttributes, PropsWithChildren} from "react";
 
 const TabPanelStyled = styled.div`
   height: 100%;
   padding-inline: 2rem;
   padding-block: 1.7rem;
-  min-height: 24rem;
   background-color: ${theme.colors.white};
   font-family: 'Open Sans', sans-serif;
   border: 1px solid ${theme.colors.greyLight};
@@ -24,11 +23,11 @@ type TabPanelProps = {
   labelledBy: string,
   isExpanded:boolean,
   className?: string
-} &  PropsWithChildren
+} &  PropsWithChildren & HTMLAttributes<HTMLDivElement>
 
-export const TabPanel = ({ labelledBy, isExpanded, className, children }: TabPanelProps) => {
+export const TabPanel = ({ labelledBy, isExpanded, className, children, ...rest }: TabPanelProps) => {
   return (
-    <TabPanelStyled role={"tabpanel"} tabIndex={0} aria-labelledby={labelledBy} aria-hidden={!isExpanded} aria-expanded={isExpanded} className={className}>
+    <TabPanelStyled role={"tabpanel"} tabIndex={0} aria-labelledby={labelledBy} aria-hidden={!isExpanded} aria-expanded={isExpanded} className={className} {...rest}>
       { children }
     </TabPanelStyled>
   )

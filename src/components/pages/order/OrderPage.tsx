@@ -34,6 +34,8 @@ export const OrderPage = () => {
   const [isAdminMode, setIsAdminMode] = useState<boolean>(false);
   const [currentAdminTabIndex, setCurrentAdminTabIndex] = useState<string>("tab-1");
   const [isAdminBoardOpen, setIsAdminBoardOpen] = useState<boolean>(true);
+  const [isAdminUpdateMode, setIsAdminUpdateMode] = useState(false);
+
   const [products, setProducts] = useState<MenuItem[]>(fakeMenu);
 
   const adminContextValue: TAdminContext = {
@@ -48,6 +50,8 @@ export const OrderPage = () => {
     setIsModeAdmin: setIsAdminMode,
     products: products,
     setProducts: setProducts,
+    isAdminUpdateMode: isAdminUpdateMode,
+    setIsAdminUpdateMode: setIsAdminUpdateMode,
   }
 
   let {userName} = useParams()
