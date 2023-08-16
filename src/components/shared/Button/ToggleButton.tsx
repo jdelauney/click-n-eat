@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {ChangeEventHandler} from "react";
-import {theme} from "../../theme";
+import {theme} from "../../../theme";
 
 
 const ToggleButtonStyled = styled.div`

@@ -2,8 +2,8 @@ import {FormEvent} from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import {theme} from "../../../theme";
-import {InputText} from "../../shared/InputText.tsx";
-import {Button} from "../../shared/Button.tsx";
+import {InputText} from "../../shared/Input/InputText.tsx";
+import {Button} from "../../shared/Button/Button.tsx";
 import {BsChevronRight, BsPersonCircle} from "react-icons/bs";
 
 
@@ -37,6 +37,13 @@ const LoginFormStyled = styled.form`
     margin-bottom: 1.8rem;
   }
   
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    width: 40rem;
+    gap: 1.8rem;
+  }
+  
   
 `
 export const LoginForm = () => {
@@ -58,18 +65,23 @@ export const LoginForm = () => {
           <h2>Bienvenue chez nous !</h2>
           <hr/>
           <h3>Connectez-vous</h3>
-          <InputText
-            name="firstName"
-            ariaLabel="Identifiant"
-            placeholder="Entrez votre prénom"
-            Icon={<BsPersonCircle className={"icon"}/>}
-            required/>
-          <Button
-            type={"submit"}
-            label={"Accédez à mon espace"}
-            fullWidth={true}
-            IconAfter={<BsChevronRight className={"icon"}/>}
-          />
+          <div className={"form-container"}>
+            <InputText
+              name="firstName"
+              ariaLabel="Identifiant"
+              placeholder="Entrez votre prénom"
+              Icon={<BsPersonCircle className={"icon"}/>}
+              variant={"light"}
+              size={"medium"}
+              required/>
+            <Button
+              type={"submit"}
+              label={"Accédez à mon espace"}
+              fullwidth={true}
+              size={"large"}
+              IconAfter={<BsChevronRight className={"icon"}/>}
+            />
+          </div>
         </LoginFormStyled>
     )
 }

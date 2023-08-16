@@ -3,7 +3,8 @@ import {useContext} from "react";
 import {AdminContext} from "../Context/AdminContext.tsx";
 import {AdminBoardTabs} from "./AdminBoardTabs.tsx";
 import {AdminBoardTabPanels} from "./AdminBoardTabPanels.tsx";
-import {getAdminBoardTabConfig} from "./adminBoardTabConfig.tsx";
+import {getAdminBoardTabConfig} from "./data/adminBoardTabConfig.tsx";
+//import {OrderContext} from "../Context/OrderContext.tsx";
 
 
 const AdminBoardStyled = styled.div`
@@ -21,14 +22,21 @@ const AdminBoardStyled = styled.div`
   }
 `
 export const AdminBoard = () => {
-  const { isAdminBoardOpen,
+  const { inputNameRef, isAdminBoardOpen,
           setIsAdminBoardOpen,
           setCurrentAdminTabIndex} = useContext(AdminContext)
 
+  //const {setIsAdminUpdateMode} = useContext(OrderContext)
   const defaultHandleTabClick = (value:string) => {
     setCurrentAdminTabIndex(value);
     if (!isAdminBoardOpen) {
-      setIsAdminBoardOpen(!isAdminBoardOpen);
+      setIsAdminBoardOpen(true);
+    }
+
+    if (value === "tab-2") {
+      if (inputNameRef) {
+        inputNameRef.current?.focus()
+      }
     }
   }
 
@@ -36,7 +44,9 @@ export const AdminBoard = () => {
     setIsAdminBoardOpen(!isAdminBoardOpen);
   }
 
-  const adminTabsConfig = getAdminBoardTabConfig(isAdminBoardOpen, handleToggleClick, )
+
+
+  const adminTabsConfig = getAdminBoardTabConfig(isAdminBoardOpen, handleToggleClick)
   const adminBoardTabs = adminTabsConfig.map((item) => item.tab)
 
   return (

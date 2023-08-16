@@ -1,4 +1,4 @@
-import {Button} from "../../../shared/Button.tsx";
+import {Button} from "../../../shared/Button/Button.tsx";
 import {fakeMenu2 as fakeMenu} from "../../../../data/fakeMenu.ts";
 import {useContext} from "react";
 import {OrderContext} from "../Context/OrderContext.tsx";

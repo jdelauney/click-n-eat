@@ -1,6 +1,6 @@
-import {TabPanel} from "../../../shared/tabs/TabPanel.tsx";
-import {TabPanels} from "../../../shared/tabs/TabPanels.tsx";
-import {TAdminBoardTabConfig} from "./adminBoardTabConfig.tsx";
+import {TabPanel} from "../../../shared/Tabs/TabPanel.tsx";
+import {TabPanels} from "../../../shared/Tabs/TabPanels.tsx";
+import {TAdminBoardTabConfig} from "./data/adminBoardTabConfig.tsx";
 import {useContext} from "react";
 import {AdminContext} from "../Context/AdminContext.tsx";
 
@@ -12,7 +12,7 @@ export const AdminBoardTabPanels = ({tabPanelConfig}: AdminBoardTabPanelsProps) 
   const  {currentAdminTabIndex} = useContext(AdminContext)
 
   return (
-    <TabPanels>
+    <TabPanels >
       {
         tabPanelConfig.map((item) => {
           const {id, tabPanelId } = item.tab
@@ -23,6 +23,7 @@ export const AdminBoardTabPanels = ({tabPanelConfig}: AdminBoardTabPanelsProps) 
                         labelledBy={id}
                         isExpanded={currentAdminTabIndex === id}
                         className={item.tabpanel.className}
+                        style={{height: "24rem"}}
               >
                 {item.tabpanel.content}
               </TabPanel>

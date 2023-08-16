@@ -1,6 +1,6 @@
-import {Tabs} from "../../../shared/tabs/Tabs.tsx";
-import {Tab} from "../../../shared/tabs/Tab.tsx";
-import {TAdminBoardTabConfigTabItem} from "./adminBoardTabConfig.tsx";
+import {Tabs} from "../../../shared/Tabs/Tabs.tsx";
+import {Tab} from "../../../shared/Tabs/Tab.tsx";
+import {TAdminBoardTabConfigTabItem} from "./data/adminBoardTabConfig.tsx";
 import {useContext} from "react";
 import {AdminContext} from "../Context/AdminContext.tsx";
 
