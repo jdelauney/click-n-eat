@@ -44,8 +44,6 @@ export const AdminBoard = () => {
     setIsAdminBoardOpen(!isAdminBoardOpen);
   }
 
-
-
   const adminTabsConfig = getAdminBoardTabConfig(isAdminBoardOpen, handleToggleClick)
   const adminBoardTabs = adminTabsConfig.map((item) => item.tab)
 
