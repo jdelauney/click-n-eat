@@ -1,4 +1,4 @@
-import {BtnSuccess, Button} from "../../../../shared/Button/Button.tsx";
+import {Button} from "../../../../shared/Button/Button.tsx";
 import {FiCheckCircle} from "react-icons/fi";
 import styled from "styled-components";
 import {theme} from "../../../../../theme";
@@ -24,7 +24,7 @@ type AdminAddProductFormFooterProps = {
 export const AdminAddProductFormFooter = ({isSubmitted}:AdminAddProductFormFooterProps) => {
   return (
     <>
-      <Button type={"submit"} theme={BtnSuccess} label={"Ajouter un nouveau produit au menu"}/>
+      <Button type={"submit"} variant={"success"} size={"medium"} label={"Ajouter un nouveau produit au menu"}/>
       { isSubmitted &&
       <NotificationSuccessMessageStyled>
           <FiCheckCircle className={"icon"}/>

@@ -1,66 +1,49 @@
 import styled from "styled-components";
-import {theme} from "../../../theme";
 import {ButtonHTMLAttributes, ReactNode} from "react";
+import {buttonTheme} from "../../../theme/buttonTheme.ts";
 
-type StyledTheme = {
-  fg: string,
-  bg: string,
-  hoverFg: string,
-  hoverBg: string,
-  padding: string
-}
 
-const ButtonStyled = styled.button<{ $fullWidth?: boolean  }>`
+const ButtonStyled = styled.button<StyledButtonProps>`
   display: flex;
   flex-flow: row nowrap;
   gap: 1rem;
-  align-items: center;
+  align-items: center;                
   justify-content: center;
-  width: ${props => props?.$fullWidth ? '100%' : 'auto'};
-  padding: ${({ theme }) => theme?.padding as string};
+  width: ${({fullwidth}) => fullwidth && fullwidth ? '100%' : 'auto'};
+  padding-inline: ${({size}) => size && size !== "" ? buttonTheme.size[size].paddingInline : "2.65rem"};
+  padding-block: ${({size}) => size && size !== "" ? buttonTheme.size[size].paddingBlock : "1.2rem"};
 
-  background-color: ${({ theme }) => theme?.bg as string}; 
-  border: 1px solid ${({ theme }) => theme?.bg as string};
-  color: ${({ theme }) => theme?.fg as string};
-  border-radius: .5rem;
+  background-color: ${({variant}) => variant && variant !== "" ? buttonTheme.variant[variant].colors.bg : buttonTheme.variant["primary"].colors.bg};
+  border: 1px solid ${({variant}) => variant && variant !== "" ? buttonTheme.variant[variant].colors.bc : buttonTheme.variant["primary"].colors.bc};
+  color: ${({variant}) => variant && variant !== "" ? buttonTheme.variant[variant].colors.fg : buttonTheme.variant["primary"].colors.fg};
+  border-radius: ${({shape}) => shape && shape !== "" ? buttonTheme.shape[shape].borderRadius : ".5rem" };
   transition: all .25s ease-in-out;
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme?.hoverBg as string};
-
-    color: ${({ theme }) => theme?.hoverFg as string};
+    background-color: ${({variant}) => variant && variant !== "" ? buttonTheme.variant[variant].colors.hover.bg : buttonTheme.variant["primary"].colors.hover.bg};
+    color: ${({variant}) => variant && variant !== "" ? buttonTheme.variant[variant].colors.hover.fg : buttonTheme.variant["primary"].colors.hover.fg};
+    border-color: ${({variant}) => variant && variant !== "" ? buttonTheme.variant[variant].colors.hover.bc : buttonTheme.variant["primary"].colors.hover.bc};
   }
 `
-ButtonStyled.defaultProps = {
-  theme:{
-    bg: theme.colors.primary_burger,
-    fg: theme.colors.white,
-    hoverBg: theme.colors.white,
-    hoverFg: theme.colors.primary_burger,
-    padding: "1.8rem",
-  }
-}
 
-export const BtnSuccess: StyledTheme = {
-  bg: theme.colors.success,
-  fg: theme.colors.white,
-  hoverBg: theme.colors.white,
-  hoverFg: theme.colors.success,
-  padding: "1rem 2.9rem",
+type StyledButtonProps = {
+  shape?: string
+  variant?: string
+  size?: string
+  fullwidth?: boolean
 }
 
 type ButtonProps = {
   label?: string,
   IconAfter?: ReactNode,
-  fullWidth?: boolean,
+  fullwidth?: boolean,
   className?: string
-  theme?: StyledTheme
-} & ButtonHTMLAttributes<HTMLButtonElement>
+} & StyledButtonProps & ButtonHTMLAttributes<HTMLButtonElement>
 
-export const Button = ({className, label, IconAfter, fullWidth, theme, ...rest}: ButtonProps) => {
+export const Button = ({className, label, IconAfter, fullwidth, shape, variant, size, ...rest}: ButtonProps) => {
   return (
-    <ButtonStyled $fullWidth={fullWidth} theme={theme ? theme : undefined} className={className} {...rest} >
+    <ButtonStyled shape={shape} variant={variant} size={size} fullwidth={fullwidth}  className={className} {...rest} >
       {label && <span>{label}</span>}
       {IconAfter && IconAfter}
     </ButtonStyled>

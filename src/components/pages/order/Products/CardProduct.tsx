@@ -5,9 +5,9 @@ import {MenuItem} from "../../../../data/fakeMenu.ts";
 import {formatPrice} from "../../../../utils/currency.ts";
 import {useContext} from "react";
 import {OrderContext} from "../Context/OrderContext.tsx";
-import {DeleteButton} from "../../../shared/Button/DeleteButton.tsx";
 import {AdminContext} from "../Context/AdminContext.tsx";
 import {MouseEvent} from "react";
+import {TiDelete} from "react-icons/ti";
 
 const CardProductStyled = styled.article`
   width: 24rem;
@@ -52,6 +52,24 @@ const CardProductStyled = styled.article`
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
+    padding:0;
+    width: 3rem;
+    height: 3rem;
+    border: none;
+    background-color: transparent;
+
+    > .icon {
+      width:100%;
+      height: 100%;
+      fill: ${theme.colors.red};
+      stroke: ${theme.colors.white};
+      transition: all .25s ease-in-out;
+    }
+
+    &:hover > .icon {
+      fill: ${theme.colors.redSecondary};
+    }
+    
   }
 
   .card__image {
@@ -144,7 +162,7 @@ const handleDeleteClick = (event: MouseEvent, id: number) => {
       >
         {
           isModeAdmin &&
-            <DeleteButton className={"card__remove-button"} onClick={(event) => handleDeleteClick(event, item.id)}/>
+            <Button variant={"danger"} shape={"circle"} IconAfter={<TiDelete className={"icon"}/>} className={"card__remove-button"} onClick={(event) => handleDeleteClick(event, item.id)}/>
         }
         <img className={"card__image"} src={item.imageSource} alt={item.title}/>
         <span className={"card__title"}>{item.title}</span>

@@ -67,7 +67,8 @@ export const LoginForm = () => {
           <Button
             type={"submit"}
             label={"Accédez à mon espace"}
-            fullWidth={true}
+            fullwidth={true}
+            size={"large"}
             IconAfter={<BsChevronRight className={"icon"}/>}
           />
         </LoginFormStyled>
