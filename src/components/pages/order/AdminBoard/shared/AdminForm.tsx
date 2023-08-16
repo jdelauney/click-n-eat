@@ -40,33 +40,7 @@ const AdminFormStyled = styled.form`
     flex-wrap: nowrap;
     align-items: center;
     gap:1.5rem;
-
-    .productForm__notification-message {
-      display: flex;
-      flex-wrap: nowrap;
-      align-items: center;
-      gap:.5rem;
-      font-family: "Open Sans", sans-serif;
-      font-size: 1.5rem;
-      color: ${theme.colors.success};
-      
-      > .icon {
-        width: 1.8rem;
-        height: 1.8rem;
-      }
-    }
-
-    .message {
-      color: ${theme.colors.primary_burger};
-      font-family: "Open Sans", sans-serif;
-      font-size: 1.5rem;
-
-      .underline {
-        text-decoration-line: underline;
-      }
-    }
   }
-
 `
 
 type AdminFormProps = {
@@ -93,7 +67,7 @@ export const AdminForm = forwardRef<HTMLInputElement,AdminFormProps>(({product, 
                               ariaLabel={input.ariaLabel}
                               pattern={input.pattern}
                               onInput={onChange}
-                              ref={ref && input.name === "productImage" ? ref : null}
+                              ref={ref && input.name === "productName" ? ref : null}
             />
           })
         }

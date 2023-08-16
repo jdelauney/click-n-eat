@@ -3,11 +3,7 @@ import {OrderContext} from "../../Context/OrderContext.tsx";
 import {MenuItem} from "../../../../../data/fakeMenu.ts";
 import {AdminForm} from "../shared/AdminForm.tsx";
 import {getProductPropertyKeyNameFromInputName} from "../data/productInputConfig.tsx";
-import {BtnSuccess, Button} from "../../../../shared/Button/Button.tsx";
-import {FiCheckCircle} from "react-icons/fi";
-
-//https://c-pi.niceshops.com/upload/image/product/large/default/haribo-tropi-frutti-100-g-922290-fr.jpg
-
+import {AdminAddProductFormFooter} from "./AdminAddProductFormFooter.tsx";
 
 const NEW_EMPTY_PRODUCT: MenuItem = {
   id: -1,
@@ -78,10 +74,7 @@ export const AdminAddProductForm = () => {
       }}
       isSubmitted={isSubmitted}
     >
-      <Button type={"submit"} theme={BtnSuccess} label={"Ajouter un nouveau produit au menu"}/>
-      {isSubmitted &&
-          <span className={"productForm__notification-message"}><FiCheckCircle className={"icon"}/> Ajouté avec succès !</span>
-      }
+      <AdminAddProductFormFooter isSubmitted={isSubmitted}/>
     </AdminForm>
 
   )
