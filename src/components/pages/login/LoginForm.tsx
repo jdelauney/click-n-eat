@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import {theme} from "../../../theme";
 import {InputText} from "../../shared/InputText.tsx";
-import {Button} from "../../shared/Button.tsx";
+import {Button} from "../../shared/Button/Button.tsx";
 import {BsChevronRight, BsPersonCircle} from "react-icons/bs";
 
 

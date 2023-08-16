@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {UserProfil} from "./UserProfil.tsx";
 import {theme} from "../../../theme";
 import {reloadPage} from "../../../utils/window.ts";
-import {ToggleButton} from "../../shared/ToggleButton.tsx";
+import {ToggleButton} from "../../shared/Button/ToggleButton.tsx";
 import {useContext} from "react";
 import {OrderContext} from "../order/Context/OrderContext.tsx";
 import toast from "react-hot-toast";

@@ -1,15 +1,15 @@
 import styled from "styled-components";
-import {InputText} from "../../../shared/InputText.tsx";
-import {theme} from "../../../../theme";
+import {InputText} from "../../../../shared/InputText.tsx";
+import {theme} from "../../../../../theme";
 import {
   ChangeEvent, FormEventHandler, forwardRef,
   PropsWithChildren,
 } from "react";
 
-import {MenuItem} from "../../../../data/fakeMenu.ts";
+import {MenuItem} from "../../../../../data/fakeMenu.ts";
 
-import {ImagePreview} from "./ImagePreview.tsx";
-import {getInputs, getProductPropertyValueFromInputName} from "./productInputConfig.tsx";
+import {AdminFormImagePreview} from "./AdminFormImagePreview.tsx";
+import {getInputs, getProductPropertyValueFromInputName} from "../data/productInputConfig.tsx";
 
 
 //https://c-pi.niceshops.com/upload/image/product/large/default/haribo-tropi-frutti-100-g-922290-fr.jpg
@@ -75,12 +75,14 @@ type AdminFormProps = {
   isSubmitted?: boolean
   onChange: (event : ChangeEvent<HTMLInputElement>) => void
 } & PropsWithChildren
+
+// eslint-disable-next-line react/display-name
 export const AdminForm = forwardRef<HTMLInputElement,AdminFormProps>(({product, onSubmit, onChange, children}: AdminFormProps, ref) => {
   const inputs = getInputs(product)
 
   return (
     <AdminFormStyled onSubmit={onSubmit}>
-      <ImagePreview imageUrl={product.imageSource}/>
+      <AdminFormImagePreview imageUrl={product.imageSource}/>
       <div className={"productForm__fields"}>
         {
           inputs.map((input) => {

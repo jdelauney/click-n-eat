@@ -2,8 +2,8 @@ import {ReactNode} from "react";
 import {FiChevronDown, FiChevronUp} from "react-icons/fi";
 import {AiOutlinePlus} from "react-icons/ai";
 import {MdModeEditOutline} from "react-icons/md";
-import {AdminAddProductForm} from "./AdminAddProductForm.tsx";
-import {AdminUpdateProductForm} from "./AdminUpdateProductForm.tsx";
+import {AdminAddProductForm} from "../product/AdminAddProductForm.tsx";
+import {AdminUpdateProductForm} from "../product/AdminUpdateProductForm.tsx";
 
 export type TAdminBoardTabConfigTabItem = {
   id: string,

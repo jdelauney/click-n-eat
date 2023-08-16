@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import {theme} from "../../../../theme";
+import {theme} from "../../../../../theme";
 
-const ImagePreviewStyled = styled.div`
+const AdminFormImagePreviewStyled = styled.div`
   display: grid;
   place-items: center;
   width: 22rem;
@@ -27,8 +27,8 @@ const ImagePreviewStyled = styled.div`
     color: ${theme.colors.greyBlue};
   }
 `
-export const ImagePreview = ({ imageUrl }: {imageUrl: string}) => {
-  return <ImagePreviewStyled>
+export const AdminFormImagePreview = ({ imageUrl }: {imageUrl: string}) => {
+  return <AdminFormImagePreviewStyled>
     {
       imageUrl !== ""
         ? (
@@ -38,5 +38,5 @@ export const ImagePreview = ({ imageUrl }: {imageUrl: string}) => {
         )
         : <span>Aucune image</span>
     }
-  </ImagePreviewStyled>;
+  </AdminFormImagePreviewStyled>;
 }

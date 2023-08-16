@@ -1,9 +1,9 @@
 import {ChangeEvent, FormEvent, useContext, useState} from "react";
-import {OrderContext} from "../Context/OrderContext.tsx";
-import {MenuItem} from "../../../../data/fakeMenu.ts";
-import {AdminForm} from "./AdminForm.tsx";
-import {getProductPropertyKeyNameFromInputName} from "./productInputConfig.tsx";
-import {BtnSuccess, Button} from "../../../shared/Button.tsx";
+import {OrderContext} from "../../Context/OrderContext.tsx";
+import {MenuItem} from "../../../../../data/fakeMenu.ts";
+import {AdminForm} from "../shared/AdminForm.tsx";
+import {getProductPropertyKeyNameFromInputName} from "../data/productInputConfig.tsx";
+import {BtnSuccess, Button} from "../../../../shared/Button/Button.tsx";
 import {FiCheckCircle} from "react-icons/fi";
 
 //https://c-pi.niceshops.com/upload/image/product/large/default/haribo-tropi-frutti-100-g-922290-fr.jpg

@@ -2,7 +2,7 @@ import {InputHTMLAttributes, ReactElement} from "react";
 import {FaHamburger} from "react-icons/fa";
 import {BsFillCameraFill} from "react-icons/bs";
 import {MdOutlineEuro} from "react-icons/md";
-import {MenuItem} from "../../../../data/fakeMenu.ts";
+import {MenuItem} from "../../../../../data/fakeMenu.ts";
 
 export type FormFieldDesc = {
   type?: string

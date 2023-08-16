@@ -1,7 +1,7 @@
 import {Button} from "./Button.tsx";
 import {TiDelete} from "react-icons/ti";
 import styled from "styled-components";
-import {theme} from "../../theme";
+import {theme} from "../../../theme";
 import {ButtonHTMLAttributes} from "react";
 
 const DeleteButtonStyled = styled(Button)`

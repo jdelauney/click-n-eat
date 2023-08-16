@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import {theme} from "../../../../theme";
-import {Button} from "../../../shared/Button.tsx";
+import {Button} from "../../../shared/Button/Button.tsx";
 import {MenuItem} from "../../../../data/fakeMenu.ts";
 import {formatPrice} from "../../../../utils/currency.ts";
 import {useContext} from "react";
 import {OrderContext} from "../Context/OrderContext.tsx";
-import {DeleteButton} from "../../../shared/DeleteButton.tsx";
+import {DeleteButton} from "../../../shared/Button/DeleteButton.tsx";
 import {AdminContext} from "../Context/AdminContext.tsx";
 import {MouseEvent} from "react";
 
-const CardStyled = styled.article`
+const CardProductStyled = styled.article`
   width: 24rem;
   height: 33rem;
   
@@ -98,7 +98,7 @@ const CardStyled = styled.article`
 type CardProps = {
   item: MenuItem
 }
-export const CardMenuItem = ({item}: CardProps) => {
+export const CardProduct = ({item}: CardProps) => {
   const {isModeAdmin, products, setProducts} = useContext(OrderContext)
   const {setCurrentAdminTabIndex, inputNameRef, isAdminBoardOpen, setIsAdminBoardOpen, currentSelectProduct, setCurrentSelectedProduct} = useContext(AdminContext)
   const deleteProduct = (productId: number) => {
@@ -106,8 +106,6 @@ export const CardMenuItem = ({item}: CardProps) => {
       return product.id !== productId
     })
     setProducts(newProducts)
-
-
   }
 
 const handleDeleteClick = (event: MouseEvent, id: number) => {
@@ -120,7 +118,6 @@ const handleDeleteClick = (event: MouseEvent, id: number) => {
       inputNameRef.current?.focus()
     }
   }
-  //const cardRef = useRef<HTMLDivElement>(null);
 
   const handleCardClick = async (event: MouseEvent<HTMLDivElement>, product: MenuItem) => {
     if (!isAdminBoardOpen) {
@@ -136,13 +133,11 @@ const handleDeleteClick = (event: MouseEvent, id: number) => {
       inputNameRef.current?.focus()
     }
 
-    //const currentCard : HTMLDivElement = event.currentTarget as HTMLDivElement
-    //currentCard.classList.toggle("is-selected")
     event.stopPropagation();
   }
 
   return (
-    <CardStyled>
+    <CardProductStyled>
       <div
         className={ isModeAdmin ? `card__inner is-selectable ${currentSelectProduct?.id === item.id ? "is-selected" : ""}` : "card__inner"}
         onClick={isModeAdmin ?  (event) => handleCardClick(event, item) : undefined}
@@ -158,6 +153,6 @@ const handleDeleteClick = (event: MouseEvent, id: number) => {
           <Button label={"Ajouter"} className={"card__button"}/>
         </div>
       </div>
-    </CardStyled>
+    </CardProductStyled>
   )
 }
