@@ -2,6 +2,12 @@ import styled from "styled-components";
 import {ButtonHTMLAttributes, ReactNode} from "react";
 import {buttonTheme} from "../../../theme/buttonTheme.ts";
 
+type StyledButtonProps = {
+  shape?: string
+  variant?: string
+  size?: string
+  fullwidth?: boolean
+}
 
 const ButtonStyled = styled.button<StyledButtonProps>`
   display: flex;
@@ -27,12 +33,7 @@ const ButtonStyled = styled.button<StyledButtonProps>`
   }
 `
 
-type StyledButtonProps = {
-  shape?: string
-  variant?: string
-  size?: string
-  fullwidth?: boolean
-}
+
 
 type ButtonProps = {
   label?: string,

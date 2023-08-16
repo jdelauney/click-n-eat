@@ -15,7 +15,7 @@ const AdminUpdateProductFormFooterStyled= styled.span`
 export const AdminUpdateProductFormFooter = () => {
   return (
     <AdminUpdateProductFormFooterStyled>
-      Cliquez sur un produit du menu pour le modifier
+      Cliquez sur un produit du menu pour le modifier&nbsp;
       <span className={"underline"}>en temps réel</span>
     </AdminUpdateProductFormFooterStyled>
   )

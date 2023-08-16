@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {InputText} from "../../../../shared/InputText.tsx";
+import {InputText} from "../../../../shared/Input/InputText.tsx";
 import {theme} from "../../../../../theme";
 import {
   ChangeEvent, FormEventHandler, forwardRef,
@@ -22,6 +22,7 @@ const AdminFormStyled = styled.form`
   .productForm__fields {
     display: flex;
     flex-direction: column;
+    gap: .8rem;
     flex: 1 1 100%;
   }
 

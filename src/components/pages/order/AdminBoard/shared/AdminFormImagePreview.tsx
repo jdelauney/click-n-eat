@@ -5,7 +5,7 @@ const AdminFormImagePreviewStyled = styled.div`
   display: grid;
   place-items: center;
   width: 22rem;
-  height: 15rem;
+  height: 13.5rem;
   border-radius: 0.5rem;
   border: 1px solid ${theme.colors.greyLight};
   

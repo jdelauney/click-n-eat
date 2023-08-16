@@ -1,33 +1,10 @@
 import {theme} from "./index.ts";
-
-
-type ButtonShapeProps = {
-  borderRadius: string;
-};
-
-type ButtonThemeProps = {
-  colors: {
-    bg: string
-    fg: string
-    bc: string
-    hover : {
-      bg: string
-      fg: string
-      bc: string
-    }
-  }
-}
-
-type ButtonSizeProps = {
-  paddingInline: string
-  paddingBlock: string
-  fontSize: string
-}
+import {ShapeThemeProps, ThemeSizeProps, VariantThemeProps} from "./types.ts";
 
 type ButtonThemeType = {
-  shape: Record<string, ButtonShapeProps>;
-  variant: Record<string, ButtonThemeProps>;
-  size: Record<string, ButtonSizeProps>;
+  shape: Record<string, ShapeThemeProps>;
+  variant: Record<string, VariantThemeProps>;
+  size: Record<string, ThemeSizeProps>;
 }
 
 export const buttonTheme: ButtonThemeType = {
@@ -78,17 +55,20 @@ export const buttonTheme: ButtonThemeType = {
     small: {
       paddingInline: ".5rem",
       paddingBlock: ".25rem",
-      fontSize: ".8em"
+      fontSize: ".8em",
+      lineHeight: "1"
     },
     medium: {
       paddingInline: "2.9rem",
       paddingBlock: "1.175rem",
-      fontSize: "1.2em"
+      fontSize: "1.2em",
+      lineHeight: "1"
     },
     large: {
       paddingInline: "2.2rem",
       paddingBlock: "1.8rem",
-      fontSize: "1.5em"
+      fontSize: "1.5em",
+      lineHeight: "1"
     },
   },
 };
