@@ -1,7 +1,7 @@
-import {Button} from "../../../../shared/Button/Button.tsx";
+import {Button} from "../../../../../shared/Button/Button.tsx";
 import {FiCheckCircle} from "react-icons/fi";
 import styled from "styled-components";
-import {theme} from "../../../../../theme";
+import {theme} from "../../../../../../theme";
 
 const NotificationSuccessMessageStyled= styled.span`
   display: flex;

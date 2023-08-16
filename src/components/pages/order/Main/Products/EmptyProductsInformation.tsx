@@ -1,9 +1,9 @@
 import {useContext} from "react";
-import {OrderContext} from "../Context/OrderContext.tsx";
+import {OrderContext} from "../../Context/OrderContext.tsx";
 import {AdminEmptyProductsInformation} from "../AdminBoard/AdminEmptyProductsInformation.tsx";
 import {UserEmptyProductsInformation} from "./UserEmptyProductsInformation.tsx";
 import styled from "styled-components";
-import {theme} from "../../../../theme";
+import {theme} from "../../../../../theme";
 
 
 const EmptyProductsInformationStyled = styled.div`

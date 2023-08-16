@@ -3,7 +3,6 @@ import styled from "styled-components";
 import {theme} from "../../../theme";
 import {Navbar} from "../layout/Navbar.tsx";
 import {useRef, useState} from "react";
-import {AdminBoard} from "./AdminBoard/AdminBoard.tsx";
 import {AdminContext, TAdminContext} from "./Context/AdminContext.tsx";
 import {OrderContext, TOrderContext} from "./Context/OrderContext.tsx";
 import {Main} from "./Main/Main.tsx";
@@ -70,7 +69,6 @@ export const OrderPage = () => {
           <Navbar userName={userName}/>
           <AdminContext.Provider value={adminContextValue}>
             <Main/>
-            { isAdminMode && <AdminBoard/>}
           </AdminContext.Provider>
         </div>
       </OrderPageStyled>
