@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import {InputText} from "../../../../shared/Input/InputText.tsx";
-import {theme} from "../../../../../theme";
+import {InputText} from "../../../../../shared/Input/InputText.tsx";
+import {theme} from "../../../../../../theme";
 import {
   ChangeEvent, FormEventHandler, forwardRef,
   PropsWithChildren,
 } from "react";
 
-import {MenuItem} from "../../../../../data/fakeMenu.ts";
+import {MenuItem} from "../../../../../../data/fakeMenu.ts";
 
 import {AdminFormImagePreview} from "./AdminFormImagePreview.tsx";
 import {getInputs, getProductPropertyValueFromInputName} from "../data/productInputConfig.tsx";

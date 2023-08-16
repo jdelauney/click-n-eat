@@ -1,7 +1,7 @@
-import {Button} from "../../../shared/Button/Button.tsx";
-import {fakeMenu2 as fakeMenu} from "../../../../data/fakeMenu.ts";
+import {Button} from "../../../../shared/Button/Button.tsx";
+import {fakeMenu2 as fakeMenu} from "../../../../../data/fakeMenu.ts";
 import {useContext} from "react";
-import {OrderContext} from "../Context/OrderContext.tsx";
+import {OrderContext} from "../../Context/OrderContext.tsx";
 
 export const AdminEmptyProductsInformation = () => {
 

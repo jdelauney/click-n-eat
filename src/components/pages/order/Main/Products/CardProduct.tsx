@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import {theme} from "../../../../theme";
-import {Button} from "../../../shared/Button/Button.tsx";
-import {MenuItem} from "../../../../data/fakeMenu.ts";
-import {formatPrice} from "../../../../utils/currency.ts";
+import {theme} from "../../../../../theme";
+import {Button} from "../../../../shared/Button/Button.tsx";
+import {MenuItem} from "../../../../../data/fakeMenu.ts";
+import {formatPrice} from "../../../../../utils/currency.ts";
 import {useContext} from "react";
-import {OrderContext} from "../Context/OrderContext.tsx";
-import {AdminContext} from "../Context/AdminContext.tsx";
+import {OrderContext} from "../../Context/OrderContext.tsx";
+import {AdminContext} from "../../Context/AdminContext.tsx";
 import {MouseEvent} from "react";
 import {TiDelete} from "react-icons/ti";
 

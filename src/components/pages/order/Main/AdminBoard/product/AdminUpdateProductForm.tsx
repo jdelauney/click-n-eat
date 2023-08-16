@@ -1,7 +1,7 @@
 import {ChangeEvent, useContext} from "react";
-import {OrderContext} from "../../Context/OrderContext.tsx";
+import {OrderContext} from "../../../Context/OrderContext.tsx";
 
-import {AdminContext} from "../../Context/AdminContext.tsx";
+import {AdminContext} from "../../../Context/AdminContext.tsx";
 import {AdminUpdateNotSelectedProductMessage} from "./AdminUpdateNotSelectedProductMessage.tsx";
 import {getProductPropertyKeyNameFromInputName} from "../data/productInputConfig.tsx";
 import {AdminForm} from "../shared/AdminForm.tsx";

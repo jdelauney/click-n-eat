@@ -1,6 +1,6 @@
 import {ChangeEvent, FormEvent, useContext, useState} from "react";
-import {OrderContext} from "../../Context/OrderContext.tsx";
-import {MenuItem} from "../../../../../data/fakeMenu.ts";
+import {OrderContext} from "../../../Context/OrderContext.tsx";
+import {MenuItem} from "../../../../../../data/fakeMenu.ts";
 import {AdminForm} from "../shared/AdminForm.tsx";
 import {getProductPropertyKeyNameFromInputName} from "../data/productInputConfig.tsx";
 import {AdminAddProductFormFooter} from "./AdminAddProductFormFooter.tsx";

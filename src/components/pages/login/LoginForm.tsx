@@ -60,7 +60,8 @@ export const LoginForm = () => {
         currentForm.reset()
         navigate(`/order/${firstNameValue}`, { replace: true })
     }
-    return (
+
+  return (
         <LoginFormStyled onSubmit={handleSubmit}>
           <h2>Bienvenue chez nous !</h2>
           <hr/>
@@ -72,6 +73,8 @@ export const LoginForm = () => {
               placeholder="Entrez votre prénom"
               Icon={<BsPersonCircle className={"icon"}/>}
               variant={"light"}
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
               size={"medium"}
               required/>
             <Button

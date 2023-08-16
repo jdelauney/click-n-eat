@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {useContext} from "react";
-import {AdminContext} from "../Context/AdminContext.tsx";
+import {AdminContext} from "../../Context/AdminContext.tsx";
 import {AdminBoardTabs} from "./AdminBoardTabs.tsx";
 import {AdminBoardTabPanels} from "./AdminBoardTabPanels.tsx";
 import {getAdminBoardTabConfig} from "./data/adminBoardTabConfig.tsx";
