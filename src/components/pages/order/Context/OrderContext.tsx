@@ -1,19 +1,20 @@
 import {createContext, Dispatch, SetStateAction} from "react";
 import {MenuList} from "../../../../data/fakeMenu.ts";
+import {BasketList} from "../../../../data/fakeBasket.ts";
 
 export type TOrderContext = {
   isModeAdmin: boolean,
   setIsModeAdmin: Dispatch<SetStateAction<boolean>>
   products: MenuList
   setProducts:  Dispatch<SetStateAction<MenuList>>
-  /*isAdminUpdateMode: boolean,
-  setIsAdminUpdateMode: Dispatch<SetStateAction<boolean>>*/
+  basket: BasketList
+  setBasket: Dispatch<SetStateAction<BasketList>>
 }
 export const OrderContext = createContext<TOrderContext>({
   isModeAdmin: false,
   setIsModeAdmin: () => {},
   products: [],
   setProducts:  () => {},
-  /*isAdminUpdateMode: false,
-  setIsAdminUpdateMode: () => {}*/
+  basket: [],
+  setBasket:  () => {},
 })

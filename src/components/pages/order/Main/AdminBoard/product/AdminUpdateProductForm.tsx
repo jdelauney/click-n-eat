@@ -14,17 +14,21 @@ export const AdminUpdateProductForm = () => {
   const {setProducts} = useContext(OrderContext)
   const {inputNameRef, currentSelectProduct, setCurrentSelectedProduct} = useContext(AdminContext)
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
 
+    console.log(value)
     if (currentSelectProduct !== null) {
-      setCurrentSelectedProduct({...currentSelectProduct,
-        [getProductPropertyKeyNameFromInputName(name)]: value})
+      // eslint-disable-next-line @typescript-eslint/await-thenable
+      const updateProduct =  {...currentSelectProduct, [getProductPropertyKeyNameFromInputName(name)]: value}
 
+      setCurrentSelectedProduct(updateProduct)
+
+      // eslint-disable-next-line @typescript-eslint/await-thenable
       setProducts((prevState) => {
         return prevState.map((item) => {
-          if (item.id === currentSelectProduct.id) {
-            item = {...currentSelectProduct}
+          if (item.id === updateProduct.id) {
+            item = {...updateProduct}
           }
           return item
         })

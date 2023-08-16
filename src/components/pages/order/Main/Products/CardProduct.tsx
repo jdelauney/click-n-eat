@@ -117,7 +117,7 @@ type CardProps = {
   item: MenuItem
 }
 export const CardProduct = ({item}: CardProps) => {
-  const {isModeAdmin, products, setProducts} = useContext(OrderContext)
+  const {isModeAdmin, products, setProducts, basket, setBasket} = useContext(OrderContext)
   const {setCurrentAdminTabIndex, inputNameRef, isAdminBoardOpen, setIsAdminBoardOpen, currentSelectProduct, setCurrentSelectedProduct} = useContext(AdminContext)
   const deleteProduct = (productId: number) => {
     const newProducts = products.filter((product) => {
@@ -126,8 +126,32 @@ export const CardProduct = ({item}: CardProps) => {
     setProducts(newProducts)
   }
 
+  const addProductToBasket = (productId: number) => {
+
+    const currentBasketItem = basket.find((item) => productId === item.productId )
+    const newQuantity = currentBasketItem ? currentBasketItem.quantity + 1 : 1;
+    const newId = currentBasketItem ?  currentBasketItem.id : crypto.randomUUID()
+
+    const newBasketItem = {
+      id : newId,
+      productId: productId,
+      quantity: newQuantity
+    }
+    if (currentBasketItem) {
+      setBasket((prevState) => {
+        return prevState.map((item) => {
+          if (item.id === newBasketItem.id) {
+            item = {...newBasketItem}
+          }
+          return item
+        })
+      })
+    } else {
+      setBasket([newBasketItem, ...basket])
+    }
+  }
+
 const handleDeleteClick = (event: MouseEvent, id: number) => {
-    event.stopPropagation()
     deleteProduct(id)
     if (id === currentSelectProduct?.id) {
       setCurrentSelectedProduct(null)
@@ -135,6 +159,7 @@ const handleDeleteClick = (event: MouseEvent, id: number) => {
     if (inputNameRef) {
       inputNameRef.current?.focus()
     }
+    event.stopPropagation()
   }
 
   const handleCardClick = async (event: MouseEvent<HTMLDivElement>, product: MenuItem) => {
@@ -168,7 +193,7 @@ const handleDeleteClick = (event: MouseEvent, id: number) => {
         <span className={"card__title"}>{item.title}</span>
         <div className={"card__footer"}>
           <span className={"card__price"}>{formatPrice(item.price)}</span>
-          <Button label={"Ajouter"} className={"card__button"}/>
+          <Button label={"Ajouter"} className={"card__button"} onClick={() => addProductToBasket(item.id)}/>
         </div>
       </div>
     </CardProductStyled>

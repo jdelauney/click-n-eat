@@ -7,6 +7,8 @@ import {AdminContext, TAdminContext} from "./Context/AdminContext.tsx";
 import {OrderContext, TOrderContext} from "./Context/OrderContext.tsx";
 import {Main} from "./Main/Main.tsx";
 import {fakeMenu2 as fakeMenu, MenuItem} from "../../../data/fakeMenu.ts";
+import {BasketItem} from "../../../data/fakeBasket.ts";
+import {MEDIUM as fakeBasket} from "../../../data/fakeBasket.ts";
 
 const OrderPageStyled = styled.div`
   
@@ -33,7 +35,8 @@ export const OrderPage = () => {
   const [isAdminMode, setIsAdminMode] = useState<boolean>(false);
   const [currentAdminTabIndex, setCurrentAdminTabIndex] = useState<string>("tab-1");
   const [isAdminBoardOpen, setIsAdminBoardOpen] = useState<boolean>(true);
-  //const [isAdminUpdateMode, setIsAdminUpdateMode] = useState(false);
+  const [basket, setBasket] = useState<BasketItem[]>(fakeBasket);
+
 
   const [products, setProducts] = useState<MenuItem[]>(fakeMenu);
   const [currentSelectedProduct, setCurrentSelectedProduct] = useState<MenuItem|null>(null);
@@ -55,6 +58,8 @@ export const OrderPage = () => {
     setIsModeAdmin: setIsAdminMode,
     products: products,
     setProducts: setProducts,
+    basket: basket,
+    setBasket: setBasket
   }
 
   let {userName} = useParams()

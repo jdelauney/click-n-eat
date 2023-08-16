@@ -33,8 +33,6 @@ const ButtonStyled = styled.button<StyledButtonProps>`
   }
 `
 
-
-
 type ButtonProps = {
   label?: string,
   IconAfter?: ReactNode,

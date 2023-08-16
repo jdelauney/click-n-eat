@@ -55,7 +55,7 @@ export const getProductPropertyKeyNameFromInputName = (inputName: string) => {
 }
 
 export const getProductPropertyValueFromInputName = (product: MenuItem, inputName: string): string => {
-  if (product !== null) {
+  if (product) {
     switch (inputName) {
       case "productName" :
         return product.title ? product.title : ""
@@ -64,7 +64,7 @@ export const getProductPropertyValueFromInputName = (product: MenuItem, inputNam
       case "productPrice" :
         return product.price ? product.price.toString() : "0.00"
       default:
-        return "title"
+        return ""
     }
   }
   return ""

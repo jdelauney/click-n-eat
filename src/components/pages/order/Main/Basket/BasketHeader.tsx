@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import {theme} from "../../../../../theme";
+import {formatPrice} from "../../../../../utils/currency.ts";
+import {useContext, useEffect, useState} from "react";
+import {OrderContext} from "../../Context/OrderContext.tsx";
+import {MenuItem} from "../../../../../data/fakeMenu.ts";
 
 
 const BasketHeaderStyled = styled.header`
@@ -22,10 +26,34 @@ const BasketHeaderStyled = styled.header`
   }
 `
 export const BasketHeader = () => {
+  const { basket, products } = useContext(OrderContext)
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+
+
+  useEffect(() => {
+    const computeTotalCardPrice = (): number => {
+      const findProduct = (id: number): MenuItem|undefined => {
+        return products.find((product) => id === product.id )
+      }
+
+      return basket.reduce((total, currentItem) => {
+        const product = findProduct(currentItem.productId)
+        const subTotal = product ? (product.price * currentItem.quantity) : 0
+        return total + subTotal
+      },0)
+    }
+
+    setTotalPrice(computeTotalCardPrice())
+    return () => {
+      setTotalPrice(0)
+    }
+  }, [basket, products]);
+
+
   return (
     <BasketHeaderStyled>
       <span>Total</span>
-      <span className={"price"}>0,00 €</span>
+      <span className={"price"}>{formatPrice(totalPrice)}</span>
     </BasketHeaderStyled>
   )
 }
