@@ -16,7 +16,7 @@ import {getInputs, getProductPropertyValueFromInputName} from "../data/productIn
 const AdminFormStyled = styled.form`
   display: flex;
   gap: 2rem;
-  width: 90rem;
+  width: 100%;
   height: 16rem;
 
   .productForm__fields {
