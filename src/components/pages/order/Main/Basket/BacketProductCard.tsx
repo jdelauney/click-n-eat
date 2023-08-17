@@ -4,6 +4,9 @@ import {TbTrashX} from "react-icons/tb";
 
 import {MenuItem} from "../../../../../data/fakeMenu.ts";
 import {formatPrice} from "../../../../../utils/currency.ts";
+import {MouseEvent, useContext} from "react";
+import {AdminContext} from "../../Context/AdminContext.tsx";
+import {OrderContext} from "../../Context/OrderContext.tsx";
 
 const BasketProductCardStyled =  styled.div`
   display: flex;
@@ -15,6 +18,23 @@ const BasketProductCardStyled =  styled.div`
   background-color: ${theme.colors.white};
   border-radius: .5rem;
   box-shadow: -4px 4px 15px 0 rgba(0, 0, 0, 0.20);
+  transition: all .25s ease-in-out;
+
+  &.is-selectable {
+    //border-radius: 1.5rem;
+    //background-color: transparent;
+    cursor: pointer;
+  }
+
+  &.is-selected,
+  &.is-selectable:hover {
+    box-shadow: -4px 4px 15px 0 rgba(0, 0, 0, 0.20),
+    0 0 8px 0 #FF9A23 !important;
+  }
+
+  &.is-selectable:hover {
+    transform: scale(1.05);
+  }
   
   .basketProductCard__image-preview {
     width: 8.6rem;
@@ -52,7 +72,7 @@ const BasketProductCardStyled =  styled.div`
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        max-width: 10.5rem;
+        max-width: 12rem;
       }
     }
 
@@ -92,6 +112,7 @@ const BasketProductCardStyled =  styled.div`
     }
   }
   
+  &.is-selected .basketProductCard__btn-delete,
   &:hover .basketProductCard__btn-delete {
     display:grid;
   }
@@ -105,8 +126,31 @@ type BasketProductCardProps = {
 }
 export const BasketProductCard = ({product, quantity, onDelete}:BasketProductCardProps) => {
   const {title, imageSource, price } = product
+  const {isModeAdmin} = useContext(OrderContext)
+  const {isAdminBoardOpen, setIsAdminBoardOpen, inputNameRef, setCurrentAdminTabIndex, currentSelectProduct, setCurrentSelectedProduct} = useContext(AdminContext)
+
+  const handleCardClick = async (event: MouseEvent<HTMLDivElement>, product: MenuItem) => {
+    if (!isAdminBoardOpen) {
+      setIsAdminBoardOpen(true)
+    }
+
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await setCurrentSelectedProduct(product)
+    setCurrentAdminTabIndex("tab-2");
+
+
+    if (inputNameRef) {
+      inputNameRef.current?.focus()
+    }
+
+    event.stopPropagation();
+  }
+
   return (
-    <BasketProductCardStyled>
+    <BasketProductCardStyled
+      className={ isModeAdmin ? `is-selectable ${currentSelectProduct?.id === product.id ? " is-selected" : ""}` : ""}
+      onClick={isModeAdmin ?  (event) => handleCardClick(event, product) : undefined}
+    >
       <div className={"basketProductCard__image-preview"}>
         <img src={imageSource} alt={title}/>
       </div>

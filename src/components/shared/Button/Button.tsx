@@ -6,7 +6,7 @@ type StyledButtonProps = {
   shape?: string
   variant?: string
   size?: string
-  fullwidth?: boolean
+  fullwidth?: string
 }
 
 const ButtonStyled = styled.button<StyledButtonProps>`
@@ -15,7 +15,7 @@ const ButtonStyled = styled.button<StyledButtonProps>`
   gap: 1rem;
   align-items: center;                
   justify-content: center;
-  width: ${({fullwidth}) => fullwidth && fullwidth ? '100%' : 'auto'};
+  width: ${({fullwidth}) => fullwidth && fullwidth.toLowerCase() === "true" ? '100%' : 'auto'};
   padding-inline: ${({size}) => size && size !== "" ? buttonTheme.size[size].paddingInline : "2.65rem"};
   padding-block: ${({size}) => size && size !== "" ? buttonTheme.size[size].paddingBlock : "1.2rem"};
 
@@ -36,7 +36,7 @@ const ButtonStyled = styled.button<StyledButtonProps>`
 type ButtonProps = {
   label?: string,
   IconAfter?: ReactNode,
-  fullwidth?: boolean,
+  fullwidth?: string,
   className?: string
 } & StyledButtonProps & ButtonHTMLAttributes<HTMLButtonElement>
 
