@@ -66,6 +66,9 @@ const CardProductStyled = styled.article`
       transition: all .25s ease-in-out;
     }
 
+    &:hover {
+      background-color: transparent;
+    }
     &:hover > .icon {
       fill: ${theme.colors.redSecondary};
     }
