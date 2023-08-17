@@ -13,7 +13,7 @@ const LoginPageStyled = styled.div`
   width: 100dvw;
   margin:0;
   padding: 0;
-  background-image: url("assets/images/burger-background.jpg");
+  background-image: url("/assets/images/burger-background.jpg");
   background-color: rgba(0,0,0,.65);
   background-repeat: no-repeat;
   background-position: center;
