@@ -6,6 +6,7 @@ import {formatPrice} from "../../../../../../utils/currency.ts";
 import {MouseEvent, useContext} from "react";
 import {AdminContext} from "../../../Context/AdminContext.tsx";
 import {OrderContext} from "../../../Context/OrderContext.tsx";
+import {MachineSlot} from "../../../../../shared/MachineSlot.tsx";
 
 const BasketCardStyled =  styled.div`
   display: flex;
@@ -83,8 +84,8 @@ const BasketCardStyled =  styled.div`
     }
 
     .basketProductCard__quantity {
-      display: grid;
-      place-items: center;
+      display: flex;
+      align-items: center;
     }
     
   }
@@ -173,7 +174,8 @@ export const BasketCard = ({className, product, quantity, onDelete}:BasketCardPr
         </div>
 
         <div className={"basketProductCard__quantity basketProductCard__text-info"}>
-          <span>x {quantity}</span>
+          <span>x&nbsp;</span>
+          <MachineSlot label={quantity.toString()}/>
         </div>
       </div>
 
