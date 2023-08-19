@@ -4,6 +4,7 @@ import {formatPrice} from "../../../../../utils/currency.ts";
 import {useContext, useEffect, useState} from "react";
 import {OrderContext} from "../../Context/OrderContext.tsx";
 import {MenuItem} from "../../../../../data/fakeMenu.ts";
+import {MachineSlot} from "../../../../shared/MachineSlot.tsx";
 
 
 const BasketHeaderStyled = styled.header`
@@ -53,7 +54,8 @@ export const BasketHeader = () => {
   return (
     <BasketHeaderStyled>
       <span>Total</span>
-      <span className={"price"}>{formatPrice(totalPrice)}</span>
+      {/*<span className={"price"}>{formatPrice(totalPrice)}</span>*/}
+      <MachineSlot className={"price"} label={formatPrice(totalPrice)}/>
     </BasketHeaderStyled>
   )
 }

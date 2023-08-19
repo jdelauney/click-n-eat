@@ -171,6 +171,7 @@ export const BasketProductCard = ({product, quantity, onDelete}:BasketProductCar
             {formatPrice(price)}
           </span>
         </div>
+
         <div className={"basketProductCard__quantity basketProductCard__text-info"}>
           <span>x {quantity}</span>
         </div>
