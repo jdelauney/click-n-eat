@@ -33,7 +33,7 @@ const OrderPageStyled = styled.div`
 export const OrderPage = () => {
 
   const [isAdminMode, setIsAdminMode] = useState<boolean>(false);
-  const [currentAdminTabIndex, setCurrentAdminTabIndex] = useState<string>("tab-1");
+  const [currentAdminTabIndex, setCurrentAdminTabIndex] = useState<string>("tab-add-product");
   const [isAdminBoardOpen, setIsAdminBoardOpen] = useState<boolean>(true);
   const [basket, setBasket] = useState<BasketItem[]>(fakeBasket);
 

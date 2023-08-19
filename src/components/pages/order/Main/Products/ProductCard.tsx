@@ -124,12 +124,23 @@ type CardProps = {
 export const ProductCard = ({item}: CardProps) => {
   const {isModeAdmin, products, setProducts, basket, setBasket} = useContext(OrderContext)
   const {setCurrentAdminTabIndex, inputNameRef, isAdminBoardOpen, setIsAdminBoardOpen, currentSelectProduct, setCurrentSelectedProduct} = useContext(AdminContext)
+
+  const deleteProductToBasket = (productId: number) => {
+    const newBasket = basket.filter((basketItem) => {
+      return basketItem.productId !== productId
+    })
+    setBasket(newBasket)
+  }
+
   const deleteProduct = (productId: number) => {
     const newProducts = products.filter((product) => {
       return product.id !== productId
     })
     setProducts(newProducts)
+
+    deleteProductToBasket(productId)
   }
+
 
   const addProductToBasket = (productId: number) => {
 
@@ -174,7 +185,7 @@ const handleDeleteClick = (event: MouseEvent, id: number) => {
 
     // eslint-disable-next-line @typescript-eslint/await-thenable
     await setCurrentSelectedProduct(product)
-    setCurrentAdminTabIndex("tab-2");
+    setCurrentAdminTabIndex("tab-update-product");
 
 
     if (inputNameRef) {

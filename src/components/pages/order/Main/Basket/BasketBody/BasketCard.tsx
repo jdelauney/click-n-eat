@@ -143,7 +143,7 @@ export const BasketCard = ({className, product, quantity, onDelete}:BasketCardPr
 
     // eslint-disable-next-line @typescript-eslint/await-thenable
     await setCurrentSelectedProduct(product)
-    setCurrentAdminTabIndex("tab-2");
+    setCurrentAdminTabIndex("tab-update-product");
 
 
     if (inputNameRef) {
