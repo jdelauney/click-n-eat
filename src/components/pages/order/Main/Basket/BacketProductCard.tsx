@@ -91,8 +91,10 @@ const BasketProductCardStyled =  styled.div`
   }
   
   .basketProductCard__btn-delete {
-    display:none;
-    //display: grid;
+    //display:none;
+    display: grid;
+    z-index:-1;
+    opacity:0;
     place-items: center;
     position: absolute;
     right: 0;
@@ -105,16 +107,21 @@ const BasketProductCardStyled =  styled.div`
     color: ${theme.colors.white};
     border-radius: 0 .5rem .5rem 0;
     cursor: pointer;
+    transition: all .25s ease-in-out;
     
     .icon {
       width: 2.4rem;
       height: 2.4rem;
     }
+
+    &:hover {
+      background-color: ${theme.colors.redSecondary};
+    }
   }
   
-  &.is-selected .basketProductCard__btn-delete,
   &:hover .basketProductCard__btn-delete {
-    display:grid;
+    z-index:0;
+    opacity:1;
   }
   
 `
@@ -148,9 +155,10 @@ export const BasketProductCard = ({product, quantity, onDelete}:BasketProductCar
 
   return (
     <BasketProductCardStyled
-      className={ isModeAdmin ? `is-selectable ${currentSelectProduct?.id === product.id ? " is-selected" : ""}` : ""}
+      className={ isModeAdmin ? `is-selectable ${currentSelectProduct?.id === product.id ? " is-selected" : ""}` : "card"}
       onClick={isModeAdmin ?  (event) => handleCardClick(event, product) : undefined}
     >
+
       <div className={"basketProductCard__image-preview"}>
         <img src={imageSource} alt={title}/>
       </div>
