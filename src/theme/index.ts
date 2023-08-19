@@ -63,6 +63,14 @@ const weights = {
   heavy: 800,
 }
 
+const animations = {
+  speed: {
+    quick: "300ms",
+    slow: "500ms",
+  },
+}
+
+
 export const theme = {
   colors,
   fonts,
@@ -71,4 +79,5 @@ export const theme = {
   shadows,
   weights,
   spacing,
+  animations
 }

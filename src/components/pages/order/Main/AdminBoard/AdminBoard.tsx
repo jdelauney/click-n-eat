@@ -18,7 +18,7 @@ const AdminBoardStyled = styled.div`
   border-radius: 0 0 1.5rem 1.5rem;
   transform: translateY(calc(100% - 4.3rem));
   //bottom: calc(100% - 4.3rem);
-  transition: all .25s ease-in-out;
+  transition: all .3s ease-in-out;
   
   &.is-open {
     transform: translateY(0);

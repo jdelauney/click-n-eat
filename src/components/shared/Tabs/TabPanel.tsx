@@ -13,10 +13,12 @@ const TabPanelStyled = styled.div`
   border-radius: 0 0 1.5rem 1.5rem;
   box-shadow: ${theme.shadows.soft};
   opacity: 0;
+  z-index: -1;
   transition: .35s ease-in-out;
   
   &[aria-expanded="true"] {
     opacity: 1;
+    z-index: 2;
   }
 `
 

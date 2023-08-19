@@ -8,6 +8,7 @@ import {OrderContext} from "../../../Context/OrderContext.tsx";
 import {BasketEmptyMessage} from "./BasketEmptyMessage.tsx";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 import {BasketCard} from "./BasketCard.tsx";
+import {basketCardAnimation} from "../../../../../../theme/animations.ts";
 
 const BasketBodyStyled = styled.section`
   
@@ -25,57 +26,7 @@ const BasketBodyStyled = styled.section`
     padding-block: 2rem;
   }
 
-  .card-container-appear {
-      transform: translateX(-100px);
-      opacity: 0;
-  }
-
-  .card-container-appear-active {
-      transition: all .5s ease-in-out;
-      transform: translateX(0);
-      opacity: 1;
-    
-  }
-  
-  .card-container-enter {
-      transform: translateX(-100px);
-      opacity: 0;
-  }
-
-  .card-container-enter-active {
-      transition: all .5s ease-in-out;
-      transform: translateX(0);
-      opacity: 1;
-  }
-    //.card-container-done {
-    //  transform: translateX(100px);
-    //  opacity: 1;
-    //}
-
-  .card-container-exit {
-      transform: translateX(0);
-      opacity: 1;
-    
-  }
-
-  .card-container-exit-active {
-      transition: all .5s ease-in-out;
-      transform: translateX(100px);
-      opacity: 0;
-  }
-
-  .card-container-leave {
-    transform: translateX(0);
-    opacity: 1;
-
-  }
-
-  .card-container-leave-active {
-    transition: all .5s ease-in-out;
-    transform: translateX(100px);
-    opacity: 0;
-  }
-  
+  ${basketCardAnimation}
 `
 export const BasketBody = () => {
   const {basket, setBasket, products } = useContext(OrderContext)
@@ -104,7 +55,7 @@ export const BasketBody = () => {
                         appear={true}
                         leave={true}
                         key={item.id}
-                        classNames={"card-container"}
+                        classNames={"basketCardsAnimation"}
                         timeout={500}
                     >
                       <BasketCard

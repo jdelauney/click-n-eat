@@ -8,6 +8,7 @@ import {OrderContext} from "../../Context/OrderContext.tsx";
 import {AdminContext} from "../../Context/AdminContext.tsx";
 import {MouseEvent} from "react";
 import {TiDelete} from "react-icons/ti";
+import {fadeInFromRight} from "../../../../../theme/animations.ts";
 
 const ProductCardStyled = styled.article`
   width: 24rem;
@@ -57,6 +58,7 @@ const ProductCardStyled = styled.article`
     height: 3rem;
     border: none;
     background-color: transparent;
+    animation: ${fadeInFromRight} ${theme.animations.speed.slow} ease-out;
 
     > .icon {
       width:100%;
@@ -190,7 +192,13 @@ const handleDeleteClick = (event: MouseEvent, id: number) => {
       >
         {
           isModeAdmin &&
-            <Button variant={"danger"} shape={"circle"} IconAfter={<TiDelete className={"icon"}/>} className={"card__remove-button"} onClick={(event) => handleDeleteClick(event, item.id)}/>
+            <Button
+                variant={"danger"}
+                shape={"circle"}
+                IconAfter={<TiDelete className={"icon"}/>}
+                className={"card__remove-button"}
+                aria-label={"Delete product"}
+                onClick={(event) => handleDeleteClick(event, item.id)}/>
         }
         <img className={"card__image"} src={item.imageSource} alt={item.title}/>
         <span className={"card__title"}>{item.title}</span>
