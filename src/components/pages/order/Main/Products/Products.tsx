@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {CardProduct} from "./CardProduct.tsx";
+import {ProductCard} from "./ProductCard.tsx";
 import {useContext} from "react";
 import {OrderContext} from "../../Context/OrderContext.tsx";
 
@@ -23,7 +23,7 @@ export const Products = () => {
     <ProductsStyled>
       {
         products.map((item) => {
-          return <CardProduct key={item.id} item={item}/>
+          return <ProductCard key={item.id} item={item}/>
         })
       }
 

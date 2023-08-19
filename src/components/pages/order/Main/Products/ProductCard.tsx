@@ -9,7 +9,7 @@ import {AdminContext} from "../../Context/AdminContext.tsx";
 import {MouseEvent} from "react";
 import {TiDelete} from "react-icons/ti";
 
-const CardProductStyled = styled.article`
+const ProductCardStyled = styled.article`
   width: 24rem;
   height: 33rem;
   
@@ -119,7 +119,7 @@ const CardProductStyled = styled.article`
 type CardProps = {
   item: MenuItem
 }
-export const CardProduct = ({item}: CardProps) => {
+export const ProductCard = ({item}: CardProps) => {
   const {isModeAdmin, products, setProducts, basket, setBasket} = useContext(OrderContext)
   const {setCurrentAdminTabIndex, inputNameRef, isAdminBoardOpen, setIsAdminBoardOpen, currentSelectProduct, setCurrentSelectedProduct} = useContext(AdminContext)
   const deleteProduct = (productId: number) => {
@@ -183,7 +183,7 @@ const handleDeleteClick = (event: MouseEvent, id: number) => {
   }
 
   return (
-    <CardProductStyled>
+    <ProductCardStyled>
       <div
         className={ isModeAdmin ? `card__inner is-selectable ${currentSelectProduct?.id === item.id ? "is-selected" : ""}` : "card__inner"}
         onClick={isModeAdmin ?  (event) => handleCardClick(event, item) : undefined}
@@ -199,6 +199,6 @@ const handleDeleteClick = (event: MouseEvent, id: number) => {
           <Button label={"Ajouter"} className={"card__button"} onClick={() => addProductToBasket(item.id)}/>
         </div>
       </div>
-    </CardProductStyled>
+    </ProductCardStyled>
   )
 }

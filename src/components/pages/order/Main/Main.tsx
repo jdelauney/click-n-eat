@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {theme} from "../../../../theme";
 import {useContext, useEffect, useState} from "react";
 import {OrderContext} from "../Context/OrderContext.tsx";
-import {EmptyProductsInformation} from "./Products/EmptyProductsInformation.tsx";
+import {ProductsEmptyMessage} from "./Products/ProductsEmptyMessage/ProductsEmptyMessage.tsx";
 import {AdminBoard} from "./AdminBoard/AdminBoard.tsx";
 import {Basket} from "./Basket/Basket.tsx";
 
@@ -43,7 +43,7 @@ export const Main = () => {
       <div className={"main-container"}>
         { isProductsEmpty
           ? (
-            <EmptyProductsInformation/>
+            <ProductsEmptyMessage/>
           )
           : (
             <Products/>
