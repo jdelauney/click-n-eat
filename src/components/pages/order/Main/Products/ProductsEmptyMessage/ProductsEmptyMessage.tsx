@@ -1,9 +1,9 @@
 import {useContext} from "react";
-import {OrderContext} from "../../Context/OrderContext.tsx";
-import {AdminEmptyProductsInformation} from "../AdminBoard/AdminEmptyProductsInformation.tsx";
-import {UserEmptyProductsInformation} from "./UserEmptyProductsInformation.tsx";
+import {OrderContext} from "../../../Context/OrderContext.tsx";
+import {ProductsEmptyMessageAdmin} from "./ProductsEmptyMessageAdmin.tsx";
+import {ProductsEmptyMessageClient} from "./ProductsEmptyMessageClient.tsx";
 import styled from "styled-components";
-import {theme} from "../../../../../theme";
+import {theme} from "../../../../../../theme";
 
 
 const EmptyProductsInformationStyled = styled.div`
@@ -30,13 +30,13 @@ const EmptyProductsInformationStyled = styled.div`
     }
   }
 `
-export const EmptyProductsInformation = () => {
+export const ProductsEmptyMessage = () => {
   const { isModeAdmin } = useContext(OrderContext)
 
   return (
     <EmptyProductsInformationStyled>
       <div className={"boxInfo"} style={isModeAdmin ? { marginTop: "-12rem"} : {}}>
-        { isModeAdmin ? <AdminEmptyProductsInformation/> : <UserEmptyProductsInformation/> }
+        { isModeAdmin ? <ProductsEmptyMessageAdmin/> : <ProductsEmptyMessageClient/> }
       </div>
     </EmptyProductsInformationStyled>
   )

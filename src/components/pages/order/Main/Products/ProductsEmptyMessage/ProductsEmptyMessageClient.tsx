@@ -1,4 +1,4 @@
-export const UserEmptyProductsInformation = () => {
+export const ProductsEmptyMessageClient = () => {
   return (
     <>
       <span>Victime de notre succès ! :D</span>

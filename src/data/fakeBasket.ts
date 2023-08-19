@@ -13,7 +13,8 @@ export const EMPTY = []
 
 export const SMALL = [
   {
-    id: 1,
+    id: "1",
+    productId: 1,
     // title: "Burger Meal",
     // imageSource: "images/burger1.png",
     quantity: 1,

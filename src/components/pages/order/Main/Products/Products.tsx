@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import {CardProduct} from "./CardProduct.tsx";
+import {ProductCard} from "./ProductCard.tsx";
 import {useContext} from "react";
 import {OrderContext} from "../../Context/OrderContext.tsx";
+import {CSSTransition, TransitionGroup} from "react-transition-group";
+import {productCardAnimation} from "../../../../../theme/animations.ts";
 
 const ProductsStyled = styled.section`
   display: grid;
@@ -13,6 +15,8 @@ const ProductsStyled = styled.section`
   height:100%;
   max-height: 100%;
   overflow: auto;
+  
+  ${productCardAnimation}
 `
 
 export const Products = () => {
@@ -20,13 +24,17 @@ export const Products = () => {
   const { products } = useContext(OrderContext)
 
   return (
-    <ProductsStyled>
+    <TransitionGroup component={ProductsStyled} appear={true}>
       {
         products.map((item) => {
-          return <CardProduct key={item.id} item={item}/>
+          return (
+            <CSSTransition classNames={"menu-animation"} key={item.id} timeout={300}>
+              <ProductCard key={item.id} item={item}/>
+            </CSSTransition>
+          )
         })
       }
 
-    </ProductsStyled>
+    </TransitionGroup>
   )
 }

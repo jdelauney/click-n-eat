@@ -1,11 +1,12 @@
 import {Products} from "./Products/Products.tsx";
 import styled from "styled-components";
 import {theme} from "../../../../theme";
-import {useContext, useEffect, useState} from "react";
+import {useContext} from "react";
 import {OrderContext} from "../Context/OrderContext.tsx";
-import {EmptyProductsInformation} from "./Products/EmptyProductsInformation.tsx";
+import {ProductsEmptyMessage} from "./Products/ProductsEmptyMessage/ProductsEmptyMessage.tsx";
 import {AdminBoard} from "./AdminBoard/AdminBoard.tsx";
 import {Basket} from "./Basket/Basket.tsx";
+import {isEmpty} from "../../../../utils/array.ts";
 
 const MainStyled = styled.main`
   display: grid;
@@ -25,25 +26,25 @@ const MainStyled = styled.main`
 `
 export const Main = () => {
 
-  const [isProductsEmpty, setIsProductsEmpty] = useState(false);
+  //const [isProductsEmpty, setIsProductsEmpty] = useState(false);
   const {isModeAdmin,  products} = useContext(OrderContext)
 
-  useEffect(() => {
-    if (products.length === 0) {
-      setIsProductsEmpty(true)
-    } else if ((products.length !== 0) && isProductsEmpty) {
-      setIsProductsEmpty(false)
-    }
-    return () => {}
-  }, [products, isProductsEmpty]);
+  // useEffect(() => {
+  //   if (products.length === 0) {
+  //     setIsProductsEmpty(true)
+  //   } else if ((products.length !== 0) && isProductsEmpty) {
+  //     setIsProductsEmpty(false)
+  //   }
+  //   return () => {}
+  // }, [products, isProductsEmpty]);
 
 
   return (
     <MainStyled>
       <div className={"main-container"}>
-        { isProductsEmpty
+        { isEmpty(products)
           ? (
-            <EmptyProductsInformation/>
+            <ProductsEmptyMessage/>
           )
           : (
             <Products/>

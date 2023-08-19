@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import {theme} from "../../../../../theme";
+import {theme} from "../../../../../../theme";
 import {TbTrashX} from "react-icons/tb";
-
-import {MenuItem} from "../../../../../data/fakeMenu.ts";
-import {formatPrice} from "../../../../../utils/currency.ts";
+import {MenuItem} from "../../../../../../data/fakeMenu.ts";
+import {formatPrice} from "../../../../../../utils/currency.ts";
 import {MouseEvent, useContext} from "react";
-import {AdminContext} from "../../Context/AdminContext.tsx";
-import {OrderContext} from "../../Context/OrderContext.tsx";
+import {AdminContext} from "../../../Context/AdminContext.tsx";
+import {OrderContext} from "../../../Context/OrderContext.tsx";
+import {MachineSlot} from "../../../../../shared/MachineSlot.tsx";
 
-const BasketProductCardStyled =  styled.div`
+const BasketCardStyled =  styled.div`
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -84,15 +84,17 @@ const BasketProductCardStyled =  styled.div`
     }
 
     .basketProductCard__quantity {
-      display: grid;
-      place-items: center;
+      display: flex;
+      align-items: center;
     }
     
   }
   
   .basketProductCard__btn-delete {
-    display:none;
-    //display: grid;
+    //display:none;
+    display: grid;
+    z-index:-1;
+    opacity:0;
     place-items: center;
     position: absolute;
     right: 0;
@@ -105,26 +107,32 @@ const BasketProductCardStyled =  styled.div`
     color: ${theme.colors.white};
     border-radius: 0 .5rem .5rem 0;
     cursor: pointer;
+    transition: all .25s ease-in-out;
     
     .icon {
       width: 2.4rem;
       height: 2.4rem;
     }
+
+    &:hover {
+      background-color: ${theme.colors.redSecondary};
+    }
   }
   
-  &.is-selected .basketProductCard__btn-delete,
   &:hover .basketProductCard__btn-delete {
-    display:grid;
+    z-index:0;
+    opacity:1;
   }
   
 `
 
-type BasketProductCardProps = {
+type BasketCardProps = {
   product: MenuItem
   quantity: number
   onDelete : () => void
+  className?: string
 }
-export const BasketProductCard = ({product, quantity, onDelete}:BasketProductCardProps) => {
+export const BasketCard = ({className, product, quantity, onDelete}:BasketCardProps) => {
   const {title, imageSource, price } = product
   const {isModeAdmin} = useContext(OrderContext)
   const {isAdminBoardOpen, setIsAdminBoardOpen, inputNameRef, setCurrentAdminTabIndex, currentSelectProduct, setCurrentSelectedProduct} = useContext(AdminContext)
@@ -136,7 +144,7 @@ export const BasketProductCard = ({product, quantity, onDelete}:BasketProductCar
 
     // eslint-disable-next-line @typescript-eslint/await-thenable
     await setCurrentSelectedProduct(product)
-    setCurrentAdminTabIndex("tab-2");
+    setCurrentAdminTabIndex("tab-update-product");
 
 
     if (inputNameRef) {
@@ -147,10 +155,11 @@ export const BasketProductCard = ({product, quantity, onDelete}:BasketProductCar
   }
 
   return (
-    <BasketProductCardStyled
-      className={ isModeAdmin ? `is-selectable ${currentSelectProduct?.id === product.id ? " is-selected" : ""}` : ""}
+    <BasketCardStyled
+      className={ isModeAdmin ? `is-selectable ${currentSelectProduct?.id === product.id ? `${className} is-selected` : `${className}`}` : `${className}`}
       onClick={isModeAdmin ?  (event) => handleCardClick(event, product) : undefined}
     >
+
       <div className={"basketProductCard__image-preview"}>
         <img src={imageSource} alt={title}/>
       </div>
@@ -163,14 +172,16 @@ export const BasketProductCard = ({product, quantity, onDelete}:BasketProductCar
             {formatPrice(price)}
           </span>
         </div>
+
         <div className={"basketProductCard__quantity basketProductCard__text-info"}>
-          <span>x {quantity}</span>
+          <span>x&nbsp;</span>
+          <MachineSlot label={quantity.toString()}/>
         </div>
       </div>
 
       <button className={"basketProductCard__btn-delete"} onClick={onDelete}>
         <TbTrashX className={"icon"}/>
       </button>
-    </BasketProductCardStyled>
+    </BasketCardStyled>
   )
 }

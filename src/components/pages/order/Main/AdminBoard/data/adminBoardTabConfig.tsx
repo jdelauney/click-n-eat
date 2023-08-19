@@ -34,7 +34,7 @@ export const getAdminBoardTabConfig = (isAdminBoardOpen: boolean,
   return [
       {
         tab: {
-          id: "tab-0",
+          id: "tab-collapse",
           Icon: isAdminBoardOpen ? <FiChevronDown/> : <FiChevronUp/>,
           className: !isAdminBoardOpen ? "is-selected" : "",
           onClick: toggleAdminBoardOpenHandler,
@@ -45,8 +45,8 @@ export const getAdminBoardTabConfig = (isAdminBoardOpen: boolean,
       },
       {
         tab: {
-          id: "tab-1",
-          tabPanelId: "panel-1",
+          id: "tab-add-product",
+          tabPanelId: "panel-add-product",
           Icon: <AiOutlinePlus/>,
           label: "Ajouter un produit",
         },
@@ -56,8 +56,8 @@ export const getAdminBoardTabConfig = (isAdminBoardOpen: boolean,
       },
       {
         tab: {
-          id: "tab-2",
-          tabPanelId: "panel-2",
+          id: "tab-update-product",
+          tabPanelId: "panel-update-product",
           Icon: <MdModeEditOutline/>,
           label: "Modifier un produit",
         },

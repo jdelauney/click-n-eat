@@ -8,8 +8,9 @@ import {OrderContext} from "../../Context/OrderContext.tsx";
 import {AdminContext} from "../../Context/AdminContext.tsx";
 import {MouseEvent} from "react";
 import {TiDelete} from "react-icons/ti";
+import {fadeInFromRight} from "../../../../../theme/animations.ts";
 
-const CardProductStyled = styled.article`
+const ProductCardStyled = styled.article`
   width: 24rem;
   height: 33rem;
   
@@ -57,6 +58,7 @@ const CardProductStyled = styled.article`
     height: 3rem;
     border: none;
     background-color: transparent;
+    animation: ${fadeInFromRight} ${theme.animations.speed.slow} ease-out;
 
     > .icon {
       width:100%;
@@ -119,15 +121,26 @@ const CardProductStyled = styled.article`
 type CardProps = {
   item: MenuItem
 }
-export const CardProduct = ({item}: CardProps) => {
+export const ProductCard = ({item}: CardProps) => {
   const {isModeAdmin, products, setProducts, basket, setBasket} = useContext(OrderContext)
   const {setCurrentAdminTabIndex, inputNameRef, isAdminBoardOpen, setIsAdminBoardOpen, currentSelectProduct, setCurrentSelectedProduct} = useContext(AdminContext)
+
+  const deleteProductToBasket = (productId: number) => {
+    const newBasket = basket.filter((basketItem) => {
+      return basketItem.productId !== productId
+    })
+    setBasket(newBasket)
+  }
+
   const deleteProduct = (productId: number) => {
     const newProducts = products.filter((product) => {
       return product.id !== productId
     })
     setProducts(newProducts)
+
+    deleteProductToBasket(productId)
   }
+
 
   const addProductToBasket = (productId: number) => {
 
@@ -172,7 +185,7 @@ const handleDeleteClick = (event: MouseEvent, id: number) => {
 
     // eslint-disable-next-line @typescript-eslint/await-thenable
     await setCurrentSelectedProduct(product)
-    setCurrentAdminTabIndex("tab-2");
+    setCurrentAdminTabIndex("tab-update-product");
 
 
     if (inputNameRef) {
@@ -183,14 +196,20 @@ const handleDeleteClick = (event: MouseEvent, id: number) => {
   }
 
   return (
-    <CardProductStyled>
+    <ProductCardStyled>
       <div
         className={ isModeAdmin ? `card__inner is-selectable ${currentSelectProduct?.id === item.id ? "is-selected" : ""}` : "card__inner"}
         onClick={isModeAdmin ?  (event) => handleCardClick(event, item) : undefined}
       >
         {
           isModeAdmin &&
-            <Button variant={"danger"} shape={"circle"} IconAfter={<TiDelete className={"icon"}/>} className={"card__remove-button"} onClick={(event) => handleDeleteClick(event, item.id)}/>
+            <Button
+                variant={"danger"}
+                shape={"circle"}
+                IconAfter={<TiDelete className={"icon"}/>}
+                className={"card__remove-button"}
+                aria-label={"Delete product"}
+                onClick={(event) => handleDeleteClick(event, item.id)}/>
         }
         <img className={"card__image"} src={item.imageSource} alt={item.title}/>
         <span className={"card__title"}>{item.title}</span>
@@ -199,6 +218,6 @@ const handleDeleteClick = (event: MouseEvent, id: number) => {
           <Button label={"Ajouter"} className={"card__button"} onClick={() => addProductToBasket(item.id)}/>
         </div>
       </div>
-    </CardProductStyled>
+    </ProductCardStyled>
   )
 }

@@ -14,7 +14,7 @@ export const AdminUpdateProductForm = () => {
   const {setProducts} = useContext(OrderContext)
   const {inputNameRef, currentSelectProduct, setCurrentSelectedProduct} = useContext(AdminContext)
 
-  const handleInputChange = async (event: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
 
     console.log(value)

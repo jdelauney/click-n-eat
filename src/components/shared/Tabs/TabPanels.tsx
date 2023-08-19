@@ -1,9 +1,12 @@
 import styled from "styled-components";
 import {HTMLAttributes, PropsWithChildren} from "react";
+import {theme} from "../../../theme";
 
 const TabPanelsStyled =  styled.section`
   width: 100%;
-  //min-height: 25rem;
+  height: 24rem;
+  position: relative;
+  background-color: ${theme.colors.white};
 `
 
 type TabPanelsProps = {
