@@ -1,14 +1,13 @@
 import styled from "styled-components";
-import {theme} from "../../../../../theme";
+import {theme} from "../../../../../../theme";
 import {TbTrashX} from "react-icons/tb";
-
-import {MenuItem} from "../../../../../data/fakeMenu.ts";
-import {formatPrice} from "../../../../../utils/currency.ts";
+import {MenuItem} from "../../../../../../data/fakeMenu.ts";
+import {formatPrice} from "../../../../../../utils/currency.ts";
 import {MouseEvent, useContext} from "react";
-import {AdminContext} from "../../Context/AdminContext.tsx";
-import {OrderContext} from "../../Context/OrderContext.tsx";
+import {AdminContext} from "../../../Context/AdminContext.tsx";
+import {OrderContext} from "../../../Context/OrderContext.tsx";
 
-const BasketProductCardStyled =  styled.div`
+const BasketCardStyled =  styled.div`
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -126,12 +125,13 @@ const BasketProductCardStyled =  styled.div`
   
 `
 
-type BasketProductCardProps = {
+type BasketCardProps = {
   product: MenuItem
   quantity: number
   onDelete : () => void
+  className?: string
 }
-export const BasketProductCard = ({product, quantity, onDelete}:BasketProductCardProps) => {
+export const BasketCard = ({className, product, quantity, onDelete}:BasketCardProps) => {
   const {title, imageSource, price } = product
   const {isModeAdmin} = useContext(OrderContext)
   const {isAdminBoardOpen, setIsAdminBoardOpen, inputNameRef, setCurrentAdminTabIndex, currentSelectProduct, setCurrentSelectedProduct} = useContext(AdminContext)
@@ -154,8 +154,8 @@ export const BasketProductCard = ({product, quantity, onDelete}:BasketProductCar
   }
 
   return (
-    <BasketProductCardStyled
-      className={ isModeAdmin ? `is-selectable ${currentSelectProduct?.id === product.id ? " is-selected" : ""}` : "card"}
+    <BasketCardStyled
+      className={ isModeAdmin ? `is-selectable ${currentSelectProduct?.id === product.id ? `${className} is-selected` : `${className}`}` : `${className}`}
       onClick={isModeAdmin ?  (event) => handleCardClick(event, product) : undefined}
     >
 
@@ -180,6 +180,6 @@ export const BasketProductCard = ({product, quantity, onDelete}:BasketProductCar
       <button className={"basketProductCard__btn-delete"} onClick={onDelete}>
         <TbTrashX className={"icon"}/>
       </button>
-    </BasketProductCardStyled>
+    </BasketCardStyled>
   )
 }

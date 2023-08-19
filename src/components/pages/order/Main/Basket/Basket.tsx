@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {BasketHeader} from "./BasketHeader.tsx";
-import {BasketProducts} from "./BasketProducts.tsx";
+import {BasketBody} from "./BasketBody/BasketBody.tsx";
 import {theme} from "../../../../../theme";
 import {BasketFooter} from "./BasketFooter.tsx";
 
@@ -17,7 +17,7 @@ export const Basket = () => {
   return (
     <BasketStyled>
       <BasketHeader/>
-      <BasketProducts/>
+      <BasketBody/>
       <BasketFooter/>
     </BasketStyled>
   )

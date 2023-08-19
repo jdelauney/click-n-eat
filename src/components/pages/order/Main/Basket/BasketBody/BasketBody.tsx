@@ -1,14 +1,15 @@
 import styled from "styled-components";
-import {theme} from "../../../../../theme";
+import {theme} from "../../../../../../theme";
 // import {BasketEmptyMessage} from "./BasketEmptyMessage.tsx";
-import {BasketProductCard} from "./BacketProductCard.tsx";
-import {MenuItem} from "../../../../../data/fakeMenu.ts";
+
+import {MenuItem} from "../../../../../../data/fakeMenu.ts";
 import {useContext} from "react";
-import {OrderContext} from "../../Context/OrderContext.tsx";
+import {OrderContext} from "../../../Context/OrderContext.tsx";
 import {BasketEmptyMessage} from "./BasketEmptyMessage.tsx";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
+import {BasketCard} from "./BasketCard.tsx";
 
-const BasketProductsStyled = styled.section`
+const BasketBodyStyled = styled.section`
   
   
   background-color: ${theme.colors.background_white};
@@ -23,35 +24,60 @@ const BasketProductsStyled = styled.section`
     padding-inline: 1.6rem;
     padding-block: 2rem;
   }
+
+  .card-container-appear {
+      transform: translateX(-100px);
+      opacity: 0;
+  }
+
+  .card-container-appear-active {
+      transition: all .5s ease-in-out;
+      transform: translateX(0);
+      opacity: 1;
+    
+  }
+  
   .card-container-enter {
-        transform: translateX(-100px);
-        opacity: 0;
-    }
+      transform: translateX(-100px);
+      opacity: 0;
+  }
 
   .card-container-enter-active {
-        transition: all .5s ease-in-out;
-        transform: translateX(0);
-        opacity: 1;
-    }
-
+      transition: all .5s ease-in-out;
+      transform: translateX(0);
+      opacity: 1;
+  }
     //.card-container-done {
     //  transform: translateX(100px);
     //  opacity: 1;
     //}
 
   .card-container-exit {
-        transform: translateX(0);
-        opacity: 1;
-    }
+      transform: translateX(0);
+      opacity: 1;
+    
+  }
 
   .card-container-exit-active {
-        transition: all .5s ease-in-out;
-        transform: translateX(100px);
-        opacity: 0;
-    }
+      transition: all .5s ease-in-out;
+      transform: translateX(100px);
+      opacity: 0;
+  }
+
+  .card-container-leave {
+    transform: translateX(0);
+    opacity: 1;
+
+  }
+
+  .card-container-leave-active {
+    transition: all .5s ease-in-out;
+    transform: translateX(100px);
+    opacity: 0;
+  }
   
 `
-export const BasketProducts = () => {
+export const BasketBody = () => {
   const {basket, setBasket, products } = useContext(OrderContext)
   const findProduct = (id: number): MenuItem|undefined => {
     return products.find((product) => id === product.id )
@@ -66,23 +92,26 @@ export const BasketProducts = () => {
 
   return (
 
-    <BasketProductsStyled>
+    <BasketBodyStyled>
       { (basket && basket.length > 0)
         ? (
-          <TransitionGroup transitionAppear={true} className={"products"}>
+          <TransitionGroup className={"products"}>
             { basket.map( (item) => {
                 const basketProduct = findProduct(item.productId)
                 return (
                   basketProduct &&
                     <CSSTransition
+                        appear={true}
+                        leave={true}
                         key={item.id}
                         classNames={"card-container"}
                         timeout={500}
                     >
-                      <BasketProductCard
+                      <BasketCard
                                           product={basketProduct}
                                           quantity={item.quantity}
                                           onDelete={() => deleteBasketItem(item.id)}
+                                          className={"card"}
                       />
                     </CSSTransition>
                 )
@@ -92,7 +121,7 @@ export const BasketProducts = () => {
         ) : <BasketEmptyMessage/>
       }
 
-    </BasketProductsStyled>
+    </BasketBodyStyled>
   )
 }
 
