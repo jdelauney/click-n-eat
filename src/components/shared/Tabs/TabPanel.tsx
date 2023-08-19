@@ -3,7 +3,8 @@ import {theme} from "../../../theme";
 import {HTMLAttributes, PropsWithChildren} from "react";
 
 const TabPanelStyled = styled.div`
-  height: 100%;
+  position: absolute;
+  inset: 0;
   padding-inline: 2rem;
   padding-block: 1.7rem;
   background-color: ${theme.colors.white};
@@ -11,10 +12,11 @@ const TabPanelStyled = styled.div`
   border: 1px solid ${theme.colors.greyLight};
   border-radius: 0 0 1.5rem 1.5rem;
   box-shadow: ${theme.shadows.soft};
-  display: none;
+  opacity: 0;
+  transition: .35s ease-in-out;
   
   &[aria-expanded="true"] {
-    display: block;
+    opacity: 1;
   }
 `
 

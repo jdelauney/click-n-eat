@@ -11,11 +11,14 @@ const AdminBoardStyled = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 100%;
   left: 0;
+  right:0;
   bottom:0;
+  
   border-radius: 0 0 1.5rem 1.5rem;
   transform: translateY(calc(100% - 4.3rem));
+  //bottom: calc(100% - 4.3rem);
+  transition: all .25s ease-in-out;
   
   &.is-open {
     transform: translateY(0);
